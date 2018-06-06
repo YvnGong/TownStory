@@ -1,0 +1,2 @@
+python-pip python-dev libpq-dev postgresql postgresql-contrib
+build-dep python-psycopg2

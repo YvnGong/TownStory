@@ -1,0 +1,14 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.landing, name = 'landing'),
+    path('authenticate', views.auth, name = 'auth'),
+    path('city', views.city, name = 'city'),
+    path('story', views.story, name = 'story'),
+    path('write', views.write, name = 'write'),
+    path('uploadImg', views.uploadImg, name = 'uploadImg'),
+    path('uploadImgURL', views.uploadImgURL, name = 'uploadImgURL'),
+    path('uploadImgURLs', views.uploadImgURLs, name = 'uploadImgURLs'),
+    path('uploadArticle', views.uploadArticle, name = 'uploadArticle'),
+]
