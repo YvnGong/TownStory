@@ -125,3 +125,10 @@ def test(request):
     return JsonResponse(status.data)
         
 
+#landing Page Upload to post address
+def landPage_Tester(request):
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('LandingPage.html')
+        return HttpResponse(template.render(request=request))
+    return JsonResponse(status.data)

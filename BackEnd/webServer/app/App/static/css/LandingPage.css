@@ -1,5 +1,5 @@
 body {
-    background: url(/home/yvonne/Desktop/Project/244828.jpg);
+    background: url(Projects/244828.jpg);
     background-size: cover;
     background-position: center; 
 }
@@ -14,7 +14,8 @@ html {
 
 h1 {
 	font-weight: 700;
-	font-size: 6em;
+    font-size: 6em;
+    color: coral;
 }
 
 .content{
@@ -41,10 +42,13 @@ input,
 	border-style: none;
 	border-color: transparent;
 	background-color: transparent; 
+    text-align: center;
+    align-content: center;
 }
 
 .navigation{
 	padding-left: 5%;
+    padding-right: 5%;
 	background-color: #e3f2fd;
 	opacity: 0.6;
 	text-align: center;
@@ -52,4 +56,6 @@ input,
 
 .head{
 	padding-left: 5%;
+    padding-right: 5%;
 }
+
