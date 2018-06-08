@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="test" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="styles.css"> -->
+
+        <!-- JavaScripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="js/canvas-to-blob.min.js"></script>
+        <script src="js/writer.js"></script>
+
+        <!-- Auto complete -->
+        <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/flick/jquery-ui.css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <style type="text/css">
+        .ui-menu .ui-menu-item a,.ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active {
+          font-weight: normal;
+          margin: -1px;
+          text-align:left;
+          font-size:14px;
+          }
+        .ui-autocomplete-loading { background: white url("/images/ui-anim_basic_16x16.gif") right center no-repeat; }
+        </style>
+
+        <script type="text/javascript">
+          jQuery(function () 
+          {
+            jQuery("#city").autocomplete({
+              source: function (request, response) {
+              jQuery.getJSON(
+                "http://gd.geobytes.com/AutoCompleteCity?callback=?&q="+request.term,
+                function (data) {
+                response(data);
+                }
+              );
+              },
+                  minLength: 3,
+              select: function (event, ui) {
+              var selectedObj = ui.item;
+              jQuery("#city").val(selectedObj.value);
+              return false;
+              },
+              open: function () {
+              jQuery(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+              },
+              close: function () {
+              jQuery(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+                  }
+            });
+            jQuery("#city").autocomplete("option", "delay", 100);
+            });
+          </script>
+
+
+        <!-- Title -->
+        <title>Write Story - Fairytaler</title>
+    </head>
+
+    <body>
+      <form action="/action_page.php" method="get" id="stroyForm">
+        <div class = "container" id='article'>
+            <div class="row-sm align-items-center justify-content-center">
+              <div class="form-group">
+                  <label for="mainTitle"><h3>Story Titile</h3></label>
+                  <input type="text" class="form-control" id="title" style="font-weight: bold" placeholder="Enter title">
+                  <small class="form-text text-muted">The title of your story.</small>
+              </div>
+            </div>
+            <div class="row-sm align-items-center justify-content-center">
+              <div class="form-group">
+                <label for="subTitle">Summary</label>
+                <input type="text" class="form-control" id="summary" placeholder="Summary">
+                <small class="form-text text-muted">A small summary.</small>
+              </div>
+            </div>
+            <div>
+                <form action="" method="post" name="form_citydetails" id="form_citydetails" enctype="multipart/form-data" onsubmit="return false;">
+                  <p> City </p>
+                  <input class="ff_elem" type="text" name="ff_nm_from[]" value="" id="city"/>
+                  <span id='cityWaring' class="error text-danger" hidden>Invalid city, please select from the drop down menu</span>
+                </form>
+            </div>
+      </div>
+      </form>
+
+    <br>
+    <div class = "container">
+      <span id='itemWarning' class="error text-danger" hidden>No items</span>
+      <div class="row-sm align-items-center justify-content-center">
+        <!-- <input type="file" id="uploadFile" accept="image/gif, image/jpeg, image/png"> -->
+        <button type="button" class="btn btn-outline-dark" onclick="javascripts:insertHeader();">Header</button>
+        <button type="button" class="btn btn-outline-primary" onclick="javascripts:insertParagraph();">Paragraph</button>
+        <button type="button" class="btn btn-outline-success" id="uploadImage" data-toggle="modal" data-target="#myModal">Image</button>
+        <button type="button" class="btn btn-outline-secondary">Caption</button>
+        <button type="button" class="btn btn-outline-danger" onclick="javascripts:deleteItem();">Delete</button>
+      </div>
+      <br>
+      <div class="row-sm align-items-center justify-content-center">
+        <button type="button" class="btn btn-primary" value="Submit" onclick="javascripts:validateDataAndSend()">Submit</button>
+      </div>
+    </div>
+    
+    <!-- Image Upload Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+        
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Image</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          
+          <!-- Modal body -->
+          <div class="modal-body">
+            Please upload an image.
+          </div>
+	        <div class="form-group">
+            <form id="uploadImageFile" enctype="multipart/form-data" action="http://0.0.0.0:8000/app/uploadImg" method="post">
+              <input id="image" type="file" class="form-control-file" name="image" accept="image/gif, image/jpeg, image/png">
+            </form>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" form="uploadImageFile" onclick="javascripts:selectImage()">Submit</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Image Upload Modal -->
+    <div class="modal" id="submitModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+        
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Image</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          
+          <!-- Modal body -->
+          <div class="modal-body" id="finishText">
+            Please wait until the upload finished.
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button id="finish" type="button" class="btn btn-primary" disabled onclick="javascripts:redirect()">Finish</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+
+    </body>
+</html>
