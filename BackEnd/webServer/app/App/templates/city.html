@@ -3,7 +3,8 @@
 <head>
 	<title>CityName</title>
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="city.css">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/city.css' %}">
 </head>
 <body>
 <div class="navigation">
@@ -39,86 +40,24 @@
 
 <div class="head">
 	<p></p>
-		<h1>CITY NAME</h1>
+		<script>
+			var city_name = '{{city_name}}';
+		</script>
+		<h1>{{city_name}}</h1>
 		<h4>Dublin City, does it need an introduction? I mean, everybody knows a bit about the capital of Ireland. But what are the basic facts you really need to know? That it is the home of Guinness? That it is on the Liffey? That it is not as large as it seems to be? Here's what you should know about Dublin before arriving at the airport ...</h4>
 </div>
 
 <div class="row">
-
+	{% for story in stories %}
 	<div class="card" style="width: 20rem;">
   		<img class="card-img-top" src="https://f4.bcbits.com/img/0011621512_10.jpg" alt="Card image cap">
   		<div class="card-body">
-    		<h5 class="card-title">Card title</h5>
-    		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    		<a href="/home/yvonne/Desktop/Project/story.html" class="btn btn-primary">Read</a>
-  		</div>
+    		<h5 class="card-title">{{story.title}}</h5>
+    		<p class="card-text">{{story.summary}}</p>
+			<a href="http://0.0.0.0:8000/app/getStory?story_id={{story.id}}" class="btn btn-primary">Read</a>
+		</div>
 	</div>
-
-	<div class="card" style="width: 20rem;">
-  		<img class="card-img-top" src="https://f4.bcbits.com/img/0011621512_10.jpg" alt="Card image cap">
-  		<div class="card-body">
-    		<h5 class="card-title">Card title</h5>
-    		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    		<a href="file://home/yvonne/Desktop/Project/story.html#" class="btn btn-primary">Read</a>
-  		</div>
-	</div>
-
-	<div class="card" style="width: 20rem;">
-  		<img class="card-img-top" src="https://f4.bcbits.com/img/0011621512_10.jpg" alt="Card image cap">
-  		<div class="card-body">
-    		<h5 class="card-title">Card title</h5>
-    		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    		<a href="#" class="btn btn-primary">Read</a>
-  		</div>
-	</div>
-
-
-	<div class="card" style="width: 20rem;">
-  		<img class="card-img-top" src="https://f4.bcbits.com/img/0011621512_10.jpg" alt="Card image cap">
-  		<div class="card-body">
-    		<h5 class="card-title">Card title</h5>
-    		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    		<a href="#" class="btn btn-primary">Read</a>
-  		</div>
-	</div>
-
-
-	<div class="card" style="width: 20rem;">
-  		<img class="card-img-top" src="https://f4.bcbits.com/img/0011621512_10.jpg" alt="Card image cap">
-  		<div class="card-body">
-    		<h5 class="card-title">Card title</h5>
-    		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    		<a href="#" class="btn btn-primary">Read</a>
-  		</div>
-	</div>
-
-
-	<div class="card" style="width: 20rem;">
-  		<img class="card-img-top" src="https://f4.bcbits.com/img/0011621512_10.jpg" alt="Card image cap">
-  		<div class="card-body">
-    		<h5 class="card-title">Card title</h5>
-    		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    		<a href="#" class="btn btn-primary">Read</a>
-  		</div>
-	</div>
-
-	<div class="card" style="width: 20rem;">
-  		<img class="card-img-top" src="https://f4.bcbits.com/img/0011621512_10.jpg" alt="Card image cap">
-  		<div class="card-body">
-    		<h5 class="card-title">Card title</h5>
-    		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    		<a href="#" class="btn btn-primary">Read</a>
-  		</div>
-	</div>
-
-	<div class="card" style="width: 20rem;">
-  		<img class="card-img-top" src="https://f4.bcbits.com/img/0011621512_10.jpg" alt="Card image cap">
-  		<div class="card-body">
-    		<h5 class="card-title">Card title</h5>
-    		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    		<a href="#" class="btn btn-primary">Read</a>
-  		</div>
-	</div>
+	{% endfor %}
 </div>
 
 <div class="container">
