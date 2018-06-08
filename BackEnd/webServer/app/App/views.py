@@ -56,7 +56,12 @@ def story(request):
     return HttpResponse('story')
 
 def write(request):
-    return HttpResponse('write')
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('writer.html')
+        return HttpResponse(template.render(request=request))
+    return JsonResponse(status.data)
+    
 
 @csrf_exempt
 def uploadImg(request):
@@ -146,6 +151,6 @@ def test(request):
 def landPage_Tester(request):
     status = sr()
     if request.method == 'GET':
-        template = loader.get_template('LandingPage.html')
+        template = loader.get_template('landing.html')
         return HttpResponse(template.render(request=request))
     return JsonResponse(status.data)

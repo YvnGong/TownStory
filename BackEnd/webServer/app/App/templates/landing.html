@@ -4,10 +4,13 @@
 	<title>FairyTale</title>
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 	{% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'css/LandingPage.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}">
 	<link rel="stylesheet" type="text/css" href="css/LandingPage.css">
  	<link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/flick/jquery-ui.css" />
- 	<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&language=en"></script>
+	 <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&language=en"></script>
+	 {% load static %}
+	 <script src="{% static 'js/landing.js' %}"></script>
+
 </head>
 <body>
 
@@ -77,7 +80,7 @@
 			  </script>
 	
 						<hr>
-						<button class="btn btn-default btn-lg" onclick="showCity();">search</button>
+						<button class="btn btn-default btn-lg" onclick="javascripts:showCity();">search</button>
 					</div>
 				</div>
 			</div>
