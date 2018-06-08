@@ -52,7 +52,6 @@ function setLoginTrue(isLogin)
     }
 
     else{
-
         document.getElementById('navBar').innerHTML = '\
             <ul class="nav nav-tabs">\
             <li class="nav-item">\

@@ -41,10 +41,13 @@ input,
 	border-style: none;
 	border-color: transparent;
 	background-color: transparent; 
+  text-align: center;
+  align-content: center;
 }
 
 .navigation{
 	padding-left: 5%;
+  padding-right: 5%;
 	background-color: #e3f2fd;
 	opacity: 0.6;
 	text-align: center;
@@ -52,4 +55,6 @@ input,
 
 .head{
 	padding-left: 5%;
+  padding-right: 5%;
 }
+
