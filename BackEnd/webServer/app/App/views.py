@@ -33,7 +33,24 @@ def auth(request):
     return HttpResponse('auth')
 
 def city(request):
-    return HttpResponse('city')
+    status = sr()
+    if request.method == 'GET':
+        city_name = request.GET.get('city_name')
+        try:
+            # city has story
+            city = City.objects.get(pk=city_name)
+            stories = Story.objects.filter(city=city)
+        except:
+            # city has no story
+            stories = None
+        # render stories
+        template = loader.get_template('city.html')
+        context = {
+            'city_name': city_name,
+            'stories': stories,
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
 
 def story(request):
     return HttpResponse('story')
