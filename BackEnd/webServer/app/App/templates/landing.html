@@ -10,6 +10,10 @@
 	 <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&language=en"></script>
 	 {% load static %}
 	 <script src="{% static 'js/landing.js' %}"></script>
+	 <script> writerUrl='{{endpoints.writer_url}}';</script>
+	 <script> loginUrl='{{endpoints.login_url}}';</script>
+	 <script> cityUrl='{{endpoints.login_url}}';</script>
+	 
 
 </head>
 <body>
@@ -33,7 +37,7 @@
 						<a class="nav-link" href="#">Contact<span class="sr-only">(current)</span></a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="writer.html">Creator center</a>
+						<a class="nav-link" href="#" onclick="javascripts:writing();">Creator center</a>
 					  </li>
 				</ul>
 	
@@ -46,10 +50,10 @@
 			<!-- Sign in and sign up buttom -->
 				<ul class="navbar-nav mr-2">
 					 <li class="nav-item active">
-						<a class="nav-link" href="login.html">Sign In<span class="sr-only">(current)</span></a>
+						<a class="nav-link" href="#" onclick = "javascripts:login();">Sign In<span class="sr-only">(current)</span></a>
 					  </li>
 					  <li class="nav-item active">
-						<a id="signup" class="nav-link" href="login.html" onclick="right();">Sign Up<span class="sr-only">(current)</span></a>
+						<a id="signup" class="nav-link" href="#" onclick = "javascripts:login();">Sign Up<span class="sr-only">(current)</span></a>
 					  </li>
 				</ul>
 			  </div>

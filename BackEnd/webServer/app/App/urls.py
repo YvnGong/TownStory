@@ -12,5 +12,6 @@ urlpatterns = [
     path('uploadImgURLs', views.uploadImgURLs, name = 'uploadImgURLs'),
     path('uploadArticle', views.uploadArticle, name = 'uploadArticle'),
     path('getStory', views.getStory, name = 'getStory'),
-    path('test', views.test, name='test')
+    path('test', views.test, name='test'),
+    path('login', views.Login_Tester, name = 'login')
 ]

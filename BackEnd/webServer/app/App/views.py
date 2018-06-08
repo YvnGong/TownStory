@@ -22,6 +22,9 @@ from .models import City, Story
 # time zone
 from django.utils import timezone
 
+# import endpoints
+from .endpoints import endpoints
+
 def landing(request):
     d = {
         'data': 1234,
@@ -152,5 +155,19 @@ def landPage_Tester(request):
     status = sr()
     if request.method == 'GET':
         template = loader.get_template('landing.html')
-        return HttpResponse(template.render(request=request))
+        context = {
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
+
+#login upload to post address
+def Login_Tester(request):
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('login.html')
+        context = {
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
