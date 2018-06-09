@@ -1,16 +1,16 @@
-body
+/* body
 {
     background-color: white;
     height: 100vh;
 }
 
 #headimg{
-    background-image: url(static/image/TownStory.jpg);
-}
+    background-image: url('static/image/TownStory.jpg');
+} */
 
 .outer {
     display: table;
-    position: absolute;
+    position: auto;
     height: 100%;
     width: 100%;
   }
@@ -27,11 +27,11 @@ body
     margin-right: auto;
     width: 600px;
     /*whatever width you want*/
-}
+} 
 
 /* #uploadFile {
     display: none;
-} */
+}
 
 /* #get_file {
     background: #f9f9f9;
@@ -42,7 +42,7 @@ body
     cursor: pointer;
 } */
 
-body {
+/* body {
     margin: 0;
     padding: 0;
   }
@@ -57,4 +57,4 @@ padding: 20px;
 
 #html-output {
 white-space: pre-wrap;
-}
+} */

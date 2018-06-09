@@ -13,5 +13,8 @@ urlpatterns = [
     path('uploadArticle', views.uploadArticle, name = 'uploadArticle'),
     path('getStory', views.getStory, name = 'getStory'),
     path('test', views.test, name='test'),
+    path('about', views.about, name='about'),
+    path('contact', views.contact, name='contact'),
     path('login', views.Login_Tester, name = 'login')
+
 ]

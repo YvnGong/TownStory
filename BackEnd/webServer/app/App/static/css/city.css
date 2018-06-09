@@ -1,9 +1,13 @@
 body {
+	color: black;
     background: url(/home/yvonne/Desktop/Project/244828.jpg);
     background-size: cover;
     background-position: center; 
 }
 
+h1{
+	color: black;
+}
 img {
 	width: 100%;
 }
@@ -21,7 +25,7 @@ img {
 }
 
 .head{
-	color: white;
+	color: black;
 	padding-left: 12%;
 	padding-right: 12%;
 }

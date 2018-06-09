@@ -11,14 +11,16 @@
 
         <!-- JavaScripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
         {% load static %}
         <script src="{% static 'js/canvas-to-blob.min.js' %}"></script>
-        <script src="{% static 'js/writer.js' %}"></script>
+        <script src="{% static 'js/write.js' %}"></script>
 
-        <!-- Auto complete -->
+        <!-- Auto complete
         <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/flick/jquery-ui.css" />
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <style type="text/css">
@@ -58,14 +60,18 @@
             });
             jQuery("#city").autocomplete("option", "delay", 100);
             });
-          </script>
+          </script> -->
 
 
         <!-- Title -->
-        <title>Write Story - Fairytaler</title>
+        <title>Write Story - Town Story</title>
     </head>
 
     <body>
+    <!-- Header -->
+    {% include 'header.html' %}
+    <br>
+    <br>
       <form action="/action_page.php" method="get" id="stroyForm">
         <div class = "container" id='article'>
             <div class="row-sm align-items-center justify-content-center">
@@ -83,11 +89,9 @@
               </div>
             </div>
             <div>
-                <form action="" method="post" name="form_citydetails" id="form_citydetails" enctype="multipart/form-data" onsubmit="return false;">
-                  <p> City </p>
-                  <input class="ff_elem" type="text" name="ff_nm_from[]" value="" id="city"/>
-                  <span id='cityWaring' class="error text-danger" hidden>Invalid city, please select from the drop down menu</span>
-                </form>
+                <label>City</label><br>
+                <!-- Autocomplete City -->
+                {% include 'autocomplete.html' %}
             </div>
       </div>
       </form>
@@ -125,7 +129,7 @@
             Please upload an image.
           </div>
 	        <div class="form-group">
-            <form id="uploadImageFile" enctype="multipart/form-data" action="http://0.0.0.0:8000/app/uploadImg" method="post">
+            <form id="uploadImageFile" enctype="multipart/form-data" action="{{endpoints.uploadImg}}" method="post">
               <input id="image" type="file" class="form-control-file" name="image" accept="image/gif, image/jpeg, image/png">
             </form>
           </div>

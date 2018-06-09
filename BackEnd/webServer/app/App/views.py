@@ -51,6 +51,7 @@ def city(request):
         context = {
             'city_name': city_name,
             'stories': stories,
+            'endpoints': endpoints
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -61,8 +62,11 @@ def story(request):
 def write(request):
     status = sr()
     if request.method == 'GET':
-        template = loader.get_template('writer.html')
-        return HttpResponse(template.render(request=request))
+        template = loader.get_template('write.html')
+        context = {
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
     
 
@@ -139,7 +143,8 @@ def getStory(request):
         context = {
             'title': title,
             'summary': summary,
-            'content': content
+            'content': content,
+            'endpoints': endpoints
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -149,14 +154,13 @@ def test(request):
     City.objects.create(city='1', city_name='2', state_name='3', country_name='4')
     return JsonResponse(status.data)
         
-
 #landing Page Upload to post address
 def landPage_Tester(request):
     status = sr()
     if request.method == 'GET':
         template = loader.get_template('landing.html')
         context = {
-            'endpoints': endpoints
+            'endpoints': endpoints,
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -166,6 +170,28 @@ def Login_Tester(request):
     status = sr()
     if request.method == 'GET':
         template = loader.get_template('login.html')
+        context = {
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
+
+#about page link
+def about(request):
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('about.html')
+        context = {
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
+
+#about page link
+def contact(request):
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('contact.html')
         context = {
             'endpoints': endpoints
         }

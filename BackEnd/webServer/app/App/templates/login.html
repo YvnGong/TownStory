@@ -19,10 +19,16 @@
     </head>
 
     <body>
+        <!-- Header -->
+        {% include 'header.html' %}
+        <br>
+        <br>
         <div class="outer">
             <div class="middle">
                 <div class="inner">
-                    <div class="row justify-content-center align-items-center" id="headimg">
+                    <div class="row justify-content-center align-items-center">
+                        {% load static %}
+                        <img src="{% static 'image/signinLogo.jpg' %}">
                     </div>
                     <br>
                     <!--Section-->
