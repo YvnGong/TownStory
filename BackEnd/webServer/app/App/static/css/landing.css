@@ -22,7 +22,18 @@ h1 {
                  2px 18px 23px rgba(0,0,0,0.1);
 }
 
-h2{
+h2 {
+	font-weight: 500;
+    font-size: 4em;
+    text-align: center;
+    color: white;
+    padding-top:0%;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.4),
+                 2px 8px 13px rgba(0,0,0,0.1),
+                 2px 18px 23px rgba(0,0,0,0.1);
+}
+
+/* h2{
     text-align: center;
     color: rgb(233, 220, 214);
     font-size: 4em;
@@ -33,7 +44,7 @@ h2{
     margin-left: 480px; 
     margin-right: auto;
     
-}
+} */
 
 .content{
 	padding-top: 10%;
@@ -60,7 +71,7 @@ input,
 #city{
 	border-style: none;
 	border-color: transparent;
-	background-color: transparent; 
+	background-color: white; 
     text-align: center;
     align-content: center;
 }

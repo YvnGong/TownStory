@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.template import Context, Template
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
 
 from App.Utilities import S3Access
 from pyReturn.response import status_response as sr
@@ -60,14 +61,17 @@ def story(request):
     return HttpResponse('story')
 
 def write(request):
-    status = sr()
-    if request.method == 'GET':
-        template = loader.get_template('write.html')
-        context = {
-            'endpoints': endpoints
-        }
-        return HttpResponse(template.render(context, request))
-    return JsonResponse(status.data)
+    if request.user.is_authenticated:
+        status = sr()
+        if request.method == 'GET':
+            template = loader.get_template('write.html')
+            context = {
+                'endpoints': endpoints
+            }
+            return HttpResponse(template.render(context, request))
+        return JsonResponse(status.data)
+    else:
+        return redirect(endpoints['login_url'])
     
 
 @csrf_exempt
