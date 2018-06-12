@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CityName</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/city.css' %}">
+</head>
+<body>
+	<!-- Header -->
+	{% include 'header.html' %}
+
+<div class="head">
+	<p></p>
+		<script>
+			var city_name = '{{city_name}}';
+		</script>
+		<h1>{{city_name}}</h1>
+</div>
+
+<div class="row">
+	{% for story in stories %}
+	<div class="card" style="width: 20rem;">
+  		<img class="card-img-top" src="https://f4.bcbits.com/img/0011621512_10.jpg" alt="Card image cap">
+  		<div class="card-body">
+    		<h5 class="card-title">{{story.title}}</h5>
+    		<p class="card-text">{{story.summary}}</p>
+			<a href="http://0.0.0.0:8000/app/getStory?story_id={{story.id}}" class="btn btn-primary">Read</a>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+<div class="container">
+	<div class="row align-items-center justify-content-center" id="pagination">
+		<!-- <nav aria-label="Page navigation example"> -->
+ 			<ul class="pagination">
+    			<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    			<li class="page-item"><a class="page-link" href="#">1</a></li>
+    			<li class="page-item"><a class="page-link" href="#">2</a></li>
+    			<li class="page-item"><a class="page-link" href="#">3</a></li>
+    			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+  			</ul>
+		<!-- </nav> -->
+	</div>
+</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

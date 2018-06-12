@@ -1,2 +1,16 @@
-python-pip python-dev libpq-dev postgresql postgresql-contrib
+sudo apt-get update
+sudo apt-get install python-pip python-dev libpq-dev postgresql postgresql-contrib
+
+
+python-pip python-dev libpq-dev postgresql postgresql-contrib 
 build-dep python-psycopg2
+
+# POSTGREL INIT
+sudo su - postgres
+psql
+CREATE DATABASE myproject;
+CREATE USER myprojectuser WITH PASSWORD 'password';
+ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
+ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
+ALTER ROLE myprojectuser SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;

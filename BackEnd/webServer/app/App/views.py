@@ -9,6 +9,22 @@ from django.views.decorators.csrf import csrf_exempt
 from App.Utilities import S3Access
 from pyReturn.response import status_response as sr
 
+# Templating
+from django.http import HttpResponse
+from django.template import loader
+
+# uuid
+import uuid
+
+# load model
+from .models import City, Story
+
+# time zone
+from django.utils import timezone
+
+# import endpoints
+from .endpoints import endpoints
+
 def landing(request):
     d = {
         'data': 1234,
@@ -20,13 +36,39 @@ def auth(request):
     return HttpResponse('auth')
 
 def city(request):
-    return HttpResponse('city')
+    status = sr()
+    if request.method == 'GET':
+        city_name = request.GET.get('city_name')
+        try:
+            # city has story
+            city = City.objects.get(pk=city_name)
+            stories = Story.objects.filter(city=city)
+        except:
+            # city has no story
+            stories = None
+        # render stories
+        template = loader.get_template('city.html')
+        context = {
+            'city_name': city_name,
+            'stories': stories,
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
 
 def story(request):
     return HttpResponse('story')
 
 def write(request):
-    return HttpResponse('write')
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('write.html')
+        context = {
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
+    
 
 @csrf_exempt
 def uploadImg(request):
@@ -75,8 +117,83 @@ def uploadArticle(request):
         summary = request.POST.get('summary')
         article = request.POST.get('article')
         city = request.POST.get('city')
-    print(title)
-    print(summary)
-    print(city)
-    print(article)
+        # if city not exsit, create one
+        try:
+            city = City.objects.get(pk=city)
+        except:
+            city = City.objects.create(city=city)
+        # create story
+        ID = str(uuid.uuid4())
+        story = Story.objects.create(id = ID, city = city, title = title, summary = summary, content = article, date = timezone.now())
+    return JsonResponse(status.data)
+
+"""
+Web Response
+"""
+def getStory(request):
+    status = sr()
+    if request.method == 'GET':
+        story_id = request.GET.get('story_id')
+        story = Story.objects.get(id=story_id)
+        content = story.content
+        title = story.title
+        summary = story.summary
+        city = story.city
+        template = loader.get_template('story.html')
+        context = {
+            'title': title,
+            'summary': summary,
+            'content': content,
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
+
+def test(request):
+    status = sr()
+    City.objects.create(city='1', city_name='2', state_name='3', country_name='4')
+    return JsonResponse(status.data)
+        
+#landing Page Upload to post address
+def landPage_Tester(request):
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('landing.html')
+        context = {
+            'endpoints': endpoints,
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
+
+#login upload to post address
+def Login_Tester(request):
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('login.html')
+        context = {
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
+
+#about page link
+def about(request):
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('about.html')
+        context = {
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
+
+#about page link
+def contact(request):
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('contact.html')
+        context = {
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)

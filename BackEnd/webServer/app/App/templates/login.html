@@ -7,22 +7,28 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/login.css">
-
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    
 
         <!-- JavaScripts -->
-        <script src="js/login.js"></script>
+        <script src="{% static 'js/login.js' %}"></script>
 
         <!-- Title -->
         <title>Login - Fairytaler</title>
     </head>
 
     <body>
+        <!-- Header -->
+        {% include 'header.html' %}
+        <br>
+        <br>
         <div class="outer">
             <div class="middle">
                 <div class="inner">
                     <div class="row justify-content-center align-items-center">
-                        <img src="static/image/TownStory.jpg">
+                        {% load static %}
+                        <img src="{% static 'image/signinLogo.jpg' %}">
                     </div>
                     <br>
                     <!--Section-->
@@ -32,7 +38,7 @@
                                     <a class="nav-link active"> Login </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="signupPage" href="#" onclick="javascripts:signupForm();"> Signup </a>
+                                    <a class="nav-link" href="#" onclick="javascripts:signupForm();"> Signup </a>
                                 </li>
                             </ul>
                         </div>
