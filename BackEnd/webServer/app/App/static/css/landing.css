@@ -1,5 +1,5 @@
 body {
-    background: url(Projects/244828.jpg);
+    /* background: url(); */
     background-size: cover;
     background-position: center; 
 }
@@ -8,14 +8,31 @@ body,
 html {
     width: 100%;
     height: 100%;
-    /* font-family: "Lobster"; */
-    color: black;
+    color: white;
 }
 
 h1 {
 	font-weight: 700;
-    font-size: 6em;
-    color: coral;
+    font-size: 9em;
+    text-align: center;
+    color: white;
+    padding-top:8%;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.4),
+                 2px 8px 13px rgba(0,0,0,0.1),
+                 2px 18px 23px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align: center;
+    color: rgb(233, 220, 214);
+    font-size: 4em;
+    font-family: "Lobster";
+    font-style: normal;
+    background-color:rgb(240, 146, 93);
+    display:inline-block;
+    margin-left: 480px; 
+    margin-right: auto;
+    
 }
 
 .content{
@@ -28,8 +45,10 @@ h1 {
 
 hr {
     width: 500px;
-    border-top: 1px solid #f8f8f8;
+
+    border-top: 1px solid black;
     border-bottom: 1px solid rgba(0,0,0,0.2);
+    opacity: 0.8;
 }
 
 input,

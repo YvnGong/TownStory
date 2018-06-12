@@ -6,13 +6,21 @@
 <script> landingUrl="{{endpoints.landing_url}}";</script>
 <script> aboutUrl="{{endpoints.about_url}}";</script>
 <script> contactUrl="{{endpoints.contact_url}}";</script>
+
+{% if user.is_authenticated %}
+    <script>logstatus = "{{user.is_authenticated}}";</script>
+{% endif %}
+
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
 
 <!-- navigation bar whole set -->
 <div class="navigation">
     <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#" onclick="javascripts:home();">Fairtalers</a>
+            <a class="navbar-brand" href="#" onclick="javascripts:home();">
+                {% load static %}
+                <img src="{% static 'image/catontree_icon.png' %}">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -29,7 +37,7 @@
                     <a class="nav-link" href="#" onclick="javascripts:contact();">Contact<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="javascripts:writer();">Creator center</a>
+                    <a class="nav-link" href="#" id="writercenter" onclick="javascripts:writer();">Creator center</a>
                     </li>
             </ul>
 	
@@ -42,10 +50,10 @@
 			<!-- Sign in and sign up buttom -->
 				<ul class="navbar-nav mr-2">
 					 <li class="nav-item active">
-						<a class="nav-link" href="#" onclick = "javascripts:login();">Sign In<span class="sr-only">(current)</span></a>
+						<a class="nav-link" href="#" id="signin" onclick = "javascripts:login();">Sign In<span class="sr-only">(current)</span></a>
 					  </li>
 					  <li class="nav-item active">
-						<a id="signup" class="nav-link" href="#" onclick = "javascripts:login();">Sign Up<span class="sr-only">(current)</span></a>
+						<a id="signup" class="nav-link" href="#" id="signup" onclick = "javascripts:login();">Sign Up<span class="sr-only">(current)</span></a>
 					  </li>
 				</ul>
             </div>

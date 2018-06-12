@@ -1,3 +1,4 @@
+checklogin()
 function login(){
     window.location.replace(loginUrl);
 }
@@ -16,4 +17,12 @@ function contact(){
 
 function writer(){
     window.location.replace(writeUrl);
+}
+
+function checklogin(){
+    if (logstatus == "True"){
+        document.getElementById("writercenter").disable = false;
+        document.getElementById("signin").hidden = true;
+        document.getElementById("signup").hidden = true;
+    }
 }

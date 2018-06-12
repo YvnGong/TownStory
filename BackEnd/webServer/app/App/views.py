@@ -161,6 +161,7 @@ def landPage_Tester(request):
         template = loader.get_template('landing.html')
         context = {
             'endpoints': endpoints,
+            'login': request.user.is_authenticated
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)

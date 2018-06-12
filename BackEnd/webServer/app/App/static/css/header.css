@@ -1,8 +1,11 @@
 
 .navigation{
+	font-family: BlinkMacSystemFont;
+	font-weight: 100;
+    font-size: 1.25em;
 	padding-left: 5%;
     padding-right: 5%;
 	background-color: #e3f2fd;
-	opacity: 0.6;
+	/* opacity: 0.6; */
 	text-align: center;
 }
