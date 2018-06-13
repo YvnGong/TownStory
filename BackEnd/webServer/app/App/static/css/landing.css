@@ -11,7 +11,7 @@ html {
     color: white;
 }
 
-h1 {
+/* h1 {
 	font-weight: 700;
     font-size: 9em;
     text-align: center;
@@ -20,9 +20,9 @@ h1 {
     text-shadow: 2px 4px 3px rgba(0,0,0,0.4),
                  2px 8px 13px rgba(0,0,0,0.1),
                  2px 18px 23px rgba(0,0,0,0.1);
-}
+} */
 
-h2 {
+/* h2 {
 	font-weight: 500;
     font-size: 4em;
     text-align: center;
@@ -31,7 +31,7 @@ h2 {
     text-shadow: 2px 4px 3px rgba(0,0,0,0.4),
                  2px 8px 13px rgba(0,0,0,0.1),
                  2px 18px 23px rgba(0,0,0,0.1);
-}
+} */
 
 /* h2{
     text-align: center;
@@ -85,8 +85,8 @@ input,
 }
 
 .head{
+    padding-top:15%;
     color: black;
-	padding-left: 5%;
-    padding-right: 5%;
+    text-align: center;
 }
 

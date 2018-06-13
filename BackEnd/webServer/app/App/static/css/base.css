@@ -27,7 +27,7 @@
     margin-right: auto;
     width: 600px;
     /*whatever width you want*/
-}  */
+/* } */
 
 /* #uploadFile {
     display: none;
@@ -48,11 +48,14 @@ body {
   }
 
 .center {
-    margin: auto;
-    margin-top: 40px;
-    width: 40%;
+    /* margin: auto; */
+    /* margin-top: 40px; */
+    width: 90%;
     border: 3px solid #73AD21;
-    padding: 100px;
+    /* display:inline-block; */
+    /* text-align: center; */
+    /* align-content: left; */
+    /* padding: 100px; */
 }
 
 .notification {
@@ -61,6 +64,13 @@ body {
     width: 40%;
     border: 2px solid #73AD21;
     padding: 20px;
+}
+
+.box{
+    /* margin-top: 10px; */
+    margin: auto;
+    border: 2px solid #73AD21;
+    padding: 5px;
 }
   
 /* .content {
