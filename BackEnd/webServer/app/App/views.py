@@ -117,41 +117,6 @@ def uploadImgURLs(request):
     print(status.get_response())
     return JsonResponse(status.data)
 
-# @csrf_exempt
-# def uploadArticle(request):
-#     status = sr()
-#     if request.method == 'POST':
-#         title = request.POST.get('title')
-#         summary = request.POST.get('summary')
-#         article = request.POST.get('article')
-#         city = request.POST.get('city')
-#         # if city not exsit, create one
-#         try:
-#             city = City.objects.get(pk=city)
-#         except:
-#             city = City.objects.create(city=city)
-#         # create story
-#         ID = str(uuid.uuid4())
-#         story = Story.objects.create(id = ID, city = city, title = title, summary = summary, content = article, date = timezone.now())
-#     return JsonResponse(status.data)
-
-# @csrf_exempt
-# def uploadArticle(request):
-#     status = sr()
-#     if request.method == 'POST':
-#         title = request.POST.get('title')
-#         summary = request.POST.get('summary')
-#         article = request.POST.get('article')
-#         city = request.POST.get('city')
-#         article = json.loads(article)
-#         dynamoAccess.add(DYNAMO_STORY_TABLE, )
-#         print(article[0])
-#     return JsonResponse(status.data)
-
-# def contentConstructor(content_list):
-    
-#     for
-
 @csrf_exempt
 def uploadArticle(request):
     status = sr()
