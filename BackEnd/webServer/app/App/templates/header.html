@@ -1,18 +1,11 @@
+<!-- Include Endpoints -->
+{% include 'endpoints.html' %}
+
 {% load static %}
 <script src="{% static 'js/header.js' %}"></script>
-<script> writeUrl="{{endpoints.write_url}}";</script>
-<script> loginUrl="{{endpoints.login_url}}";</script>
-<script> cityUrl="{{endpoints.city_url}}";</script>
-<script> landingUrl="{{endpoints.landing_url}}";</script>
-<script> aboutUrl="{{endpoints.about_url}}";</script>
-<script> contactUrl="{{endpoints.contact_url}}";</script>
-
-{% if user.is_authenticated %}
-    <script>logstatus = "{{user.is_authenticated}}";</script>
-{% endif %}
-
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> -->
 
 <!-- navigation bar whole set -->
 <div class="navigation">
@@ -43,19 +36,28 @@
 	
 			<!-- Search box and its buttom -->
 				<form class="form-inline my-20 my-lg-0">
-					  <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
-					 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				</form>
-	
-			<!-- Sign in and sign up buttom -->
-				<ul class="navbar-nav mr-2">
-					 <li class="nav-item active">
-						<a class="nav-link" href="#" id="signin" onclick = "javascripts:login();">Sign In<span class="sr-only">(current)</span></a>
-					  </li>
-					  <li class="nav-item active">
-						<a id="signup" class="nav-link" href="#" id="signup" onclick = "javascripts:login();">Sign Up<span class="sr-only">(current)</span></a>
-					  </li>
-				</ul>
+                
+                {% if not user.is_authenticated %}
+                <!-- Sign in and sign up buttom -->
+                  <ul class="navbar-nav mr-2">
+                     <li class="nav-item active">
+                      <a class="nav-link" href="#" id="signin" onclick = "javascripts:login();">log in<span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                      <a id="signup" class="nav-link" href="#" id="signup" onclick = "javascripts:signup();">sign up<span class="sr-only">(current)</span></a>
+                      </li>
+                  </ul>
+                {% else %}
+                <!-- Sign in and sign up buttom -->
+                <ul class="navbar-nav mr-2">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#" id="signin" onclick = "javascripts:logout();">log out<span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                {% endif %}
             </div>
     </nav>
 </div>

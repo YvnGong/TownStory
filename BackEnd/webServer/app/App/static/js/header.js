@@ -1,14 +1,21 @@
-checklogin()
 function login(){
-    window.location.replace(loginUrl);
+    window.location.assign(loginUrl);
+}
+
+function logout(){
+    window.location.assign(logoutUrl);
+}
+
+function signup(){
+    window.location.assign(signupUrl);
 }
 
 function home(){
-    window.location.replace(landingUrl);
+    window.location.assign(landingUrl);
 }
 
 function about(){
-    window.location.replace(aboutUrl);
+    window.location.assign(aboutUrl);
 }
 
 function contact(){
@@ -16,13 +23,5 @@ function contact(){
 }
 
 function writer(){
-    window.location.replace(writeUrl);
-}
-
-function checklogin(){
-    if (logstatus == "True"){
-        document.getElementById("writercenter").disable = false;
-        document.getElementById("signin").hidden = true;
-        document.getElementById("signup").hidden = true;
-    }
+    window.location.assign(writeUrl);
 }
