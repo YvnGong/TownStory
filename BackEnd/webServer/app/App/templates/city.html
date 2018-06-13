@@ -21,7 +21,7 @@
 <div class="row">
 	{% for story in stories %}
 	<div class="card" style="width: 20rem;">
-  		<img class="card-img-top" src="https://f4.bcbits.com/img/0011621512_10.jpg" alt="Card image cap">
+  		<img class="card-img-top" src="{{story.cover}}" alt="Card image cap">
   		<div class="card-body">
     		<h5 class="card-title">{{story.title}}</h5>
     		<p class="card-text">{{story.summary}}</p>

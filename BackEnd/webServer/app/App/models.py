@@ -33,8 +33,9 @@ class City(models.Model):
 class Story(models.Model):
     id = models.CharField(max_length = 50, primary_key = True, unique = True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length = 50)
     summary = models.CharField(max_length = 150)
-    content = models.CharField(max_length = 9000)
+    cover = models.CharField(max_length = 50)
     like = models.IntegerField(default=0)
     date = models.DateField(default=timezone.now)

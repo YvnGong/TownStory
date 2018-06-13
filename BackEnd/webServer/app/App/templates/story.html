@@ -12,11 +12,28 @@
 
 
 	<div class="content">
-		<h1>{{title}}</h1>
-		<h4>{{summary}}</h4>
-		{% autoescape off %}
-		<div id='content'>{{content}}</div>
-		{% endautoescape %}
+		<div class="container">
+			<div class="row"><h1>{{title}}</h1></div>
+			<div class="row"><h4>{{summary}}</h4></div>
+			<div class="row"><h6>{{author}}</h6></div>
+			<!-- Contents -->
+			{% for item in content %}
+				{% if item.0 == 'header'%}
+				<div class="row">
+					<h3>{{ item.1 }}</h3>
+				</div>
+				{% elif item.0 == 'paragraph'%}
+				<div class="row">
+					<p>{{ item.1 }}</p>
+				</div>
+				{% elif item.0 == 'image'%}
+				<div class="row">
+					<img src="{{ item.1 }}">
+				</div>
+				{% else %}
+				{% endif %}
+			{% endfor %}
+		</div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
