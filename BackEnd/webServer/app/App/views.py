@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 
-from App.Utilities import S3Access
+from App.Utilities import S3Access, dynamoAccess
 from pyReturn.response import status_response as sr
 
 # Templating
@@ -25,6 +25,10 @@ from django.utils import timezone
 
 # import endpoints
 from .endpoints import endpoints
+
+# constants
+DYNAMO_STORY_TABLE = 'STORY_TABLE'
+DEFAULT_COVER_IMAGE = 'https://f4.bcbits.com/img/0011621512_10.jpg'
 
 def landing(request):
     d = {
@@ -113,6 +117,41 @@ def uploadImgURLs(request):
     print(status.get_response())
     return JsonResponse(status.data)
 
+# @csrf_exempt
+# def uploadArticle(request):
+#     status = sr()
+#     if request.method == 'POST':
+#         title = request.POST.get('title')
+#         summary = request.POST.get('summary')
+#         article = request.POST.get('article')
+#         city = request.POST.get('city')
+#         # if city not exsit, create one
+#         try:
+#             city = City.objects.get(pk=city)
+#         except:
+#             city = City.objects.create(city=city)
+#         # create story
+#         ID = str(uuid.uuid4())
+#         story = Story.objects.create(id = ID, city = city, title = title, summary = summary, content = article, date = timezone.now())
+#     return JsonResponse(status.data)
+
+# @csrf_exempt
+# def uploadArticle(request):
+#     status = sr()
+#     if request.method == 'POST':
+#         title = request.POST.get('title')
+#         summary = request.POST.get('summary')
+#         article = request.POST.get('article')
+#         city = request.POST.get('city')
+#         article = json.loads(article)
+#         dynamoAccess.add(DYNAMO_STORY_TABLE, )
+#         print(article[0])
+#     return JsonResponse(status.data)
+
+# def contentConstructor(content_list):
+    
+#     for
+
 @csrf_exempt
 def uploadArticle(request):
     status = sr()
@@ -126,9 +165,21 @@ def uploadArticle(request):
             city = City.objects.get(pk=city)
         except:
             city = City.objects.create(city=city)
+        # get current user
+        user = request.user
         # create story
         ID = str(uuid.uuid4())
-        story = Story.objects.create(id = ID, city = city, title = title, summary = summary, content = article, date = timezone.now())
+        # use dynamoDB to store the contents
+        article = json.loads(article)
+        # check if there is any image and get the first one as cover
+        cover_img_url = DEFAULT_COVER_IMAGE
+        for item in article:
+            if item[0] == 'image':
+                cover_img_url = item[1]
+                break
+        dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
+        # save the story
+        story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, date = timezone.now())
     return JsonResponse(status.data)
 
 """
@@ -139,16 +190,21 @@ def getStory(request):
     if request.method == 'GET':
         story_id = request.GET.get('story_id')
         story = Story.objects.get(id=story_id)
-        content = story.content
         title = story.title
         summary = story.summary
+        cover_url = story.cover
+        author = story.author
         city = story.city
         template = loader.get_template('story.html')
+        content = dynamoAccess.get_item(DYNAMO_STORY_TABLE, 'story_id', story_id)['content']
         context = {
             'title': title,
             'summary': summary,
             'content': content,
-            'endpoints': endpoints
+            'endpoints': endpoints,
+            'cover_url': cover_url,
+            'city': city,
+            'author': author
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
