@@ -129,7 +129,8 @@ def uploadArticle(request):
         try:
             city = City.objects.get(pk=city)
         except:
-            city = City.objects.create(city=city)
+            city_name, state_name, country_name = city.split(', ')
+            city = City.objects.create(city=city, city_name=city_name, state_name=state_name, country_name=country_name)
         # get current user
         user = request.user
         # create story
@@ -145,6 +146,9 @@ def uploadArticle(request):
         dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
         # save the story
         story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, date = timezone.now())
+        # add one story and save the update
+        city.number_of_story += 1
+        city.save()
         status.attach_data('story_id', ID, isSuccess=True)
     return JsonResponse(status.data)
 
