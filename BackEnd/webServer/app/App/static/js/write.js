@@ -5,6 +5,7 @@ var imageCount = 0;
 var imageFiles = [];
 var uploadURLs = [];
 var accessURLs = [];
+var story_id = '';
 // var article = '';
 var article = [];
 var globalBlob;
@@ -199,6 +200,8 @@ function finished(){
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById('finishText').innerHTML = 'Story success!';
             document.getElementById('finish').disabled = false;
+            response = JSON.parse(this.responseText);
+            story_id = response.story_id;
             }
         }
     xhr.open('POST', url);
@@ -228,7 +231,9 @@ function finished(){
 // }
 
 function redirect(){
-    document.write(article);
+    // document.write(article);
+    var url = storyUrl + '?story_id=' + story_id
+    window.location.assign(url)
 }
 
 function resizeImageFileAndPush(file){

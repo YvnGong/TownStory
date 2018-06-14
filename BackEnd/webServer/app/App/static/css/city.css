@@ -1,28 +1,30 @@
-body {
+/* body {
 	color: black;
     background: url(/home/yvonne/Desktop/Project/244828.jpg);
     background-size: cover;
     background-position: center; 
-}
+} */
 
 h1{
 	color: black;
 }
+
 img {
 	width: 100%;
 }
+
 /*div {
 	border: 1px solid black;
 	height: 100px;
 }*/
 
-.navigation{
+/* .navigation{
 	padding-left: 8%;
 	padding-right: 8%;
 	background-color: #e3f2fd;
 	opacity: 0.6;
 	text-align: center;
-}
+} */
 
 .head{
 	color: black;
@@ -40,7 +42,7 @@ img {
 	position: center;
 }
 
-.container{
+.pagination{
 	position: center;
 	padding-top: 2%;
 	text-align: center;
