@@ -1,8 +1,8 @@
-body {
+/* body { */
     /* background: url(/home/yvonne/Desktop/Project/244828.jpg); */
-    background-size: cover;
-    background-position: center; 
-}
+    /* background-size: cover;
+    background-position: center;  */
+/* } */
 
 /* body,
 html {
@@ -18,17 +18,22 @@ html {
 	font-size: 6em;
 } */
 
+.title{
+    padding-left:20%;
+    padding-right:20%;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;   
+}
 .content{
-	padding-top: 3%;
-	text-align: center;
-    /* text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
-                 0px 8px 13px rgba(0,0,0,0.1),
-                 0px 18px 23px rgba(0,0,0,0.1); */
+    margin-top: 4%;
+    padding-left:12%;
+    padding-right:12%;
 }
 
-.navigation{
+/* .navigation{
     padding-left: 5%;
     background-color: #e3f2fd;
     opacity: 0.6;
     text-align: center;
-}
+} */

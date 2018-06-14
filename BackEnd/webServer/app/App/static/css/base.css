@@ -49,28 +49,28 @@ body {
 
 .center {
     /* margin: auto; */
-    /* margin-top: 40px; */
+    margin-top: 40px;
     width: 90%;
-    border: 3px solid #73AD21;
-    /* display:inline-block; */
-    /* text-align: center; */
-    /* align-content: left; */
-    /* padding: 100px; */
+    /* border: 3px solid #73AD21; */
 }
 
-.notification {
+.notification { 
     margin: auto;
     margin-top: 10px;
     width: 40%;
     border: 2px solid #73AD21;
-    padding: 20px;
+    /* border-style:hidden; */
+    padding: 50px;
 }
 
 .box{
-    /* margin-top: 10px; */
-    margin: auto;
+    padding-top:10%;
+    margin-top: 10%;
     border: 2px solid #73AD21;
-    padding: 5px;
+    /* border-style:hidden; */
+    /* background-color: lightgray; */
+    padding: 30px;
+    border-radius: 10px;
 }
   
 /* .content {

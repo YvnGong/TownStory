@@ -145,6 +145,7 @@ def uploadArticle(request):
         dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
         # save the story
         story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, date = timezone.now())
+        status.attach_data('story_id', ID, isSuccess=True)
     return JsonResponse(status.data)
 
 """

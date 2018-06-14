@@ -13,21 +13,27 @@
 
 	<div class="content">
 		<div class="container">
-			<div class="row"><h1>{{title}}</h1></div>
-			<div class="row"><h4>{{summary}}</h4></div>
-			<div class="row"><h6>{{author}}</h6></div>
+			<div class="title">
+				<h1><b>{{title}}</b></h1>
+				<div class="d-flex justify-content-end"><h5>Author: {{author}}</h5></div>
+				<div class="d-flex justify-content-center"><h4>{{summary}}</h4></div>
+			</div>
+			<br>
+			<!-- <div class="row"><h1>{{title}}</h1></div> -->
+			<!-- <div class="row"><h4>{{summary}}</h4></div> -->
+			<!-- <div class="row"><h6>{{author}}</h6></div> -->
 			<!-- Contents -->
 			{% for item in content %}
 				{% if item.0 == 'header'%}
-				<div class="row">
+				<div class="d-flex justify-content-lg-center">
 					<h3>{{ item.1 }}</h3>
 				</div>
 				{% elif item.0 == 'paragraph'%}
-				<div class="row">
+				<div class="d-flex justify-content-start">
 					<p>{{ item.1 }}</p>
 				</div>
 				{% elif item.0 == 'image'%}
-				<div class="row">
+				<div class="d-flex justify-content-center">
 					<img src="{{ item.1 }}">
 				</div>
 				{% else %}
