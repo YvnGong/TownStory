@@ -29,12 +29,14 @@ class City(models.Model):
     city_name = models.CharField(max_length = 20)
     state_name = models.CharField(max_length = 20)
     country_name = models.CharField(max_length = 20)
+    number_of_story = models.IntegerField(default=0)
 
 class Story(models.Model):
     id = models.CharField(max_length = 50, primary_key = True, unique = True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length = 50)
     summary = models.CharField(max_length = 150)
-    content = models.CharField(max_length = 9000)
+    cover = models.CharField(max_length = 50)
     like = models.IntegerField(default=0)
     date = models.DateField(default=timezone.now)

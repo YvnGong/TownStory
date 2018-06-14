@@ -1,18 +1,21 @@
+<!-- Include Endpoints -->
+{% include 'endpoints.html' %}
+
 {% load static %}
 <script src="{% static 'js/header.js' %}"></script>
-<script> writeUrl="{{endpoints.write_url}}";</script>
-<script> loginUrl="{{endpoints.login_url}}";</script>
-<script> cityUrl="{{endpoints.city_url}}";</script>
-<script> landingUrl="{{endpoints.landing_url}}";</script>
-<script> aboutUrl="{{endpoints.about_url}}";</script>
-<script> contactUrl="{{endpoints.contact_url}}";</script>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 <!-- navigation bar whole set -->
 <div class="navigation">
-    <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#" onclick="javascripts:home();">Fairtalers</a>
+    <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#" onclick="javascripts:home();">
+                {% load static %}
+                <img src="{% static 'image/catontree_icon.png' %}" alt="TownStory">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -29,25 +32,35 @@
                     <a class="nav-link" href="#" onclick="javascripts:contact();">Contact<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="javascripts:writer();">Creator center</a>
+                    <a class="nav-link" href="#" id="writercenter" onclick="javascripts:writer();">Creator center</a>
                     </li>
             </ul>
 	
 			<!-- Search box and its buttom -->
 				<form class="form-inline my-20 my-lg-0">
-					  <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
-					 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				</form>
-	
-			<!-- Sign in and sign up buttom -->
-				<ul class="navbar-nav mr-2">
-					 <li class="nav-item active">
-						<a class="nav-link" href="#" onclick = "javascripts:login();">Sign In<span class="sr-only">(current)</span></a>
-					  </li>
-					  <li class="nav-item active">
-						<a id="signup" class="nav-link" href="#" onclick = "javascripts:login();">Sign Up<span class="sr-only">(current)</span></a>
-					  </li>
-				</ul>
-            </div>
-    </nav>
-</div>
+                
+                {% if not user.is_authenticated %}
+                <!-- Sign in and sign up buttom -->
+                  <ul class="navbar-nav mr-0">
+                     <li class="nav-item active">
+                      <a class="nav-link" href="#" id="signin" onclick = "javascripts:login();"><i class="fa fa-user"></i>log in<span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                      <a class="nav-link" id="signup"  href="#" id="signup" onclick = "javascripts:signup();"><i class="fa fa-user-plus"></i>sign up<span class="sr-only">(current)</span></a>
+                      </li>
+                  </ul>
+                {% else %}
+                <!-- Sign in and sign up buttom -->
+                <ul class="navbar-nav mr-2">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#" id="signin" onclick = "javascripts:logout();">log out<span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                {% endif %}
+
+            </nav>
+        </div>
+    </div>

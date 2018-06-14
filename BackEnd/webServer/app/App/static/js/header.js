@@ -1,13 +1,21 @@
 function login(){
-    window.location.replace(loginUrl);
+    window.location.assign(loginUrl);
+}
+
+function logout(){
+    window.location.assign(logoutUrl);
+}
+
+function signup(){
+    window.location.assign(signupUrl);
 }
 
 function home(){
-    window.location.replace(landingUrl);
+    window.location.assign(landingUrl);
 }
 
 function about(){
-    window.location.replace(aboutUrl);
+    window.location.assign(aboutUrl);
 }
 
 function contact(){
@@ -15,5 +23,5 @@ function contact(){
 }
 
 function writer(){
-    window.location.replace(writeUrl);
+    window.location.assign(writeUrl);
 }

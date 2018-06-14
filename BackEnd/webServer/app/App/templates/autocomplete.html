@@ -6,7 +6,7 @@
 	font-weight: normal;
 	margin: -1px;
 	text-align:left;
-	font-size:14px;
+	font-size:9px;
 	}
 .ui-autocomplete-loading { background: white url("/images/ui-anim_basic_16x16.gif") right center no-repeat; }
 </style>
@@ -40,6 +40,13 @@ jQuery(function ()
 	 jQuery("#city").autocomplete("option", "delay", 100);
 	});
 </script>
-<input class="ff_elem" type="text" name="ff_nm_from[]" value="" id="city"/>
+<input class="ff_elem" type="text" name="ff_nm_from[]" value="" id="city" placeholder="What city you want to read"/>
+<style>
+	input,
+	::placeholder {
+  		color: black;
+  		font-size: 15px;
+	}
+	</style>
 <span id='cityWaring' class="error text-danger" hidden>Invalid city, please select from the drop down menu</span>
 </form>

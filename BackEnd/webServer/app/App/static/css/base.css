@@ -8,7 +8,7 @@
     background-image: url('static/image/TownStory.jpg');
 } */
 
-.outer {
+/* .outer {
     display: table;
     position: auto;
     height: 100%;
@@ -27,7 +27,7 @@
     margin-right: auto;
     width: 600px;
     /*whatever width you want*/
-} 
+/* } */
 
 /* #uploadFile {
     display: none;
@@ -42,12 +42,38 @@
     cursor: pointer;
 } */
 
-/* body {
+body {
     margin: 0;
     padding: 0;
   }
+
+.center {
+    /* margin: auto; */
+    margin-top: 40px;
+    width: 90%;
+    /* border: 3px solid #73AD21; */
+}
+
+.notification { 
+    margin: auto;
+    margin-top: 10px;
+    width: 40%;
+    border: 2px solid #73AD21;
+    /* border-style:hidden; */
+    padding: 50px;
+}
+
+.box{
+    padding-top:10%;
+    margin-top: 10%;
+    border: 2px solid #73AD21;
+    /* border-style:hidden; */
+    /* background-color: lightgray; */
+    padding: 30px;
+    border-radius: 10px;
+}
   
-.content {
+/* .content {
 box-sizing: border-box;
 margin: 0 auto;
 max-width: 600px;

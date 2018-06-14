@@ -5,8 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.template import Context, Template
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
 
-from App.Utilities import S3Access
+from App.Utilities import S3Access, dynamoAccess
 from pyReturn.response import status_response as sr
 
 # Templating
@@ -24,6 +25,10 @@ from django.utils import timezone
 
 # import endpoints
 from .endpoints import endpoints
+
+# constants
+DYNAMO_STORY_TABLE = 'STORY_TABLE'
+DEFAULT_COVER_IMAGE = 'https://f4.bcbits.com/img/0011621512_10.jpg'
 
 def landing(request):
     d = {
@@ -60,14 +65,17 @@ def story(request):
     return HttpResponse('story')
 
 def write(request):
-    status = sr()
-    if request.method == 'GET':
-        template = loader.get_template('write.html')
-        context = {
-            'endpoints': endpoints
-        }
-        return HttpResponse(template.render(context, request))
-    return JsonResponse(status.data)
+    if request.user.is_authenticated:
+        status = sr()
+        if request.method == 'GET':
+            template = loader.get_template('write.html')
+            context = {
+                'endpoints': endpoints
+            }
+            return HttpResponse(template.render(context, request))
+        return JsonResponse(status.data)
+    else:
+        return redirect(endpoints['login_url'])
     
 
 @csrf_exempt
@@ -121,10 +129,27 @@ def uploadArticle(request):
         try:
             city = City.objects.get(pk=city)
         except:
-            city = City.objects.create(city=city)
+            city_name, state_name, country_name = city.split(', ')
+            city = City.objects.create(city=city, city_name=city_name, state_name=state_name, country_name=country_name)
+        # get current user
+        user = request.user
         # create story
         ID = str(uuid.uuid4())
-        story = Story.objects.create(id = ID, city = city, title = title, summary = summary, content = article, date = timezone.now())
+        # use dynamoDB to store the contents
+        article = json.loads(article)
+        # check if there is any image and get the first one as cover
+        cover_img_url = DEFAULT_COVER_IMAGE
+        for item in article:
+            if item[0] == 'image':
+                cover_img_url = item[1]
+                break
+        dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
+        # save the story
+        story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, date = timezone.now())
+        # add one story and save the update
+        city.number_of_story += 1
+        city.save()
+        status.attach_data('story_id', ID, isSuccess=True)
     return JsonResponse(status.data)
 
 """
@@ -135,16 +160,21 @@ def getStory(request):
     if request.method == 'GET':
         story_id = request.GET.get('story_id')
         story = Story.objects.get(id=story_id)
-        content = story.content
         title = story.title
         summary = story.summary
+        cover_url = story.cover
+        author = story.author
         city = story.city
         template = loader.get_template('story.html')
+        content = dynamoAccess.get_item(DYNAMO_STORY_TABLE, 'story_id', story_id)['content']
         context = {
             'title': title,
             'summary': summary,
             'content': content,
-            'endpoints': endpoints
+            'endpoints': endpoints,
+            'cover_url': cover_url,
+            'city': city,
+            'author': author
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -161,6 +191,7 @@ def landPage_Tester(request):
         template = loader.get_template('landing.html')
         context = {
             'endpoints': endpoints,
+            'login': request.user.is_authenticated
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)

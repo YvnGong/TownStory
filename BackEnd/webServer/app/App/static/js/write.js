@@ -5,7 +5,9 @@ var imageCount = 0;
 var imageFiles = [];
 var uploadURLs = [];
 var accessURLs = [];
-var article = '';
+var story_id = '';
+// var article = '';
+var article = [];
 var globalBlob;
 
 function renderParagraph(itemNumber){
@@ -132,23 +134,53 @@ function submitData(){
             case 'header':
                 // console.log(i.toString());
                 var text = document.getElementById((i+1).toString()).value;
-                article += '<br><h3>' + text + '</h3><br>';
+                // article += '<br><h3>' + text + '</h3><br>';
+                article.push(['header', text])
                 break;
             case 'paragraph':
                 var text = document.getElementById((i+1).toString()).value;
-                article += '<br>' + text + '<br>';
+                // article += '<br>' + text + '<br>';
+                article.push(['paragraph', text])
                 break;
             case 'image':
                 // var file = document.getElementById((i+1).toString()).files[0];
                 // console.log(imageFiles[imageIndex]);
                 sendImage(imageFiles[imageIndex], uploadURLs[imageIndex]);
-                article += '<br><img src="' + accessURLs[imageIndex] + '" width="400" alt=""><br>';
+                // article += '<br><img src="' + accessURLs[imageIndex] + '" width="400" alt=""><br>';
+                article.push(['image', accessURLs[imageIndex]])
                 imageIndex += 1;
                 break;
         }
     }
     if (imageCount==0) finished();
 }
+
+// function submitData(){
+//     var imageIndex = 0;
+//     // console.log(imageFiles);
+//     for (i=0; i<itemCount; i++){
+//         type = itemType[i];
+//         switch (type){
+//             case 'header':
+//                 // console.log(i.toString());
+//                 var text = document.getElementById((i+1).toString()).value;
+//                 article += '<br><h3>' + text + '</h3><br>';
+//                 break;
+//             case 'paragraph':
+//                 var text = document.getElementById((i+1).toString()).value;
+//                 article += '<br>' + text + '<br>';
+//                 break;
+//             case 'image':
+//                 // var file = document.getElementById((i+1).toString()).files[0];
+//                 // console.log(imageFiles[imageIndex]);
+//                 sendImage(imageFiles[imageIndex], uploadURLs[imageIndex]);
+//                 article += '<br><img src="' + accessURLs[imageIndex] + '" width="400" alt=""><br>';
+//                 imageIndex += 1;
+//                 break;
+//         }
+//     }
+//     if (imageCount==0) finished();
+// }
 
 function finished(){
     // Submit the final information
@@ -159,21 +191,49 @@ function finished(){
     var city = document.getElementById('city').value;
     formData.append('title', title);
     formData.append('summary', summary);
-    formData.append('article', article);
+    // formData.append('article', article);
+    var content = JSON.stringify(article);
+    formData.append('article', content);
     formData.append('city', city);
     var xhr = new XMLHttpRequest({mozSystem: true});
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById('finishText').innerHTML = 'Story success!';
             document.getElementById('finish').disabled = false;
+            response = JSON.parse(this.responseText);
+            story_id = response.story_id;
             }
         }
     xhr.open('POST', url);
     xhr.send(formData);
 }
 
+// function finished(){
+//     // Submit the final information
+//     var formData = new FormData();
+//     var url = 'http://0.0.0.0:8000/app/uploadArticle'
+//     var title = document.getElementById('title').value;
+//     var summary = document.getElementById('summary').value;
+//     var city = document.getElementById('city').value;
+//     formData.append('title', title);
+//     formData.append('summary', summary);
+//     formData.append('article', article);
+//     formData.append('city', city);
+//     var xhr = new XMLHttpRequest({mozSystem: true});
+//     xhr.onreadystatechange = function() {
+//         if (this.readyState == 4 && this.status == 200) {
+//             document.getElementById('finishText').innerHTML = 'Story success!';
+//             document.getElementById('finish').disabled = false;
+//             }
+//         }
+//     xhr.open('POST', url);
+//     xhr.send(formData);
+// }
+
 function redirect(){
-    document.write(article);
+    // document.write(article);
+    var url = storyUrl + '?story_id=' + story_id
+    window.location.assign(url)
 }
 
 function resizeImageFileAndPush(file){
