@@ -162,33 +162,6 @@ function submitData(){
     if (imageCount==0) finished();
 }
 
-// function submitData(){
-//     var imageIndex = 0;
-//     // console.log(imageFiles);
-//     for (i=0; i<itemCount; i++){
-//         type = itemType[i];
-//         switch (type){
-//             case 'header':
-//                 // console.log(i.toString());
-//                 var text = document.getElementById((i+1).toString()).value;
-//                 article += '<br><h3>' + text + '</h3><br>';
-//                 break;
-//             case 'paragraph':
-//                 var text = document.getElementById((i+1).toString()).value;
-//                 article += '<br>' + text + '<br>';
-//                 break;
-//             case 'image':
-//                 // var file = document.getElementById((i+1).toString()).files[0];
-//                 // console.log(imageFiles[imageIndex]);
-//                 sendImage(imageFiles[imageIndex], uploadURLs[imageIndex]);
-//                 article += '<br><img src="' + accessURLs[imageIndex] + '" width="400" alt=""><br>';
-//                 imageIndex += 1;
-//                 break;
-//         }
-//     }
-//     if (imageCount==0) finished();
-// }
-
 function finished(){
     // Submit the final information
     var formData = new FormData();
@@ -202,6 +175,9 @@ function finished(){
     var content = JSON.stringify(article);
     formData.append('article', content);
     formData.append('city', city);
+    // Append lat/lng data
+    formData.append('latitude', latitude)
+    formData.append('longitude', longitude)
     var xhr = new XMLHttpRequest({mozSystem: true});
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -214,28 +190,6 @@ function finished(){
     xhr.open('POST', url);
     xhr.send(formData);
 }
-
-// function finished(){
-//     // Submit the final information
-//     var formData = new FormData();
-//     var url = 'http://0.0.0.0:8000/app/uploadArticle'
-//     var title = document.getElementById('title').value;
-//     var summary = document.getElementById('summary').value;
-//     var city = document.getElementById('city').value;
-//     formData.append('title', title);
-//     formData.append('summary', summary);
-//     formData.append('article', article);
-//     formData.append('city', city);
-//     var xhr = new XMLHttpRequest({mozSystem: true});
-//     xhr.onreadystatechange = function() {
-//         if (this.readyState == 4 && this.status == 200) {
-//             document.getElementById('finishText').innerHTML = 'Story success!';
-//             document.getElementById('finish').disabled = false;
-//             }
-//         }
-//     xhr.open('POST', url);
-//     xhr.send(formData);
-// }
 
 function redirect(){
     // document.write(article);
@@ -270,11 +224,8 @@ function resizeImageFileAndPush(file){
         var ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, width, height);
         var dataurl = canvas.toDataURL('image/jpeg', 0.7);
-        console.log(dataurl);
         blob = window.dataURLtoBlob && window.dataURLtoBlob(dataurl);
-        console.log(blob);
         newFile = new File([blob], "imageFile");
-        console.log(newFile);
         imageFiles.push(newFile);
     }
     reader.readAsDataURL(file);
@@ -299,6 +250,8 @@ function validateDataAndSend(){
                 "http://gd.geobytes.com/GetCityDetails?callback=?&fqcn="+cityfqcn,
                 function (data) {
                     if (data.geobytescityid>0) {
+                        latitude = data.geobyteslatitude
+                        longitude = data.geobyteslongitude
                         $('#submitModal').modal('show');
                         getUploadURLs();
                     }
