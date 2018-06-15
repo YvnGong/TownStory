@@ -11,33 +11,40 @@ var article = [];
 var globalBlob;
 
 function renderParagraph(itemNumber){
-    return  `<div class="row-sm align-items-center justify-content-center" id='` + 'item' + itemNumber + 
+    return  `<div class="row" id='` + 'item' + itemNumber + 
     `'>
+        <div class="col-lg-12">
         <div class="form-group">
         <label for="paragraph">Paragraph</label>
         <textarea class="form-control" rows="3" id=` + itemNumber +
         `></textarea>
         </div>
+        </div>
     </div>`;
 }
 
 function renderHeader(itemNumber){
-    return  `<div class="row-sm align-items-center justify-content-center" id='` + 'item' + itemNumber + 
+    return  `<div class="row" id='` + 'item' + itemNumber + 
     `'>
+        <div class="col-lg-12">
         <div class="form-group">
         <label for="header">Header</label>
         <input type="text" style="font-weight: bold;" class="form-control" id='` + itemNumber +
         `'>
         </div>
+        </div>
     </div>`;
 }
 
 function renderImage(itemNumber){
-    return  `<div class="row-sm align-items-center justify-content-center" id='` + 'item' + itemNumber + 
-    `'><br>
+    return  `<div class="row" id='` + 'item' + itemNumber + 
+    `'>
+    <div class="col-lg-12">
+    <br>
         <img id='` + 'image' + itemNumber +
     `' width="400" alt=""> 
         <input type="file" id="` + itemNumber +`" class="form-control-file" hidden><br>
+        </div>
     </div>`;
 }
 
