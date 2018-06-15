@@ -5,21 +5,30 @@
 	    <meta charset="utf-8">
       <meta name="test" content="width=device-width, initial-scale=1,shrink-to-fit=no">
 
+      <!-- Jquery read in -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <!-- <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script> -->
+
+
+      <!-- Both bootstraps read in -->
       <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-  
-    <title>{% block head_title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-    {% block extra_head %}
-    {% endblock %}
+      <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
+      <!-- Title Render -->
+      <title>{% block head_title %}{% endblock %}</title>
+    
+      <!-- read in icon -->
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+      <!-- CSS file read in -->
+      {% load static %}
+      <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+      {% block extra_head %}
+      {% endblock %}
   </head>
   <body>
       <!-- Header -->
 	    {% include 'header.html' %}
-
     {% block body %}
 
     {% if messages %}
