@@ -68,22 +68,22 @@ def write(request):
     if request.user.is_authenticated:
         status = sr()
         if request.method == 'GET':
+            city_name = request.GET.get('city_name')
             template = loader.get_template('write.html')
             context = {
-                'endpoints': endpoints
+                'endpoints': endpoints,
+                'city_name': city_name,
             }
             return HttpResponse(template.render(context, request))
         return JsonResponse(status.data)
     else:
-        return redirect(endpoints['login_url'])
+        return redirect(endpoints['login_url'] + '?next=/app/write')
     
 
 @csrf_exempt
 def uploadImg(request):
     status = sr()
     file = None
-    print(request.POST)
-    print(request.FILES)
     if request.method == 'POST':
         image = request.FILES['image']
         url = S3Access.upload_file('fairytaler', image.file)

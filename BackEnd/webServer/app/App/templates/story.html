@@ -5,18 +5,29 @@
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/story.css' %}">
+
+	<link href="https://fonts.googleapis.com/css?family=Vesper+Libre" rel="stylesheet"> 
 </head>
 <body>
 	<!-- Header -->
 	{% include 'header.html' %}
 
+	<style>
+		body{
+			background-color:rgb(236, 201, 165);
+		}
+		</style>
 
 	<div class="content">
 		<div class="container">
-			<div class="title">
-				<h1><b>{{title}}</b></h1>
+			<div class="row justify-content-center">
+				<div class="col-lg-7">
+					<div class="title">
+					<h1 style="font-family: 'Vesper Libre', serif;"><b>{{title}}</b></h1>
 				<div class="d-flex justify-content-end"><h5>Author: {{author}}</h5></div>
-				<div class="d-flex justify-content-center"><h4>{{summary}}</h4></div>
+				<br>
+				<div class="d-flex justify-content" style="color: rgba(34, 33, 30, 0.6); text-align: justify;"><h4>{{summary}}</h4></div>
+
 			</div>
 			<br>
 			<!-- <div class="row"><h1>{{title}}</h1></div> -->
@@ -26,20 +37,22 @@
 			{% for item in content %}
 				{% if item.0 == 'header'%}
 				<div class="d-flex justify-content-lg-center">
-					<h3>{{ item.1 }}</h3>
+					<h4><b>{{ item.1 }}</b></h4>
 				</div>
 				{% elif item.0 == 'paragraph'%}
-				<div class="d-flex justify-content-start">
+				<div class="d-flex justify-content-start" style="font-size: 20px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; margin-bottom: 1em;">
 					<p>{{ item.1 }}</p>
 				</div>
 				{% elif item.0 == 'image'%}
 				<div class="d-flex justify-content-center">
-					<img src="{{ item.1 }}">
+					<img src="{{ item.1 }}" alt="image loading" height="auto" width="100%" style="margin-bottom: 2em;">
 				</div>
 				{% else %}
 				{% endif %}
 			{% endfor %}
 		</div>
+	</div>
+	</div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

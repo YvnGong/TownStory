@@ -6,8 +6,9 @@ html {
 }
 
 .Heading{ 
+    font-family: 'Gloria Hallelujah', cursive;
     font-weight: 600;
-    font-size: 4.5em;
+    font-size: 4.0em;
     padding-top:20%;
     color: white;
     text-align: center;

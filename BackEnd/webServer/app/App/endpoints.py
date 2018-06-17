@@ -8,4 +8,5 @@ endpoints = {
     'city_url': SERVER_ENDPOINT + 'app/city',
     'uploadImg': SERVER_ENDPOINT + 'app/uploadImg',
     'login_url': SERVER_ENDPOINT + 'accounts/login',
+    'map_url':SERVER_ENDPOINT + 'app/map'
 }

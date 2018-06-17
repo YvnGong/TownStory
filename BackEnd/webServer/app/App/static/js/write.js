@@ -203,8 +203,8 @@ function resizeImageFileAndPush(file){
     var reader = new FileReader();
     reader.onload = function(e) {
         img.src = e.target.result;
-        var MAX_WIDTH = 800;
-        var MAX_HEIGHT = 600;
+        var MAX_WIDTH = 1280;
+        var MAX_HEIGHT = 720;
         var width = img.width;
         var height = img.height;
         

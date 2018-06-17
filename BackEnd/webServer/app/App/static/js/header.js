@@ -27,5 +27,9 @@ function writer(){
 }
 
 function discovery(){
-    window.location.assign(discoveryUrl);
+    window.location.assign(mapUrl);
+}
+
+function jump(url){
+    window.location.assign(url);
 }

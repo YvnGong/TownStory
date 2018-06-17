@@ -5,13 +5,14 @@
     background-position: center; 
 } */
 
-h1{
+.CityName{
 	color: black;
+	font-family: 'Questrial', sans-serif;;
 }
 
-img {
+/* img {
 	width: 100%;
-}
+} */
 
 /*div {
 	border: 1px solid black;
@@ -26,25 +27,19 @@ img {
 	text-align: center;
 } */
 
-.head{
-	color: black;
-	padding-left: 12%;
-	padding-right: 12%;
-}
-
-.card{
-	margin: 20px;
-}
-
-.row{
-	padding-left: 12%;
-	padding-right: 12%;
-	position: center;
-}
-
 .pagination{
 	position: center;
 	padding-top: 2%;
 	text-align: center;
 }
 
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.card{
+	/* margin-right:5.1%; */
+	margin-bottom: 17%;
+}

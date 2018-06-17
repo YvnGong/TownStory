@@ -1,7 +1,16 @@
+body{
+	background-color: rgb(53, 43, 34);
+}
+
 .navigation{
 	font-family: BlinkMacSystemFont;
 	font-weight: 100;
-    font-size: 1em;
-	background-color: #e3f2fd;
+	font-size: 1em;
+	background-color: white;
+	/* background-color: #e3f2fd; */
 	text-align: center;
+}
+
+.nav-item active{
+	color: white;
 }
