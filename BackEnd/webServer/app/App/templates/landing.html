@@ -3,7 +3,7 @@
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
-	<meta name="viewpoint" content="width=device-width, initial-scale=1.0,shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
 
@@ -30,49 +30,66 @@
 	<script src="{% static 'js/landing.js' %}"></script>
 
 	<title>Towntory</title>
+
 </head>
 <body>
 	<!-- Header -->
 	{% include 'header.html' %}
 
-	<!-- Background Img and styles -->
+	<!-- separate part -->
+
+
+
+
 	<style>
-		body{
-			background-size:cover;
-			background-color:blanchedalmond;
-			background-image:url("{% static 'image/background-header.jpg' %}");
-			background-repeat: no-repeat;
-			background-position: center;
+		#first{
+			background-image: url("{% static 'image/typewriter.jpg' %}");
 		}
 	</style>
+	
+	<div class="parallax" id="first"></div>
 
-	<!-- header title part -->
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 align-self-center">
-				<div class="Heading">
-					<p>Town Story</p>
-					<h3>You are the history observer</h3>
-				</div>
-			</div>
-		</div>
+	<div class="title" style="height:100px; font-size:70px">
+		<h1>Town Story</h1>
+		<h3>Welcome to town story, please drop down your memory!!Here should be a sentence or two to descripe the principle of this site.</h3>
 	</div>
-		
-	<!-- city search part -->
+
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-12 align-self-center">
-				<div class="content">
-						<!-- Autocomplete City -->
-						{% include 'autocomplete.html' %}
-					<br>
-					<br>
-					<button class="btn btn-default btn-lg" onclick="javascripts:validateCity();"><i class="fab fa-earlybirds"></i>search</button>
+			<div class="col-lg-12">
+				<br>
+				<br>
+				<div class="about" style="background-color: white; height:300px; font-size:35px">
+					<p>Here goes some thing about us, a intro with more details!!! </p>
+					<p>Here goes some thing about us, a intro with more details!!! </p>
+					<p>Here goes some thing about us, a intro with more details!!! </p>
 				</div>
 			</div>
 		</div>
 	</div>
 
-		<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12" style="height: 500px; background-color: rgb(70, 202, 109);">
+					<h1 id="write_section">write</h1>
+				</div>
+			</div>
+
+			<br>
+			<br>
+
+			<div class="row">
+				<div class="col-lg-12" style="height: 500px; background-color: rgb(18, 75, 199);">
+					<h1 id="discovery_section">discovery</h1>
+				</div>
+			</div>
+
+		</div>
+	
+	<!-- Footer -->
+	<br>
+	<br>
+	{% include 'footer.html' %}
 </body>
 </html>

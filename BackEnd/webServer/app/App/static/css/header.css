@@ -1,13 +1,11 @@
-body{
-	background-color: rgb(53, 43, 34);
-}
-
 .navigation{
 	font-family: BlinkMacSystemFont;
 	font-weight: 100;
 	font-size: 1em;
+	/* background-color: rgba(134, 118, 102, 0.5); */
+	
+	/* !!! change background color of head here !!! */
 	background-color: white;
-	/* background-color: #e3f2fd; */
 	text-align: center;
 }
 
