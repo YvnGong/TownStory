@@ -103,7 +103,7 @@ input[type='email']{
 .box{
     padding-top:10%;
     margin-top: 10%;
-    border: 2px solid #73AD21;
+    border: 2px solid rgb(102, 86, 55);
     /* border-style:hidden; */
     background-color:white;
     opacity: 50%;

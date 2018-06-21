@@ -45,7 +45,7 @@
 				</div>
 				{% elif item.0 == 'image'%}
 				<div class="d-flex justify-content-center">
-					<img src="{{ item.1 }}" alt="image loading" height="auto" width="100%" style="margin-bottom: 2em;">
+					<img src="{{ item.1 }}" style="margin-bottom: 2em; align-self: center;" alt="image loading" width="100%" height="auto" >
 				</div>
 				{% else %}
 				{% endif %}
@@ -57,11 +57,6 @@
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
-	<!-- Footer -->
-	<br>
-	<br>
-	{% include 'footer.html' %}
 
 </body>
 </html>

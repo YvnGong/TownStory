@@ -1,12 +1,19 @@
 .navigation{
-	font-family: BlinkMacSystemFont;
-	font-weight: 100;
-	font-size: 1em;
-	/* background-color: rgba(134, 118, 102, 0.5); */
-	
+	color: white;
+	/* font-family: BlinkMacSystemFont;*/
+	/* font-weight: 100;
+	font-size: 1em; */
+	/* background-color: rgba(134, 118, 102, 1); */
+	background-color: rgb(247, 245, 242);
+
 	/* !!! change background color of head here !!! */
-	background-color: white;
+	/* background-color: white; */
 	text-align: center;
+}
+
+.navbar{
+	background-color: rgba(247, 245, 242, 0.9);
+	z-index: 10;
 }
 
 .nav-item active{

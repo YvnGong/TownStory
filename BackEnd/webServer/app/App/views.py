@@ -232,6 +232,17 @@ def contact(request):
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
 
+# privacy policy
+def privacy_policy(request):
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('privacypolicy.html')
+        context = {
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)   
+
 # experimental map function
 def map(request):
     status = sr()
