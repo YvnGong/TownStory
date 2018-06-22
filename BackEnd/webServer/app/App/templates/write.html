@@ -7,12 +7,10 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-        <!-- <link rel="stylesheet" href="styles.css"> -->
 
         <!-- JavaScripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
@@ -37,6 +35,7 @@
               <div class="col-lg-12 col-centered">
               <div class="form-group">
                   <label for="mainTitle"><h3>Story Titile</h3></label>
+                  <span id='titleWarning' class="error text-danger" hidden>Minimum title lenght is 5.</span>
                   <input type="text" class="form-control" id="title" maxlength="45" style="font-weight: bold" placeholder="Enter title">
                   <small class="form-text text-muted">The title of your story.</small>
               </div>
@@ -75,7 +74,6 @@
       <span id='itemWarning' class="error text-danger" hidden>No items</span>
       <div class="row">
         <div class="col-lg-12 col-centered">
-        <!-- <input type="file" id="uploadFile" accept="image/gif, image/jpeg, image/png"> -->
         <button type="button" class="btn btn-outline-dark" onclick="javascripts:insertHeader();">Header</button>
         <button type="button" class="btn btn-outline-primary" onclick="javascripts:insertParagraph();">Paragraph</button>
         <button type="button" class="btn btn-outline-success" id="uploadImage" data-toggle="modal" data-target="#myModal">Image</button>

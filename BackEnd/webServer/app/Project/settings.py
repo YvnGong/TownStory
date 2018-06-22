@@ -28,7 +28,7 @@ SOCIAL_AUTH_FACEBOOK_SECRET ='63076ec8282dbda5c4b3e601ff6900aa' #app key
 DEBUG = True
 
 # Expire the login after browser close
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 # Customized user login class
 # AUTH_USER_MODEL = 'App.User'

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Towntory discover</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        min-height: 500px;
+        width: 100%;
+        height:100%;
+        border: black;
+      }
+
+      #map_box{
+        margin-top: 4%;
+        border: black;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    {% include 'header.html' %}
+
+    <!-- Intro container -->
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <h5> Connect the world with stories. </h5>
+        </div>
+        <div class="row">
+                <p> Each marker represents a city connected. Click on markers to view stories. </p>
+            </div>
+        <script>
+            function writeStory(){
+                window.location.assign(writeUrl)
+            }
+        </script>
+        <div class="row">
+            <button class="btn btn-primary btn-md" onclick="javascripts:writeStory()"> Write a story to connect your city </button>
+        </div>
+    </div>
+
+    <!-- Map container -->
+    <div class="container" id="map_box">
+    <div class="row">
+
+    <div id="map"></div>
+    <script>
+
+      function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: {lat: 37.7749, lng: -122.4194},
+          // Google map style
+          styles: 
+          [
+            {
+                "elementType": "geometry",
+                "stylers": [
+                {
+                    "color": "#ebe3cd"
+                }
+                ]
+            },
+            {
+                "elementType": "labels.text.fill",
+                "stylers": [
+                {
+                    "color": "#523735"
+                }
+                ]
+            },
+            {
+                "elementType": "labels.text.stroke",
+                "stylers": [
+                {
+                    "color": "#f5f1e6"
+                }
+                ]
+            },
+            {
+                "featureType": "administrative",
+                "elementType": "geometry",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+                ]
+            },
+            {
+                "featureType": "administrative",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                {
+                    "color": "#c9b2a6"
+                }
+                ]
+            },
+            {
+                "featureType": "administrative.land_parcel",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+                ]
+            },
+            {
+                "featureType": "administrative.land_parcel",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                {
+                    "color": "#dcd2be"
+                }
+                ]
+            },
+            {
+                "featureType": "administrative.land_parcel",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                {
+                    "color": "#ae9e90"
+                }
+                ]
+            },
+            {
+                "featureType": "administrative.neighborhood",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+                ]
+            },
+            {
+                "featureType": "landscape.natural",
+                "elementType": "geometry",
+                "stylers": [
+                {
+                    "color": "#dfd2ae"
+                }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "geometry",
+                "stylers": [
+                {
+                    "color": "#dfd2ae"
+                }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "labels.text",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                {
+                    "color": "#93817c"
+                }
+                ]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "geometry.fill",
+                "stylers": [
+                {
+                    "color": "#a5b076"
+                }
+                ]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                {
+                    "color": "#447530"
+                }
+                ]
+            },
+            {
+                "featureType": "road",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "geometry",
+                "stylers": [
+                {
+                    "color": "#f5f1e6"
+                }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels.icon",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "geometry",
+                "stylers": [
+                {
+                    "color": "#fdfcf8"
+                }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry",
+                "stylers": [
+                {
+                    "color": "#f8c967"
+                }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                {
+                    "color": "#e9bc62"
+                }
+                ]
+            },
+            {
+                "featureType": "road.highway.controlled_access",
+                "elementType": "geometry",
+                "stylers": [
+                {
+                    "color": "#e98d58"
+                }
+                ]
+            },
+            {
+                "featureType": "road.highway.controlled_access",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                {
+                    "color": "#db8555"
+                }
+                ]
+            },
+            {
+                "featureType": "road.local",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                {
+                    "color": "#806b63"
+                }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+                ]
+            },
+            {
+                "featureType": "transit.line",
+                "elementType": "geometry",
+                "stylers": [
+                {
+                    "color": "#dfd2ae"
+                }
+                ]
+            },
+            {
+                "featureType": "transit.line",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                {
+                    "color": "#8f7d77"
+                }
+                ]
+            },
+            {
+                "featureType": "transit.line",
+                "elementType": "labels.text.stroke",
+                "stylers": [
+                {
+                    "color": "#ebe3cd"
+                }
+                ]
+            },
+            {
+                "featureType": "transit.station",
+                "elementType": "geometry",
+                "stylers": [
+                {
+                    "color": "#dfd2ae"
+                }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "geometry.fill",
+                "stylers": [
+                {
+                    "color": "#b9d3c2"
+                }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.text",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                {
+                    "color": "#92998d"
+                }
+                ]
+            }
+            ]
+        });
+
+        // Add some markers to the map.
+         var markers = cities.map(function(city, i) {
+                   var marker =  new google.maps.Marker({
+                                position: city.location,
+                                label: city.value,
+                                url: '{{endpoints.city_url}}'+'?city_name='+city.city
+                                });
+                   google.maps.event.addListener(marker, 'click', function(){
+                                window.location.href = this.url;
+                               });
+                   return marker;
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+      }
+
+      var cities = [
+        {% for city in city_list%}
+        {location: {lat: {{city.2}}, lng: {{city.3}}}, city:'{{city.0}}', value:'{{city.1}}'},
+        {% endfor %}
+      ];
+
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS2wgP_4t1_HfzAQKmP-Yk7ksyrO9L--8&callback=initMap">
+    </script>
+
+    <!-- Map container end -->
+    </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+    <!-- Footer -->
+	<br>
+	<br>
+    {% include 'footer.html' %}
+    
+  </body>
+</html>

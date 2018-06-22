@@ -34,7 +34,7 @@
   			<div class="card-body">
     			<h5 class="card-title">{{story.title}}</h5>
     			<p class="card-text">{{story.summary}}</p>
-				<a href="http://0.0.0.0:8000/app/getStory?story_id={{story.id}}" class="btn btn-primary">Read</a>
+				<a href="{{endpoints.story_url}}?story_id={{story.id}}" class="btn btn-primary">Read</a>
 			</div>
 		</div>
 		</div>
@@ -73,8 +73,8 @@
 	</div>
 </div>
 
-	<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
-	<!-- <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

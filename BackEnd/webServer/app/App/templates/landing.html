@@ -5,8 +5,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
-
 	<!-- read in jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
@@ -14,9 +12,6 @@
 	<!-- read in both mini bootstrap -->
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-
-	<!-- read in google fonts -->
-	<!-- <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"> -->
 
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
@@ -34,7 +29,6 @@
 		body{
 			background-size:cover;
 			background-color: #CDCDC0;
-			/* background-image:url("{% static 'image/paper_edit.png' %}"); */
 			background-repeat: repeat;
 			background-position: center;
 		}
@@ -48,10 +42,6 @@
 	{% include 'header.html' %}
 
 	<!-- separate part -->
-
-
-
-
 	<style>
 		#first{
 			background-image: url("{% static 'image/typewriter.jpg' %}");
@@ -60,10 +50,9 @@
 	
 	<div class="parallax" id="first"></div>
 
-	<div class="title" style="height:200px; font-size:40px">
+	<div class="title" style="height:200px; font-size:40px;">
 		<h1 style="font-size:80px">Towntory</h1>
-		<h3>Tell a story in your town.</h3>
-	
+		<h2 style="color: rgb(77, 72, 72); background-color: rgba(255, 251, 249, 0.35)">Tell a story in your town.</h2>
 		<!-- city search part -->
 		<div class="container">
 			<div class="row">
@@ -71,10 +60,11 @@
 					<div class="content">
 							<!-- Autocomplete City -->
 							{% include 'autocomplete.html' %}
-						<!-- <br> -->
-						<button class="btn btn-default btn-md" onclick="javascripts:validateCity();"><i class="fab fa-earlybirds"></i> Find City </button>
 						<br>
-						<button class="btn btn-primary btn-md" onclick="javascripts:validateCity();"> Write a story </button>
+						<button class="btn btn-default btn-md" onclick="javascripts:validateCity();"><i class="fab fa-earlybirds"></i>  Find City </button>
+						<br>
+						<!-- <br> -->
+						<button class="btn btn-primary btn-md" onclick=javascripts:writeStory()> Write a story </button>
 					</div>
 				</div>
 			</div>
@@ -96,7 +86,7 @@
 			<div class="col-lg-12">
 				<div class="about" style="font-size:20px">
 					<p> History is made by people. </p>
-					<p> From all cornors of the globe. </p>
+					<p> From all corners of the globe. </p>
 					<p> Everybody shares their stories in where they are. </p>
 					<p> Together, connects all the dots, and we'll make history. </p>
 				</div>
@@ -104,23 +94,6 @@
 		</div>
 	</div>
 	<br>
-
-
-		<!-- <div class="container">
-			<div class="row">
-				<div class="col-lg-12" style="height: 500px; background-image: url('{% static 'image/write.jpg' %}')">
-					<h1 id="write_section">write</h1>
-				</div>
-			</div>
-
-			<br>
-			<br>
-
-			<div class="row">
-				<div class="col-lg-12" style="height: 500px; background-color: rgb(18, 75, 199);">
-					<h1 id="discovery_section">discovery</h1>
-				</div>
-			</div> -->
 
 		</div>
 	

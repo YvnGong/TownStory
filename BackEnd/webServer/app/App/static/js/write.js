@@ -232,6 +232,13 @@ function resizeImageFileAndPush(file){
 }
 
 function validateDataAndSend(){
+
+    // Validate title
+    if (document.getElementById('title').value.replace(/\s/g, "").length<5){
+        document.getElementById('titleWarning').hidden = false;
+        return false;
+    }
+
     // Validate number of items
     if (itemCount<=0){
         document.getElementById('itemWarning').hidden = false;
