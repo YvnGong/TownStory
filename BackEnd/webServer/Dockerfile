@@ -22,6 +22,9 @@ RUN apt-get update && \
 	pip3 install -U pip setuptools && \
    rm -rf /var/lib/apt/lists/*
 
+# Install libmysqlclient
+RUN apt-get install -y libmysqlclient-dev
+
 # Install uwsgi
 RUN pip3 install uwsgi
 
