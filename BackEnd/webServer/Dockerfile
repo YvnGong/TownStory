@@ -24,6 +24,9 @@ RUN apt-get update && \
 	libmysqlclient-dev \
    rm -rf /var/lib/apt/lists/*
 
+# Install libmysqlclient
+RUN apt-get install -y libmysqlclient-dev
+
 # Install uwsgi
 RUN pip3 install uwsgi
 
