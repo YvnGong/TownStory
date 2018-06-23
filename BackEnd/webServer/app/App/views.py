@@ -130,7 +130,10 @@ def uploadArticle(request):
             city = City.objects.get(pk=city)
         except:
             city_name, state_name, country_name = city.split(', ')
-            city = City.objects.create(city=city, city_name=city_name, state_name=state_name, country_name=country_name)
+            lat = float(request.POST.get('latitude'))
+            lng = float(request.POST.get('longitude'))
+            city = City.objects.create(city=city, city_name=city_name, 
+                latitude=lat, longitude =lng, state_name=state_name, country_name=country_name)
         # get current user
         user = request.user
         # create story
@@ -225,6 +228,23 @@ def contact(request):
         template = loader.get_template('contact.html')
         context = {
             'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
+
+# experimental map function
+def map(request):
+    status = sr()
+    if request.method == 'GET':
+        city_list = []
+        cities = City.objects.all()
+        for city in cities:
+            city_list.append([city.city, city.number_of_story, city.latitude, city.longitude])
+
+        template = loader.get_template('map.html')
+        context = {
+            'endpoints': endpoints,
+            'city_list': city_list
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)

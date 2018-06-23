@@ -25,3 +25,7 @@ function contact(){
 function writer(){
     window.location.assign(writeUrl);
 }
+
+function discovery(){
+    window.location.assign(discoveryUrl);
+}

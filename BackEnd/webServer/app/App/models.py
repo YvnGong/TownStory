@@ -26,6 +26,8 @@ Potential User Profile
 
 class City(models.Model):
     city = models.CharField(max_length = 50, primary_key = True, unique = True)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     city_name = models.CharField(max_length = 20)
     state_name = models.CharField(max_length = 20)
     country_name = models.CharField(max_length = 20)

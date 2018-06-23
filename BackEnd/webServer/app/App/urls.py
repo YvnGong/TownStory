@@ -15,6 +15,7 @@ urlpatterns = [
     path('test', views.test, name='test'),
     path('about', views.about, name='about'),
     path('contact', views.contact, name='contact'),
+    path('map', views.map, name='map'),
     # path('login', views.Login_Tester, name = 'login')
 
 ]
