@@ -57,7 +57,7 @@
       <input id="id_password"  class="login-input" name="password" placeholder="Password" type="password" />{{ form.password.errors }}
       <br>
       <div class="remember-forgot-section">
-          <input id="id_remember" name="remember" type="checkbox" />
+          <input id="id_remember" name="remember" type="checkbox" checked/>
           <label for="id_remember">Remember Me</label>
           <br>
           <a class="forgot" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>

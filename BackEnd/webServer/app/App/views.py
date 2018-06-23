@@ -211,7 +211,7 @@ def write(request):
             return HttpResponse(template.render(context, request))
         return JsonResponse(status.data)
     else:
-        return redirect(endpoints['signup_url'] + '?next=/app/write')
+        return redirect(endpoints['login_url'] + '?next=/app/write')
 
 """
 |_______________________________________

@@ -391,10 +391,26 @@
       ];
 
     </script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS2wgP_4t1_HfzAQKmP-Yk7ksyrO9L--8&callback=initMap">
+
+    <!-- Script to load markerCluster with fallback -->
+    {% load static %}
+    <script src="{% static 'js/markercluster.min.js' %}"></script>
+    <!-- <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script> -->
+    
+    <!-- Include the Fallback JS library. -->
+    {% load static %}
+    <script src="{% static 'js/fallback.min.js' %}"></script>
+
+    <!-- Script block to execute Fallback JS -->
+    <script>
+        fallback.load({
+            // Gmap
+            google: [
+                'https://maps.googleapis.com/maps/api/js?key=AIzaSyDS2wgP_4t1_HfzAQKmP-Yk7ksyrO9L--8&callback=initMap',
+                'http://maps.google.cn/maps/api/js?key=AIzaSyDS2wgP_4t1_HfzAQKmP-Yk7ksyrO9L--8&callback=initMap',
+            ],
+        });
     </script>
 
     <!-- Map container end -->

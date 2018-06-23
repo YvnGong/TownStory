@@ -18,11 +18,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-dr87r#$1+97(e76&0j4ntd$c6!3w8l$mc56cf8&3n03-5&##x'
-
-#facebook
-SOCIAL_AUTH_FACEBOOK_KEY = '203920656810215'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET ='63076ec8282dbda5c4b3e601ff6900aa' #app key
+try:
+    from credentials import DJANGO_SECRET
+    SECRET_KEY = DJANGO_SECRET
+except:
+    SECRET_KEY = os.environ.get("DJANGO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -63,11 +63,14 @@ INSTALLED_APPS = [
 SITE_ID = 2
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_PRESERVE_USERNAME_CASING = False
+ACCOUNT_SESSION_REMEMBER = True
 # `allauth` Temporary email suppresion
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_USE_TLS = True
 
-#try to import credentials
+# try to import credentials
+# email services
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 try:
     from credentials import EM_EMAIL_ADDRESS, EM_HOST, EM_PASSWORD, EM_PORT

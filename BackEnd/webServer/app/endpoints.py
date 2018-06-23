@@ -1,6 +1,6 @@
-LOGIN_URL = 'http://0.0.0.0:8000/app'
-SERVER_ENDPOINT = 'http://0.0.0.0:8000/'
 
+SERVER_ENDPOINT = 'http://0.0.0.0:80/'
+LOGIN_URL = SERVER_ENDPOINT + 'app'
 endpoints = {
     'write_url': SERVER_ENDPOINT + 'app/write',
     'landing_url': SERVER_ENDPOINT + 'app',
@@ -27,6 +27,6 @@ DEFAULT_USER_INDEX = ''
 USER_TYPE = ''
 
 # RDS Endpoints
-DB_HOST = 'towntorysql.cxnifljcd06r.us-west-1.rds.amazonaws.com'
+DB_HOST = 'towntory.ceeyveabzx1x.us-west-1.rds.amazonaws.com'
 DB_PORT = '3306'
 DB_NAME = 'towntory'
