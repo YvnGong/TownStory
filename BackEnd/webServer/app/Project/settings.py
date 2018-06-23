@@ -141,6 +141,8 @@ except:
         'NAME': DB_NAME,
         'HOST': DB_HOST,
         'PORT': DB_PORT,
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
         }
     }
 

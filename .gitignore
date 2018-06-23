@@ -104,6 +104,7 @@ venv.bak/
 .mypy_cache/
 config.py
 credentials.py
+deploy_bootstrap.txt
 
 # migrations
 **/migrations/*
