@@ -66,11 +66,20 @@ ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 # `allauth` Temporary email suppresion
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = ''
-EMAIL_HOST_PASSWORD = ''
+
+#try to import credentials
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+try:
+    from credentials import EM_EMAIL_ADDRESS, EM_HOST, EM_PASSWORD, EM_PORT
+    EMAIL_HOST = EM_HOST
+    EMAIL_PORT = EM_PORT
+    EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = EM_EMAIL_ADDRESS
+    EMAIL_HOST_PASSWORD = EM_PASSWORD
+except:
+    EMAIL_HOST = os.environ.get('EM_HOST')
+    EMAIL_PORT = os.environ.get('EM_PORT')
+    EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = os.environ.get('EM_EMAIL_ADDRESS')
+    EMAIL_HOST_PASSWORD = os.environ.get('EM_PASSWORD')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
