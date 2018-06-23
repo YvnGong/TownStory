@@ -1,5 +1,5 @@
 
-SERVER_ENDPOINT = 'http://0.0.0.0:80/'
+SERVER_ENDPOINT = 'http://0.0.0.0:8000/'
 LOGIN_URL = SERVER_ENDPOINT + 'app'
 endpoints = {
     'write_url': SERVER_ENDPOINT + 'app/write',

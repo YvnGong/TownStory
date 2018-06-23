@@ -25,7 +25,7 @@ except:
     SECRET_KEY = os.environ.get("DJANGO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Expire the login after browser close
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
