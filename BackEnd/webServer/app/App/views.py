@@ -26,7 +26,7 @@ from .models import City, Story
 from django.utils import timezone
 
 # import endpoints
-from .endpoints import endpoints, BUCKET_NAME
+from endpoints import endpoints, BUCKET_NAME
 
 # constants
 DYNAMO_STORY_TABLE = 'STORY_TABLE'
@@ -211,7 +211,7 @@ def write(request):
             return HttpResponse(template.render(context, request))
         return JsonResponse(status.data)
     else:
-        return redirect(endpoints['login_url'] + '?next=/app/write')
+        return redirect(endpoints['signup_url'] + '?next=/app/write')
 
 """
 |_______________________________________
@@ -313,4 +313,15 @@ def privacy_policy(request):
             'endpoints': endpoints
         }
         return HttpResponse(template.render(context, request))
-    return JsonResponse(status.data)  
+    return JsonResponse(status.data)
+
+# term of services
+def term_of_services(request):
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('termofservices.html')
+        context = {
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)

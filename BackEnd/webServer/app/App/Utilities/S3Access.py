@@ -8,10 +8,10 @@ This file provides S3 access capability.
 """
 import boto3
 import uuid
-from App.Utilities.endpoints import REGION, PROFILE_PIC_BUCKET, BUCKER_URL_PREFIX
+from endpoints import REGION, BUCKET_NAME, BUCKET_URL_PREFIX
 
 try:
-    from App.Utilities.config import aws_access_key_id, aws_secret_access_key
+    from credentials import aws_access_key_id, aws_secret_access_key
     s3 = boto3.client(
         's3',aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key,
         region_name=REGION
@@ -28,7 +28,7 @@ def generate_presigned_upload_url(bucket_name, key = None, timeout = 3600, metho
             Params={'Bucket':bucket_name, 'Key': key, 'ACL':'public-read'}, 
             ExpiresIn=timeout, 
             HttpMethod=method)
-        accessURL = BUCKER_URL_PREFIX + key
+        accessURL = BUCKET_URL_PREFIX + key
         return (uploadURL, accessURL)
     except:
         return False
@@ -47,7 +47,7 @@ def upload_file(bucket_name, fileobj):
     try:
         key = generate_image_name()
         s3.upload_fileobj(fileobj, bucket_name, key, ExtraArgs={'ACL':'public-read'})
-        return BUCKER_URL_PREFIX + key
+        return BUCKET_URL_PREFIX + key
     except:
         return False
 
