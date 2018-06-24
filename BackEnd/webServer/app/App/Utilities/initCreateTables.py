@@ -9,7 +9,7 @@ This file provides low-level DynamoDB interfaces.
 # Imports
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
-from config import aws_access_key_id, aws_secret_access_key
+from credentials import aws_access_key_id, aws_secret_access_key
 
 # table names
 EMAIL_LOOKUP_TABLE = 'authSerive_Email_Lookup'

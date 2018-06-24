@@ -5,44 +5,108 @@
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/story.css' %}">
+
+	<link href="https://fonts.googleapis.com/css?family=Vesper+Libre" rel="stylesheet"> 
 </head>
 <body>
 	<!-- Header -->
 	{% include 'header.html' %}
 
+	<style>
+		body{
+			background-color:rgb(236, 201, 165);
+		}
+		</style>
 
 	<div class="content">
 		<div class="container">
-			<div class="title">
-				<h1><b>{{title}}</b></h1>
-				<div class="d-flex justify-content-end"><h5>Author: {{author}}</h5></div>
-				<div class="d-flex justify-content-center"><h4>{{summary}}</h4></div>
+			<div class="row justify-content-center">
+				<div class="col-lg-9">
+					<div class="title">
+					<h1><b>{{title}}</b></h1>
+				<div class="d-flex justify-content-center"><p>by: {{author}}</p></div>
+				<br>
+				<div class="d-flex justify-content-center" style="color: rgba(34, 33, 30, 0.6); text-align: justify;"><h5>{{summary}}</h5></div>
+
 			</div>
 			<br>
-			<!-- <div class="row"><h1>{{title}}</h1></div> -->
-			<!-- <div class="row"><h4>{{summary}}</h4></div> -->
-			<!-- <div class="row"><h6>{{author}}</h6></div> -->
 			<!-- Contents -->
 			{% for item in content %}
 				{% if item.0 == 'header'%}
+
+				<br>
 				<div class="d-flex justify-content-lg-center">
-					<h3>{{ item.1 }}</h3>
+					<h4><b>{{ item.1 }}</b></h4>
 				</div>
+				<br>
+
 				{% elif item.0 == 'paragraph'%}
-				<div class="d-flex justify-content-start">
+				<div class="d-flex justify-content-start" style="font-size: 20px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
 					<p>{{ item.1 }}</p>
 				</div>
+
 				{% elif item.0 == 'image'%}
+				<br>
 				<div class="d-flex justify-content-center">
-					<img src="{{ item.1 }}">
+					<img src="{{ item.1 }}" style="margin-bottom: 2em; align-self: center;" alt="image loading" width="100%" height="auto" >
 				</div>
 				{% else %}
 				{% endif %}
 			{% endfor %}
 		</div>
 	</div>
+	</div>
+	</div>
 
+	<!-- delete button -->
+	{% if is_author %}
+	<script>
+		function deleteStory(){
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				response = JSON.parse(this.responseText);
+				if (response.status == true){
+					window.location.assign(cityUrl+'?city_name='+'{{city_name}}')
+					}
+				}
+			};
+				xhr.open('DELETE', deleteStoryUrl + '?story_id={{story_id}}');
+				xhr.send();
+			}
+	</script>
+	<br>
+	<!-- Button trigger the delete modal -->
+	<div class="container">
+		<div class="row justify-content-center">
+			<button class="btn btn-outline-dark" data-toggle="modal" data-target="#deleteConfirmation"> Delete </button>
+		</div>
+	</div>
+  
+	<!-- Modal -->
+	<div class="modal fade" id="deleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+			<div class="modal-body">
+			Are you sure?
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+			<button type="button" class="btn btn-danger" onclick="javascripts:deleteStory()">Delete Story</button>
+			</div>
+		</div>
+		</div>
+	</div>
+	{% endif %}
+	<br>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
 </body>
 </html>

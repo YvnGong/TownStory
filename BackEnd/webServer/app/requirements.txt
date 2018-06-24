@@ -3,3 +3,4 @@ django-cors-middleware
 boto3
 pyReturn
 django-allauth
+psycopg2-binary

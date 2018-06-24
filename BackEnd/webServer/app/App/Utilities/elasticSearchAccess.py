@@ -10,19 +10,29 @@ This file provides elastic search capability.
 from datetime import datetime
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
-from App.Utilities.config import aws_access_key_id, aws_secret_access_key
-from App.Utilities.endpoints import REGION, ELASTIC_SEARCH_ENDPOINT, DEFAULT_USER_INDEX, USER_TYPE
+from endpoints import REGION, ELASTIC_SEARCH_ENDPOINT, DEFAULT_USER_INDEX, USER_TYPE
 
-awsauth = AWS4Auth(aws_access_key_id, aws_secret_access_key, 'us-west-1', 'es')
 host = ELASTIC_SEARCH_ENDPOINT
 
-es = Elasticsearch(
-    hosts=[{'host': host, 'port': 443}],
-    http_auth=awsauth,
-    use_ssl=True,
-    verify_certs=True,
-    connection_class=RequestsHttpConnection
-)
+# try import local credentials
+try:
+    from credentials import aws_access_key_id, aws_secret_access_key
+    awsauth = AWS4Auth(aws_access_key_id, aws_secret_access_key, 'us-west-1', 'es')
+
+    es = Elasticsearch(
+        hosts=[{'host': host, 'port': 443}],
+        http_auth=awsauth,
+        use_ssl=True,
+        verify_certs=True,
+        connection_class=RequestsHttpConnection
+    )
+except:
+    es = Elasticsearch(
+        hosts=[{'host': host, 'port': 443}],
+        use_ssl=True,
+        verify_certs=True,
+        connection_class=RequestsHttpConnection
+    )
 
 # index a document
 def index_document(index, type, body, id = None):
