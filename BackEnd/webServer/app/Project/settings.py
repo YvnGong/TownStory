@@ -71,7 +71,7 @@ EMAIL_USE_TLS = True
 
 # try to import credentials
 # email services
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 try:
     from credentials import EM_EMAIL_ADDRESS, EM_HOST, EM_PASSWORD, EM_PORT
     EMAIL_HOST = EM_HOST
@@ -126,7 +126,7 @@ try:
     from credentials import DB_USER, DB_PASSWORD
     DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': DB_NAME,
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
@@ -137,7 +137,7 @@ try:
 except:
     DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': DB_NAME,
         'HOST': DB_HOST,
         'PORT': DB_PORT,
@@ -177,9 +177,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # Allow password with only numeric numbers
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
 
@@ -237,4 +238,3 @@ SOCIALACCOUNT_PROVIDERS = \
         'LOCALE_FUNC': lambda request: 'kr_KR',
         'VERIFIED_EMAIL': False,
 'VERSION': 'v2.4'}}
-

@@ -18,14 +18,15 @@ RUN apt-get update && \
 	python3 \
 	python3-dev \
 	python3-pip \
+	# for postgrel
+	libpq-dev \
+	postgresql \
+	postgresql-contrib \
+	python-psycopg2 \
+	# for postgrel -- end
 	python3-setuptools &&\
 	pip3 install -U pip setuptools && \
-        mysql-server -y \
-	libmysqlclient-dev \
    rm -rf /var/lib/apt/lists/*
-
-# Install libmysqlclient
-RUN apt-get install -y libmysqlclient-dev
 
 # Install uwsgi
 RUN pip3 install uwsgi
@@ -49,8 +50,8 @@ COPY . /home/
 # Set workdir
 WORKDIR /home/app/
 
-# Make migrations & Migrates
-RUN python3 manage.py makemigrations && python3 manage.py migrate --run-syncd
+# Make migrations & Migrates (should not sync during production)
+# RUN python3 manage.py makemigrations App && python3 manage.py migrate --run-syncd
 
 EXPOSE 80
 CMD ["supervisord", "-n"]

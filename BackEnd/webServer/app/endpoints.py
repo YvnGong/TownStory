@@ -28,5 +28,5 @@ USER_TYPE = ''
 
 # RDS Endpoints
 DB_HOST = 'towntory.ceeyveabzx1x.us-west-1.rds.amazonaws.com'
-DB_PORT = '3306'
+DB_PORT = '5432'
 DB_NAME = 'towntory'

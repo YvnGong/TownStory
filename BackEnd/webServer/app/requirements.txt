@@ -3,4 +3,4 @@ django-cors-middleware
 boto3
 pyReturn
 django-allauth
-mysqlclient
+psycopg2
