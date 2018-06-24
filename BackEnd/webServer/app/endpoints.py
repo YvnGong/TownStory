@@ -1,7 +1,12 @@
+import os
 
-SERVER_ENDPOINT = 'http://0.0.0.0:8000/'
+SERVER_ENDPOINT = os.environ.get('SERVER_ENDPOINT')
+if not SERVER_ENDPOINT:
+    SERVER_ENDPOINT = 'http://towntory.com/' # default
+
 LOGIN_URL = SERVER_ENDPOINT + 'app'
 endpoints = {
+    'root': SERVER_ENDPOINT,
     'write_url': SERVER_ENDPOINT + 'app/write',
     'landing_url': SERVER_ENDPOINT + 'app',
     'about_url': SERVER_ENDPOINT + 'app/about',

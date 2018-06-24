@@ -97,7 +97,7 @@ function selectImage(){
 
 function getUploadURLs(){
     var xhr = new XMLHttpRequest();
-    var requestURL = 'http://0.0.0.0:8000/app/uploadImgURLs?imageCount=' + imageCount;
+    var requestURL = uploadImgURLs + '?imageCount=' + imageCount;
     xhr.onreadystatechange = function() {
         // console.log(this.readyState);
         if (this.readyState == 4 && this.status == 200) {
@@ -124,7 +124,7 @@ function sendImage(file, uploadURL){
             }
         }
       };
-    xhr.open('PUT', uploadURL, false);
+    xhr.open('PUT', uploadURL);
     var reader = new FileReader();
     reader.onload = function(evt) {
         xhr.send(evt.target.result);
@@ -165,7 +165,7 @@ function submitData(){
 function finished(){
     // Submit the final information
     var formData = new FormData();
-    var url = 'http://0.0.0.0:8000/app/uploadArticle'
+    var url = uploadArticleUrl;
     var title = document.getElementById('title').value;
     var summary = document.getElementById('summary').value;
     var city = document.getElementById('city').value;

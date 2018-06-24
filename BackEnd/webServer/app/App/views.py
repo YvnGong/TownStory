@@ -124,6 +124,7 @@ def story(request):
 |_______________________________________
 """
 @csrf_exempt
+@login_required
 def uploadImg(request):
     status = sr()
     file = None
@@ -135,6 +136,7 @@ def uploadImg(request):
     return JsonResponse(status.data)
 
 @csrf_exempt
+@login_required
 def uploadImgURL(request):
     status = sr()
     if request.method == 'GET':
@@ -145,6 +147,7 @@ def uploadImgURL(request):
     return JsonResponse(status.data)
 
 @csrf_exempt
+@login_required
 def uploadImgURLs(request):
     status = sr()
     if request.method == 'GET':
@@ -161,6 +164,7 @@ def uploadImgURLs(request):
     return JsonResponse(status.data)
 
 @csrf_exempt
+@login_required
 def uploadArticle(request):
     status = sr()
     if request.method == 'POST':
@@ -196,6 +200,7 @@ def uploadArticle(request):
         city.number_of_story += 1
         city.save()
         status.attach_data('story_id', ID, isSuccess=True)
+    status.set_errorMessage('not post')
     return JsonResponse(status.data)
 
 def write(request):
