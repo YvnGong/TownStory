@@ -1,0 +1,113 @@
+/* body
+{
+    background-color: white;
+    height: 100vh;
+}
+
+#headimg{
+    background-image: url('static/image/TownStory.jpg');
+} */
+
+/* .outer {
+    display: table;
+    position: auto;
+    height: 100%;
+    width: 100%;
+  }
+  
+.middle 
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner 
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    /*whatever width you want*/
+/* } */
+
+/* #uploadFile {
+    display: none;
+}
+
+/* #get_file {
+    background: #f9f9f9;
+    border: 5px solid #88c;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+} */
+
+body {
+    background-color: gainsboro;
+    margin: 0;
+    padding: 0;
+  }
+
+input[type='password'],
+input[type='text'],
+input[type='email']{
+    width: 85%;
+    border-radius:5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 4px 4px;
+    margin: 12px;
+}
+
+.signinbtn{
+    text-align:center;
+    padding-left: 10px;
+    padding-right: 33px;
+}
+
+.remember-forgot-section{
+    padding: 4px 4px;
+    margin: 8px;
+}
+
+.facebook{
+    padding: 4px 4px;
+    margin: 8px;
+}
+
+.description{
+    padding: 4px 4px;
+    margin: 8px;
+}
+
+.center {
+    /* margin: auto; */
+    margin-top: 40px;
+    width: 90%;
+    /* border: 3px solid #73AD21; */
+}
+
+.notification { 
+    margin: auto;
+    margin-top: 10px;
+    width: 40%;
+    border: 2px solid #73AD21;
+    /* border-style:hidden; */
+    padding: 50px;
+}
+
+#signin{
+    text-align: center;
+}
+
+.box{
+    padding-top:10%;
+    margin-top: 10%;
+    border: 2px solid rgb(102, 86, 55);
+    /* border-style:hidden; */
+    background-color:white;
+    opacity: 50%;
+    padding: 30px;
+    border-radius: 10px;
+
+}

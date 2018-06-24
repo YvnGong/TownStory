@@ -1,0 +1,45 @@
+/* body {
+	color: black;
+    background: url(/home/yvonne/Desktop/Project/244828.jpg);
+    background-size: cover;
+    background-position: center; 
+} */
+
+.CityName{
+	color: black;
+	font-family: 'Questrial', sans-serif;;
+}
+
+/* img {
+	width: 100%;
+} */
+
+/*div {
+	border: 1px solid black;
+	height: 100px;
+}*/
+
+/* .navigation{
+	padding-left: 8%;
+	padding-right: 8%;
+	background-color: #e3f2fd;
+	opacity: 0.6;
+	text-align: center;
+} */
+
+.pagination{
+	position: center;
+	padding-top: 2%;
+	text-align: center;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.card{
+	/* margin-right:5.1%; */
+	margin-bottom: 17%;
+}
