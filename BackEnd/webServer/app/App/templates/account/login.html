@@ -57,7 +57,7 @@
       <input id="id_password"  class="login-input" name="password" placeholder="Password" type="password" />{{ form.password.errors }}
       <br>
       <div class="remember-forgot-section">
-          <input id="id_remember" name="remember" type="checkbox" />
+          <input id="id_remember" name="remember" type="checkbox" checked/>
           <label for="id_remember">Remember Me</label>
           <br>
           <a class="forgot" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
@@ -68,7 +68,7 @@
   {% endif %}
   <br>
   <div class="signinbtn">
-  <button class="btn btn-primary btn-block" type="submit" id="signinbtn">{% trans "Sign In" %}</button>
+  <button class="btn btn-primary btn-block" type="submit">{% trans "Sign In" %}</button>
   </div>
 </form>
 

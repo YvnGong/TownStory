@@ -14,7 +14,7 @@ from boto3.dynamodb.conditions import Key, Attr
 try: 
     # provide config.py for local testing
     # if config.py not present, use IAM role instead
-    from .config import aws_access_key_id, aws_secret_access_key
+    from credentials import aws_access_key_id, aws_secret_access_key
     dynamodb = boto3.resource('dynamodb', region_name='us-west-1',
         aws_access_key_id=aws_access_key_id,
         aws_secret_access_key=aws_secret_access_key,)

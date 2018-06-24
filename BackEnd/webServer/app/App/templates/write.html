@@ -7,12 +7,10 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-        <!-- <link rel="stylesheet" href="styles.css"> -->
 
         <!-- JavaScripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
@@ -20,49 +18,6 @@
         <script src="{% static 'js/canvas-to-blob.min.js' %}"></script>
         <script src="{% static 'js/write.js' %}"></script>
         <link rel="stylesheet" type="text/css" href="{% static 'css/write.css' %}">  
-
-        <!-- Auto complete
-        <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/flick/jquery-ui.css" />
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-        <style type="text/css">
-        .ui-menu .ui-menu-item a,.ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active {
-          font-weight: normal;
-          margin: -1px;
-          text-align:left;
-          font-size:14px;
-          }
-        .ui-autocomplete-loading { background: white url("/images/ui-anim_basic_16x16.gif") right center no-repeat; }
-        </style>
-
-        <script type="text/javascript">
-          jQuery(function () 
-          {
-            jQuery("#city").autocomplete({
-              source: function (request, response) {
-              jQuery.getJSON(
-                "http://gd.geobytes.com/AutoCompleteCity?callback=?&q="+request.term,
-                function (data) {
-                response(data);
-                }
-              );
-              },
-                  minLength: 3,
-              select: function (event, ui) {
-              var selectedObj = ui.item;
-              jQuery("#city").val(selectedObj.value);
-              return false;
-              },
-              open: function () {
-              jQuery(this).removeClass("ui-corner-all").addClass("ui-corner-top");
-              },
-              close: function () {
-              jQuery(this).removeClass("ui-corner-top").addClass("ui-corner-all");
-                  }
-            });
-            jQuery("#city").autocomplete("option", "delay", 100);
-            });
-          </script> -->
-
 
         <!-- Title -->
         <title>Write Story - Town Story</title>
@@ -80,7 +35,8 @@
               <div class="col-lg-12 col-centered">
               <div class="form-group">
                   <label for="mainTitle"><h3>Story Titile</h3></label>
-                  <input type="text" class="form-control" id="title" style="font-weight: bold" placeholder="Enter title">
+                  <span id='titleWarning' class="error text-danger" hidden>Minimum title lenght is 5.</span>
+                  <input type="text" class="form-control" id="title" maxlength="45" style="font-weight: bold" placeholder="Enter title">
                   <small class="form-text text-muted">The title of your story.</small>
               </div>
             </div>
@@ -91,7 +47,7 @@
                 <div class="col-lg-12 col-centered">
                 <div class="form-group">
                 <label for="subTitle">Summary</label>
-                <input type="text" class="form-control" id="summary" placeholder="Summary">
+                <input type="text" class="form-control" id="summary" maxlength="150" placeholder="Summary">
                 <small class="form-text text-muted">A small summary.</small>
               </div>
               </div>
@@ -104,6 +60,9 @@
                 <!-- Autocomplete City -->
                 {% include 'autocomplete.html' %}
             </div>
+            {% if city_name%}
+            <script> document.getElementById('city').value = '{{city_name}}'</script>
+            {% endif %}
             </div>
             </div>
             <br>
@@ -115,11 +74,10 @@
       <span id='itemWarning' class="error text-danger" hidden>No items</span>
       <div class="row">
         <div class="col-lg-12 col-centered">
-        <!-- <input type="file" id="uploadFile" accept="image/gif, image/jpeg, image/png"> -->
         <button type="button" class="btn btn-outline-dark" onclick="javascripts:insertHeader();">Header</button>
         <button type="button" class="btn btn-outline-primary" onclick="javascripts:insertParagraph();">Paragraph</button>
         <button type="button" class="btn btn-outline-success" id="uploadImage" data-toggle="modal" data-target="#myModal">Image</button>
-        <button type="button" class="btn btn-outline-secondary">Caption</button>
+        <!-- <button type="button" class="btn btn-outline-secondary">Caption</button> -->
         <button type="button" class="btn btn-outline-danger" onclick="javascripts:deleteItem();">Delete</button>
       </div>
       </div>
@@ -188,5 +146,6 @@
     </div>
 
     </section>
+
     </body>
 </html>

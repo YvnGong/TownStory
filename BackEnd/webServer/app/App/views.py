@@ -11,8 +11,10 @@ from App.Utilities import S3Access, dynamoAccess
 from pyReturn.response import status_response as sr
 
 # Templating
-from django.http import HttpResponse
 from django.template import loader
+
+# QueryDict
+from django.http import QueryDict
 
 # uuid
 import uuid
@@ -24,22 +26,44 @@ from .models import City, Story
 from django.utils import timezone
 
 # import endpoints
-from .endpoints import endpoints
+from endpoints import endpoints, BUCKET_NAME
 
 # constants
 DYNAMO_STORY_TABLE = 'STORY_TABLE'
 DEFAULT_COVER_IMAGE = 'https://f4.bcbits.com/img/0011621512_10.jpg'
 
+
+"""
+|_______________________________________
+|   Heathcheck|
+|_______________________________________
+"""
+def healthcheck(request):
+    text = 'Up and running'
+    return HttpResponse(text)
+
+"""
+|_______________________________________
+|   Langing Page|
+|_______________________________________
+"""
+#landing Page Upload to post address
 def landing(request):
-    d = {
-        'data': 1234,
-        'status': True
-    }
-    return JsonResponse(d)
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('landing.html')
+        context = {
+            'endpoints': endpoints,
+            'login': request.user.is_authenticated
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
 
-def auth(request):
-    return HttpResponse('auth')
-
+"""
+|_______________________________________
+|   Read City|
+|_______________________________________
+"""
 def city(request):
     status = sr()
     if request.method == 'GET':
@@ -47,7 +71,7 @@ def city(request):
         try:
             # city has story
             city = City.objects.get(pk=city_name)
-            stories = Story.objects.filter(city=city)
+            stories = Story.objects.filter(city=city).order_by('-datetime')
         except:
             # city has no story
             stories = None
@@ -61,47 +85,69 @@ def city(request):
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
 
+"""
+|_______________________________________
+|   Read Story|
+|_______________________________________
+"""
 def story(request):
-    return HttpResponse('story')
+    status = sr()
+    if request.method == 'GET':
+        story_id = request.GET.get('story_id')
+        story = Story.objects.get(id=story_id)
+        title = story.title
+        summary = story.summary
+        cover_url = story.cover
+        author = story.author
+        city_name = story.city.city
+        template = loader.get_template('story.html')
+        content = dynamoAccess.get_item(DYNAMO_STORY_TABLE, 'story_id', story_id)['content']
+        is_author = (request.user.username == str(author)) or request.user.is_staff
+        print(is_author)
+        context = {
+            'title': title,
+            'summary': summary,
+            'content': content,
+            'endpoints': endpoints,
+            'cover_url': cover_url,
+            'city_name': city_name,
+            'author': author,
+            'is_author': is_author,
+            'story_id': story_id,
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
 
-def write(request):
-    if request.user.is_authenticated:
-        status = sr()
-        if request.method == 'GET':
-            template = loader.get_template('write.html')
-            context = {
-                'endpoints': endpoints
-            }
-            return HttpResponse(template.render(context, request))
-        return JsonResponse(status.data)
-    else:
-        return redirect(endpoints['login_url'])
-    
-
+"""
+|_______________________________________
+|   Write Story|
+|_______________________________________
+"""
 @csrf_exempt
+@login_required
 def uploadImg(request):
     status = sr()
     file = None
-    print(request.POST)
-    print(request.FILES)
     if request.method == 'POST':
         image = request.FILES['image']
-        url = S3Access.upload_file('fairytaler', image.file)
+        url = S3Access.upload_file(BUCKET_NAME, image.file)
     status.attach_data('url', url, True)
     print(status.get_response())
     return JsonResponse(status.data)
 
 @csrf_exempt
+@login_required
 def uploadImgURL(request):
     status = sr()
     if request.method == 'GET':
-        uploadURL, accessURL = S3Access.generate_presigned_upload_url('fairytaler')
+        uploadURL, accessURL = S3Access.generate_presigned_upload_url(BUCKET_NAME)
     status.attach_data('uploadURL', uploadURL, True)
     status.attach_data('accessURL', accessURL, True)
     print(status.get_response())
     return JsonResponse(status.data)
 
 @csrf_exempt
+@login_required
 def uploadImgURLs(request):
     status = sr()
     if request.method == 'GET':
@@ -109,7 +155,7 @@ def uploadImgURLs(request):
         uploadURLs = []
         accessURLs = []
         for i in range(int(imageCount)):
-            uploadURL, accessURL = S3Access.generate_presigned_upload_url('fairytaler')
+            uploadURL, accessURL = S3Access.generate_presigned_upload_url(BUCKET_NAME)
             uploadURLs.append(uploadURL)
             accessURLs.append(accessURL)
     status.attach_data('uploadURLs', uploadURLs, True)
@@ -118,6 +164,7 @@ def uploadImgURLs(request):
     return JsonResponse(status.data)
 
 @csrf_exempt
+@login_required
 def uploadArticle(request):
     status = sr()
     if request.method == 'POST':
@@ -148,68 +195,98 @@ def uploadArticle(request):
                 break
         dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
         # save the story
-        story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, date = timezone.now())
+        story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, datetime = timezone.now())
         # add one story and save the update
         city.number_of_story += 1
         city.save()
         status.attach_data('story_id', ID, isSuccess=True)
+    status.set_errorMessage('not post')
     return JsonResponse(status.data)
 
+def write(request):
+    if request.user.is_authenticated:
+        status = sr()
+        if request.method == 'GET':
+            city_name = request.GET.get('city_name')
+            template = loader.get_template('write.html')
+            context = {
+                'endpoints': endpoints,
+                'city_name': city_name,
+            }
+            return HttpResponse(template.render(context, request))
+        return JsonResponse(status.data)
+    else:
+        return redirect(endpoints['login_url'] + '?next=/app/write')
+
 """
-Web Response
+|_______________________________________
+|   Delete Story|
+|_______________________________________
 """
-def getStory(request):
+@csrf_exempt
+def deleteStory(request):
     status = sr()
-    if request.method == 'GET':
+    if request.method == 'DELETE':
         story_id = request.GET.get('story_id')
-        story = Story.objects.get(id=story_id)
-        title = story.title
-        summary = story.summary
-        cover_url = story.cover
-        author = story.author
-        city = story.city
-        template = loader.get_template('story.html')
-        content = dynamoAccess.get_item(DYNAMO_STORY_TABLE, 'story_id', story_id)['content']
-        context = {
-            'title': title,
-            'summary': summary,
-            'content': content,
-            'endpoints': endpoints,
-            'cover_url': cover_url,
-            'city': city,
-            'author': author
-        }
-        return HttpResponse(template.render(context, request))
+        print(story_id)
+
+        try:
+            # check if the object exist
+            story = Story.objects.get(pk=story_id)
+            # check if the current user if the author
+            if (request.user == story.author) or request.user.is_staff:
+                # retrieve data list from DynamoDB
+                content = dynamoAccess.get_item(DYNAMO_STORY_TABLE, 'story_id', story_id)['content']
+                # based on the list delete objects in S3
+                for item in content:
+                    if item[0] == 'image':
+                        key = item[1].split('/')[-1]
+                        S3Access.delete_object(BUCKET_NAME, key)
+                # delete dynamoDB record
+                dynamoAccess.delete(DYNAMO_STORY_TABLE, 'story_id', story_id)
+                # reduce story count of a city
+                city = story.city
+                city.number_of_story -= 1
+                city.save()
+                # delete story object from SQL DB
+                story.delete()
+                # set status to success
+                status.set_status(True)
+            else:
+                status.set_errorMessage('not authorized')
+
+        except Story.DoesNotExist:
+            status.set_errorMessage('story not exist')
+
     return JsonResponse(status.data)
 
-def test(request):
-    status = sr()
-    City.objects.create(city='1', city_name='2', state_name='3', country_name='4')
-    return JsonResponse(status.data)
-        
-#landing Page Upload to post address
-def landPage_Tester(request):
+"""
+|_______________________________________
+|   Discover|
+|_______________________________________
+"""
+# experimental map function
+def discover(request):
     status = sr()
     if request.method == 'GET':
-        template = loader.get_template('landing.html')
+        city_list = []
+        cities = City.objects.all()
+        for city in cities:
+            city_list.append([city.city, city.number_of_story, city.latitude, city.longitude])
+
+        template = loader.get_template('discover.html')
         context = {
             'endpoints': endpoints,
-            'login': request.user.is_authenticated
+            'city_list': city_list
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
 
-#login upload to post address
-def Login_Tester(request):
-    status = sr()
-    if request.method == 'GET':
-        template = loader.get_template('login.html')
-        context = {
-            'endpoints': endpoints
-        }
-        return HttpResponse(template.render(context, request))
-    return JsonResponse(status.data)
-
+"""
+|_______________________________________
+|   Extra information|
+|_______________________________________
+"""
 #about page link
 def about(request):
     status = sr()
@@ -221,7 +298,7 @@ def about(request):
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
 
-#about page link
+#contact page link
 def contact(request):
     status = sr()
     if request.method == 'GET':
@@ -232,19 +309,24 @@ def contact(request):
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
 
-# experimental map function
-def map(request):
+# privacy policy
+def privacy_policy(request):
     status = sr()
     if request.method == 'GET':
-        city_list = []
-        cities = City.objects.all()
-        for city in cities:
-            city_list.append([city.city, city.number_of_story, city.latitude, city.longitude])
-
-        template = loader.get_template('map.html')
+        template = loader.get_template('privacypolicy.html')
         context = {
-            'endpoints': endpoints,
-            'city_list': city_list
+            'endpoints': endpoints
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
+
+# term of services
+def term_of_services(request):
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('termofservices.html')
+        context = {
+            'endpoints': endpoints
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
