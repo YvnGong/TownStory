@@ -20,6 +20,9 @@ Need to perform a data migration first as following.
 
 ## Production
 
+### Collect static files
+* `python3 manage.py collectstatic`
+
 ### Build image
 
 This step requires sudo. Suggest sign in as super user using 'su'.
