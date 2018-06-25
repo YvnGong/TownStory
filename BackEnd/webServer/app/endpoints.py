@@ -2,7 +2,7 @@ import os
 
 SERVER_ENDPOINT = os.environ.get('SERVER_ENDPOINT')
 if not SERVER_ENDPOINT:
-    SERVER_ENDPOINT = 'http://www.towntory.com/' # default
+    SERVER_ENDPOINT = 'https://www.towntory.com/' # default
 
 LOGIN_URL = SERVER_ENDPOINT + 'app'
 endpoints = {
