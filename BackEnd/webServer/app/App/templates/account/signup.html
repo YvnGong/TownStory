@@ -23,14 +23,13 @@
 
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
     {% csrf_token %}
-      {{ form.non_field_errors }}
-      <input id="id_email" name="email" type="email" placeholder="email@address.com"> {{ form.email.errors }}
+      <input id="id_email" name="email" type="email" placeholder="email@address.com">
       <br>
-      {{ form.username }} {{ form.username.errors }}
+      {{ form.username }}
       <br>
-      {{ form.password1 }} {{ form.password1.errors }}
+      {{ form.password1 }}
       <br>
-      {{ form.password2 }} {{ form.password2.errors }}     
+      {{ form.password2 }}     
 <br><br>
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
@@ -42,6 +41,21 @@
 
 <!-- Center area end -->
 </div>
+</div>
+</div>
+</div>
+
+<!-- Error area -->
+<br>
+<div class = "container">
+  <div class="row align-items-center justify-content-md-center">
+      <div class="col-md-auto">
+        <div style="color: red;">
+{{ form.non_field_errors }}
+{{ form.email.errors }}
+{{ form.username.errors }}
+{{ form.password1.errors }}
+{{ form.password2.errors }}
 </div>
 </div>
 </div>

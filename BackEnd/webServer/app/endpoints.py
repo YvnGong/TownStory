@@ -2,7 +2,7 @@ import os
 
 SERVER_ENDPOINT = os.environ.get('SERVER_ENDPOINT')
 if not SERVER_ENDPOINT:
-    SERVER_ENDPOINT = 'http://towntory.com/' # default
+    SERVER_ENDPOINT = 'http://www.towntory.com/' # default
 
 LOGIN_URL = SERVER_ENDPOINT + 'app'
 endpoints = {
@@ -22,16 +22,25 @@ endpoints = {
 # Setting Endpoints
 REGION = 'us-west-1'
 
-# S3 Bucket Endpoints
-BUCKET_NAME = 'towntory'
-BUCKET_URL_PREFIX = 'https://towntory.s3.amazonaws.com/'
-
 # Elastic Search Endpoints
 ELASTIC_SEARCH_ENDPOINT = ''
 DEFAULT_USER_INDEX = ''
 USER_TYPE = ''
 
+### Production Endpoints ###
+# S3 Bucket Endpoints
+BUCKET_NAME = 'towntory'
+BUCKET_URL_PREFIX = 'https://towntory.s3.amazonaws.com/'
 # RDS Endpoints
 DB_HOST = 'towntory.ceeyveabzx1x.us-west-1.rds.amazonaws.com'
 DB_PORT = '5432'
 DB_NAME = 'towntory'
+
+# ### DEvelopment Endpoints ###
+# # S3 Bucket Endpoints
+# BUCKET_NAME = 'fairytaler'
+# BUCKET_URL_PREFIX = 'https://fairytaler.s3.amazonaws.com/'
+# # RDS Endpoints
+# DB_HOST = 'towntory.cxnifljcd06r.us-west-1.rds.amazonaws.com'
+# DB_PORT = '5432'
+# DB_NAME = 'towntory'

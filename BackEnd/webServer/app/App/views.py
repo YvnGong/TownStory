@@ -30,7 +30,7 @@ from endpoints import endpoints, BUCKET_NAME
 
 # constants
 DYNAMO_STORY_TABLE = 'STORY_TABLE'
-DEFAULT_COVER_IMAGE = 'https://f4.bcbits.com/img/0011621512_10.jpg'
+DEFAULT_COVER_IMAGE = 'https://towntory-public-host.s3.amazonaws.com/default.png'
 
 
 """
@@ -193,12 +193,13 @@ def uploadArticle(request):
             if item[0] == 'image':
                 cover_img_url = item[1]
                 break
-        dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
         # save the story
         story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, datetime = timezone.now())
         # add one story and save the update
         city.number_of_story += 1
         city.save()
+        # now save the article content
+        dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
         status.attach_data('story_id', ID, isSuccess=True)
     status.set_errorMessage('not post')
     return JsonResponse(status.data)
