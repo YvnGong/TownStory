@@ -14,7 +14,7 @@ function validateCity(){
     cityfqcn = cityName;
     if (cityfqcn) {
         jQuery.getJSON(
-                "http://gd.geobytes.com/GetCityDetails?callback=?&fqcn="+cityfqcn,
+                geobyteUrl + "GetCityDetails?callback=?&fqcn=" +cityfqcn + geobyteKey,
                 function (data) {
                     if (data.geobytescityid>0) {
                         showCity();
