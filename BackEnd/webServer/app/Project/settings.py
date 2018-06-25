@@ -36,7 +36,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 ALLOWED_HOSTS = ['*']
 
 # Add hosts that are allowed to do cross-site requests
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
