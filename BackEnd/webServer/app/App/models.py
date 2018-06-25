@@ -39,6 +39,6 @@ class Story(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length = 50)
     summary = models.CharField(max_length = 150)
-    cover = models.CharField(max_length = 50)
+    cover = models.CharField(max_length = 100)
     like = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)

@@ -51,10 +51,9 @@
 
 <form class="login" method="POST" action="{% url 'account_login' %}">
     {% csrf_token %}
-      {{ form.non_field_errors }}
-      <input id="id_login" class="login-input" maxlength="30" name="login" placeholder="Username or Email" type="text" />{{ form.login.errors }}
+      <input id="id_login" class="login-input" maxlength="30" name="login" placeholder="Username or Email" type="text" />
       <br>
-      <input id="id_password"  class="login-input" name="password" placeholder="Password" type="password" />{{ form.password.errors }}
+      <input id="id_password"  class="login-input" name="password" placeholder="Password" type="password" />
       <br>
       <div class="remember-forgot-section">
           <input id="id_remember" name="remember" type="checkbox" checked/>
@@ -78,4 +77,19 @@
 </div>
 <!-- Center area end -->
 
+<!-- Center area -->
+<br>
+<div class = "container">
+  <div class="row align-items-center justify-content-md-center">
+      <div class="col-md-auto">
+        <div style="color: red;">
+{{ form.non_field_errors }}
+<br>
+{{ form.login.errors }}
+<br>
+{{ form.password.errors }}
+</div>
+</div>
+</div>
+</div>
 {% endblock %}
