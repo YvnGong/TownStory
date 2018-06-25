@@ -10,6 +10,22 @@ var story_id = '';
 var article = [];
 var globalBlob;
 
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 function renderParagraph(itemNumber){
     return  `<div class="row" id='` + 'item' + itemNumber + 
     `'>
@@ -188,6 +204,7 @@ function finished(){
             }
         }
     xhr.open('POST', url);
+    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
     xhr.send(formData);
 }
 
@@ -254,7 +271,7 @@ function validateDataAndSend(){
     cityfqcn = cityName;
     if (cityfqcn) {
         jQuery.getJSON(
-                "http://gd.geobytes.com/GetCityDetails?callback=?&fqcn="+cityfqcn,
+                geobyteUrl+"GetCityDetails?callback=?&fqcn="+cityfqcn+geobyteKey,
                 function (data) {
                     if (data.geobytescityid>0) {
                         latitude = data.geobyteslatitude

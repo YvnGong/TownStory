@@ -17,15 +17,67 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
+#### try to import credentials
+from endpoints import DB_HOST, DB_NAME, DB_PORT
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 # SECURITY WARNING: keep the secret key used in production secret!
-try:
-    from credentials import DJANGO_SECRET
-    SECRET_KEY = DJANGO_SECRET
-except:
-    SECRET_KEY = os.environ.get("DJANGO_SECRET")
+"""-------------------------
+|   Dev / Production setup |
+|---------------------------
+"""
 
+"""DEVELOPMENT"""
+
+# # SECRET
+# from credentials import DJANGO_SECRET
+# SECRET_KEY = DJANGO_SECRET
+# try to import credentials
+# email services
+# # EMAIL
+# from credentials import EM_EMAIL_ADDRESS, EM_HOST, EM_PASSWORD, EM_PORT
+# EMAIL_HOST = EM_HOST
+# EMAIL_PORT = EM_PORT
+# EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = EM_EMAIL_ADDRESS
+# EMAIL_HOST_PASSWORD = EM_PASSWORD
+# # DATABE
+# from credentials import DB_USER, DB_PASSWORD
+# DATABASES = {
+# 'default': {
+#     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#     'NAME': DB_NAME,
+#     'USER': DB_USER,
+#     'PASSWORD': DB_PASSWORD,
+#     'HOST': DB_HOST,
+#     'PORT': DB_PORT,
+#     }
+# }
+
+"""PRODUCTION"""
+
+# SECRET_KEY
+SECRET_KEY = os.environ.get("DJANGO_SECRET")
+### EMAIL
+EMAIL_HOST = os.environ.get('EM_HOST')
+EMAIL_PORT = os.environ.get('EM_PORT')
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = os.environ.get('EM_EMAIL_ADDRESS')
+EMAIL_HOST_PASSWORD = os.environ.get('EM_PASSWORD')
+# DATABASE
+DATABASES = {
+'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': DB_NAME,
+    'HOST': DB_HOST,
+    'PORT': DB_PORT,
+    'USER': os.environ.get('DB_USER'),
+    'PASSWORD': os.environ.get('DB_PASSWORD'),
+    }
+}
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+"""-----------------------------
+|   End Dev / Production setup |
+|-------------------------------
+"""
 
 # Expire the login after browser close
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
@@ -69,21 +121,6 @@ ACCOUNT_SESSION_REMEMBER = True
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_USE_TLS = True
 
-# try to import credentials
-# email services
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
-try:
-    from credentials import EM_EMAIL_ADDRESS, EM_HOST, EM_PASSWORD, EM_PORT
-    EMAIL_HOST = EM_HOST
-    EMAIL_PORT = EM_PORT
-    EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = EM_EMAIL_ADDRESS
-    EMAIL_HOST_PASSWORD = EM_PASSWORD
-except:
-    EMAIL_HOST = os.environ.get('EM_HOST')
-    EMAIL_PORT = os.environ.get('EM_PORT')
-    EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = os.environ.get('EM_EMAIL_ADDRESS')
-    EMAIL_HOST_PASSWORD = os.environ.get('EM_PASSWORD')
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -120,31 +157,6 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-from endpoints import DB_HOST, DB_NAME, DB_PORT
-try:
-    from credentials import DB_USER, DB_PASSWORD
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
-        }
-    }
-except:
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_NAME,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        }
-    }
 
 # DATABASES = {
 #    'default': {

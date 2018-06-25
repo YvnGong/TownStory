@@ -13,14 +13,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* font-family: 'Gloria Hallelujah', cursive; */
     font-weight: 600;
     font-size: 6.0em;
     color: rgb(10, 7, 7);
     text-align: center;
-    /* text-shadow: 2px 4px 3px rgba(0,0,0,0.4),
-                 2px 8px 13px rgba(0,0,0,0.1),
-                 2px 18px 23px rgba(0,0,0,0.1); */
 }
 
 .big{
