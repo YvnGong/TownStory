@@ -380,8 +380,7 @@
         });
 
         // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        var markerCluster = new MarkerClusterer(map, markers);
       }
 
       var cities = [
@@ -393,10 +392,8 @@
     </script>
 
     <!-- Script to load markerCluster with fallback -->
-    {% load static %}
-    <script src="{% static 'js/markercluster.min.js' %}"></script>
-    <!-- <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer_compiled.js">
+    </script>
     
     <!-- Include the Fallback JS library. -->
     {% load static %}
@@ -408,7 +405,7 @@
             // Gmap
             google: [
                 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDS2wgP_4t1_HfzAQKmP-Yk7ksyrO9L--8&callback=initMap',
-                'http://maps.google.cn/maps/api/js?key=AIzaSyDS2wgP_4t1_HfzAQKmP-Yk7ksyrO9L--8&callback=initMap',
+                'https://maps.google.cn/maps/api/js?key=AIzaSyDS2wgP_4t1_HfzAQKmP-Yk7ksyrO9L--8&callback=initMap',
             ],
         });
     </script>

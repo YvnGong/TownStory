@@ -103,7 +103,6 @@ def story(request):
         template = loader.get_template('story.html')
         content = dynamoAccess.get_item(DYNAMO_STORY_TABLE, 'story_id', story_id)['content']
         is_author = (request.user.username == str(author)) or request.user.is_staff
-        print(is_author)
         context = {
             'title': title,
             'summary': summary,
@@ -123,8 +122,6 @@ def story(request):
 |   Write Story|
 |_______________________________________
 """
-@csrf_exempt
-@login_required
 def uploadImg(request):
     status = sr()
     file = None
@@ -132,76 +129,76 @@ def uploadImg(request):
         image = request.FILES['image']
         url = S3Access.upload_file(BUCKET_NAME, image.file)
     status.attach_data('url', url, True)
-    print(status.get_response())
     return JsonResponse(status.data)
 
-@csrf_exempt
-@login_required
 def uploadImgURL(request):
     status = sr()
-    if request.method == 'GET':
-        uploadURL, accessURL = S3Access.generate_presigned_upload_url(BUCKET_NAME)
-    status.attach_data('uploadURL', uploadURL, True)
-    status.attach_data('accessURL', accessURL, True)
-    print(status.get_response())
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            uploadURL, accessURL = S3Access.generate_presigned_upload_url(BUCKET_NAME)
+        status.attach_data('uploadURL', uploadURL, True)
+        status.attach_data('accessURL', accessURL, True)
+    else:
+        status.set_errorMessage('not logged in')
     return JsonResponse(status.data)
 
-@csrf_exempt
-@login_required
 def uploadImgURLs(request):
     status = sr()
-    if request.method == 'GET':
-        imageCount = request.GET.get('imageCount')
-        uploadURLs = []
-        accessURLs = []
-        for i in range(int(imageCount)):
-            uploadURL, accessURL = S3Access.generate_presigned_upload_url(BUCKET_NAME)
-            uploadURLs.append(uploadURL)
-            accessURLs.append(accessURL)
-    status.attach_data('uploadURLs', uploadURLs, True)
-    status.attach_data('accessURLs', accessURLs, True)
-    print(status.get_response())
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            imageCount = request.GET.get('imageCount')
+            uploadURLs = []
+            accessURLs = []
+            for i in range(int(imageCount)):
+                uploadURL, accessURL = S3Access.generate_presigned_upload_url(BUCKET_NAME)
+                uploadURLs.append(uploadURL)
+                accessURLs.append(accessURL)
+        status.attach_data('uploadURLs', uploadURLs, True)
+        status.attach_data('accessURLs', accessURLs, True)
+    else:
+        status.set_errorMessage('not logged in')
     return JsonResponse(status.data)
 
-@csrf_exempt
-@login_required
 def uploadArticle(request):
     status = sr()
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        summary = request.POST.get('summary')
-        article = request.POST.get('article')
-        city = request.POST.get('city')
-        # if city not exsit, create one
-        try:
-            city = City.objects.get(pk=city)
-        except:
-            city_name, state_name, country_name = city.split(', ')
-            lat = float(request.POST.get('latitude'))
-            lng = float(request.POST.get('longitude'))
-            city = City.objects.create(city=city, city_name=city_name, 
-                latitude=lat, longitude =lng, state_name=state_name, country_name=country_name)
-        # get current user
-        user = request.user
-        # create story
-        ID = str(uuid.uuid4())
-        # use dynamoDB to store the contents
-        article = json.loads(article)
-        # check if there is any image and get the first one as cover
-        cover_img_url = DEFAULT_COVER_IMAGE
-        for item in article:
-            if item[0] == 'image':
-                cover_img_url = item[1]
-                break
-        # save the story
-        story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, datetime = timezone.now())
-        # add one story and save the update
-        city.number_of_story += 1
-        city.save()
-        # now save the article content
-        dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
-        status.attach_data('story_id', ID, isSuccess=True)
-    status.set_errorMessage('not post')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            title = request.POST.get('title')
+            summary = request.POST.get('summary')
+            article = request.POST.get('article')
+            city = request.POST.get('city')
+            # if city not exsit, create one
+            try:
+                city = City.objects.get(pk=city)
+            except:
+                city_name, state_name, country_name = city.split(', ')
+                lat = float(request.POST.get('latitude'))
+                lng = float(request.POST.get('longitude'))
+                city = City.objects.create(city=city, city_name=city_name, 
+                    latitude=lat, longitude =lng, state_name=state_name, country_name=country_name)
+            # get current user
+            user = request.user
+            # create story
+            ID = str(uuid.uuid4())
+            # use dynamoDB to store the contents
+            article = json.loads(article)
+            # check if there is any image and get the first one as cover
+            cover_img_url = DEFAULT_COVER_IMAGE
+            for item in article:
+                if item[0] == 'image':
+                    cover_img_url = item[1]
+                    break
+            # save the story
+            story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, datetime = timezone.now())
+            # add one story and save the update
+            city.number_of_story += 1
+            city.save()
+            # now save the article content
+            dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
+            status.attach_data('story_id', ID, isSuccess=True)
+        status.set_errorMessage('not post')
+    else:
+        status.set_errorMessage('not logged in')
     return JsonResponse(status.data)
 
 def write(request):
@@ -215,7 +212,6 @@ def write(request):
                 'city_name': city_name,
             }
             return HttpResponse(template.render(context, request))
-        return JsonResponse(status.data)
     else:
         return redirect(endpoints['login_url'] + '?next=/app/write')
 
@@ -229,8 +225,6 @@ def deleteStory(request):
     status = sr()
     if request.method == 'DELETE':
         story_id = request.GET.get('story_id')
-        print(story_id)
-
         try:
             # check if the object exist
             story = Story.objects.get(pk=story_id)
