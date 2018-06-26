@@ -43,12 +43,20 @@ jQuery(function ()
 	 jQuery("#city").autocomplete("option", "delay", 100);
 	});
 </script>
-<input class="ff_elem" type="text" name="ff_nm_from[]" value="" id="city" placeholder="Find your city"/>
+<input class="ff_elem" type="text" name="ff_nm_from[]" value="" id="city" placeholder="Find your city or town"/>
 <style>
 	input,
 	::placeholder {
-  		color: black;
-  		font-size: 15px;
+  		color: rgb(131, 127, 127);
+		font-size: 20px;
+		text-indent: 5%;
+	}
+	#city{
+		max-width: 250px;
+		height: 40px;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
 	}
 	</style>
 <span id='cityWaring' class="error text-danger" hidden>Invalid city, please select from the drop down menu</span>

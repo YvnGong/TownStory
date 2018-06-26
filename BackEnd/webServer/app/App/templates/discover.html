@@ -8,14 +8,15 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        min-height: 500px;
+        min-height: 490px;
         width: 100%;
         height:100%;
         border: black;
       }
 
       #map_box{
-        margin-top: 4%;
+        margin-top: 2%;
+        margin-bottom: 1%;
         border: black;
       }
       /* Optional: Makes the sample page fill the window. */
@@ -404,8 +405,8 @@
         fallback.load({
             // Gmap
             google: [
-                'https://maps.googleapis.com/maps/api/js?key=AIzaSyDS2wgP_4t1_HfzAQKmP-Yk7ksyrO9L--8&callback=initMap',
-                'http://maps.google.cn/maps/api/js?key=AIzaSyDS2wgP_4t1_HfzAQKmP-Yk7ksyrO9L--8&callback=initMap',
+                'https://maps.agoogleapis.com/maps/api/js?key=AIzaSyDS2wgP_4t1_HfzAQKmP-Yk7ksyrO9L--8&callback=initMap',
+                'http://maps.agoogle.cn/maps/api/js?key=AIzaSyDS2wgP_4t1_HfzAQKmP-Yk7ksyrO9L--8&callback=initMap',
             ],
         });
     </script>
@@ -417,9 +418,21 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
+    <!-- Switch to HTTP -->
+    <div class="container">
+            <div class="row">
+                <p> Having trouble seeing the map? &nbsp;&nbsp;
+                    <button class="btn btn-warning" onclick="location.href='http://www.towntory.com/app/discover'">
+                        Switch to HTTP</button>
+                </p>
+            </div>
+        </div>
+
     <!-- Footer -->
 	<br>
-	<br>
+    <br>
+
+    <!-- Footer -->
     {% include 'footer.html' %}
     
   </body>
