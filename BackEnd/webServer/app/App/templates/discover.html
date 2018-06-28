@@ -379,9 +379,10 @@
                                });
                    return marker;
         });
-
+        {% load static %}
         // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers);
+        var markerCluster = new MarkerClusterer(map, markers, 
+        {imagePath: '{% static 'image/m/m' %}'});
       }
 
       var cities = [
