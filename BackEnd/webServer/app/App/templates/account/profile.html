@@ -1,0 +1,37 @@
+{% extends "account/base.html" %}
+
+{% block head %}
+<title>Profile</title>
+{% endblock %}
+
+{% block body %}
+<div class="container" id="profile">
+        <div class="row justify-content-lg-center">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <img src="{{ user.userprofile.image.url }}" alt="" class="img-rounded img-responsive" />
+                        </div>
+                        <div class="col-sm-6 col-md-8">
+                            <p>Username: {{ user }}</p>
+                            <p>First name: {{ user.first_name }}</p>
+                            <p>Last name: {{ user.last_name }}</p>
+                            <p>Email: {{ user.email }}</p>
+                            <a class="forgot" href="{% url 'account_email' %}">Update my email</a>
+                            <br>
+                            <br>
+                            <a class="forgot" href="{% url 'account_reset_password' %}">Reset my password</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+

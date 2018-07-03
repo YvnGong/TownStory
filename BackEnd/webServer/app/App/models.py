@@ -1,8 +1,10 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, User
 from django.db import models
 from django.contrib.auth.models import BaseUserManager
+
 # time zone
 from django.utils import timezone
+
 # uuid
 import uuid
 
@@ -42,3 +44,7 @@ class Story(models.Model):
     cover = models.CharField(max_length = 100)
     like = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
+
+
+
+

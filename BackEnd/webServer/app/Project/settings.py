@@ -210,7 +210,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 
 #JUn 10 login tester
-LOGIN_REDIRECT_URL = LOGIN_URL + '/'
+LOGIN_REDIRECT_URL = LOGIN_URL
+# + '/'
 
 
 # `allauth`

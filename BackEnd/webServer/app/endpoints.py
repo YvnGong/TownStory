@@ -3,6 +3,7 @@ import os
 SERVER_ENDPOINT = os.environ.get('SERVER_ENDPOINT')
 if not SERVER_ENDPOINT:
     SERVER_ENDPOINT = 'https://www.towntory.com/' # default
+    # SERVER_ENDPOINT = 'http://0.0.0.0:8000/' 
 
 LOGIN_URL = SERVER_ENDPOINT + 'app/'
 endpoints = {
@@ -36,7 +37,7 @@ DB_HOST = 'towntory.ceeyveabzx1x.us-west-1.rds.amazonaws.com'
 DB_PORT = '5432'
 DB_NAME = 'towntory'
 
-# ### DEvelopment Endpoints ###
+### DEvelopment Endpoints ###
 # # S3 Bucket Endpoints
 # BUCKET_NAME = 'fairytaler'
 # BUCKET_URL_PREFIX = 'https://fairytaler.s3.amazonaws.com/'
