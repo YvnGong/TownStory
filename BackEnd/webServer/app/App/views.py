@@ -57,7 +57,6 @@ def landing(request):
         context = {
             'endpoints': endpoints,
             'login': request.user.is_authenticated,
-            'username': request.user.username
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -84,7 +83,6 @@ def city(request):
             'city_name': city_name,
             'stories': stories,
             'endpoints': endpoints,
-            'username': request.user.username
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -119,7 +117,6 @@ def story(request):
             'author': author,
             'is_author': is_author,
             'story_id': story_id,
-            'username': request.user.username
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -217,7 +214,6 @@ def write(request):
             context = {
                 'endpoints': endpoints,
                 'city_name': city_name,
-                'username': request.user.username,
             }
             return HttpResponse(template.render(context, request))
     else:
@@ -281,7 +277,6 @@ def discover(request):
         context = {
             'endpoints': endpoints,
             'city_list': city_list,
-            'username': request.user.username
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -298,7 +293,6 @@ def about(request):
         template = loader.get_template('about.html')
         context = {
             'endpoints': endpoints,
-            'username': request.user.username
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -310,7 +304,6 @@ def contact(request):
         template = loader.get_template('contact.html')
         context = {
             'endpoints': endpoints,
-            'username': request.user.username
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -322,7 +315,6 @@ def privacy_policy(request):
         template = loader.get_template('privacypolicy.html')
         context = {
             'endpoints': endpoints,
-            'username': request.user.username
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -334,7 +326,6 @@ def term_of_services(request):
         template = loader.get_template('termofservices.html')
         context = {
             'endpoints': endpoints,
-            'username': request.user.username
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -348,7 +339,6 @@ def profile(request):
         context = {
             'endpoints': endpoints,
             'user': user,
-            'username': request.user.username
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
