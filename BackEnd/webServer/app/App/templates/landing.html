@@ -42,10 +42,23 @@
 	<style>
 		#first{
 			background-image: url("{% static 'image/typewriter.jpg' %}");
-			background-size: 100%;
+			background-size: 100% auto;
+			background-position: top;
 		}
+
+		.parallax{
+			background-attachment: scroll;
+		}
+
 	</style>
 	
+	<!-- <script>
+	// if(isMobile){
+   		var backgrounds = document.getElementsByClassName('parallax');
+		backgrounds.style.background-attachment == 'scroll';
+	// 
+	</script> -->
+
 	<div class="parallax" id="first" style="width: 100%"></div>
 
 	<div class="title" style="height:200px; font-size:40px;">
@@ -57,11 +70,14 @@
 				<div class="col-lg-12 align-self-center">
 					<!-- Autocomplete City -->
 					{% include 'autocomplete.html' %}
-					<button class="btn btn-light btn-md" style="font-weight: 500" onclick="javascripts:validateCity();"> <i class="fab fa-earlybirds"></i> Read Stories</button>
 				</div>
 			</div>
+
 			<div class="row">
-					<div class="col-lg-12 align-self-center">
+				<div class="col-lg-6 align-self-center">
+						<button class="btn btn-light btn-md" style="font-weight: 500" onclick="javascripts:validateCity();"> <i class="fab fa-earlybirds"></i> Read Stories</button>
+					</div>
+					<div class="col-lg-6 align-self-center">
 						<button class="btn btn-primary btn-md" style="font-weight: 430" onclick=javascripts:writeStory()> Write a Story </button>
 					</div>
 				</div>

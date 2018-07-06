@@ -29,3 +29,4 @@ function writeStory(){
     var city_name = document.getElementById('city').value;
     window.location.assign(writeUrl+'?city_name='+city_name);
 }
+
