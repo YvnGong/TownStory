@@ -6,6 +6,8 @@ from django.template import Context, Template
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
+from django.shortcuts import render
+from django.contrib.auth.models import User
 
 from App.Utilities import S3Access, dynamoAccess
 from pyReturn.response import status_response as sr
@@ -54,7 +56,7 @@ def landing(request):
         template = loader.get_template('landing.html')
         context = {
             'endpoints': endpoints,
-            'login': request.user.is_authenticated
+            'login': request.user.is_authenticated,
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -80,10 +82,12 @@ def city(request):
         context = {
             'city_name': city_name,
             'stories': stories,
-            'endpoints': endpoints
+            'endpoints': endpoints,
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
+
+
 
 """
 |_______________________________________
@@ -272,7 +276,7 @@ def discover(request):
         template = loader.get_template('discover.html')
         context = {
             'endpoints': endpoints,
-            'city_list': city_list
+            'city_list': city_list,
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -288,7 +292,7 @@ def about(request):
     if request.method == 'GET':
         template = loader.get_template('about.html')
         context = {
-            'endpoints': endpoints
+            'endpoints': endpoints,
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -299,7 +303,7 @@ def contact(request):
     if request.method == 'GET':
         template = loader.get_template('contact.html')
         context = {
-            'endpoints': endpoints
+            'endpoints': endpoints,
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -310,7 +314,7 @@ def privacy_policy(request):
     if request.method == 'GET':
         template = loader.get_template('privacypolicy.html')
         context = {
-            'endpoints': endpoints
+            'endpoints': endpoints,
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -321,7 +325,22 @@ def term_of_services(request):
     if request.method == 'GET':
         template = loader.get_template('termofservices.html')
         context = {
-            'endpoints': endpoints
+            'endpoints': endpoints,
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
+
+#profile link
+def profile(request):
+    status = sr()
+    if request.method == 'GET':
+        template = loader.get_template('account/profile.html')
+        user = request.user
+        context = {
+            'endpoints': endpoints,
+            'user': user,
+        }
+        return HttpResponse(template.render(context, request))
+    return JsonResponse(status.data)
+
+

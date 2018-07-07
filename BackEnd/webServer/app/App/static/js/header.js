@@ -33,3 +33,7 @@ function discovery(){
 function jump(url){
     window.location.assign(url);
 }
+
+function profile(){
+    window.location.assign(userURL);
+}

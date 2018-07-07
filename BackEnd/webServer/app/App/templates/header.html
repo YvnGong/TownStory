@@ -14,7 +14,7 @@
             <nav class="navbar navbar-expand-lg navbar-light py-0">
             <a class="navbar-brand py-0" href="#" onclick="javascripts:home();">
                 {% load static %}
-                <img src="{% static 'image/globe_icon.png' %}" height='40px' alt="TownStory">
+                <img src="{% static 'image/globe_icon.png' %}" height='60px' alt="TownStory">
             </a>
             <button class="navbar-toggler py-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,11 +42,7 @@
 					<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
-                <ul class="navbar-nav mr-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#" id="writercenter" onclick="javascripts:writer();"><i class="fas fa-pencil-alt"></i>
-                                Write</a>
-                        </li>
+
                 
                 {% if not user.is_authenticated %}
                 <!-- Sign in and sign up buttom -->
@@ -54,7 +50,7 @@
                      <li class="nav-item active">
                       <a class="nav-link" href="#" id="signin" onclick = "javascripts:login();"><i class="fa fa-user"></i> log in<span class="sr-only">(current)</span></a>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item active">
                       <a class="nav-link" id="signup"  href="#" id="signup" onclick = "javascripts:signup();"><i class="fa fa-user-plus"></i> sign up<span class="sr-only">(current)</span></a>
                       </li>
                   </ul>
@@ -62,8 +58,17 @@
                 <!-- Sign in and sign up buttom -->
                 <ul class="navbar-nav mr-2">
                         <li class="nav-item active">
+                            <a class="nav-link" href="#" id="username" onclick="javascripts:profile();">{{user.username}}<span class="sr-only">(current)</span></a>
+                        </li>
+                        <ul class="navbar-nav mr-0">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#" id="writercenter" onclick="javascripts:writer();"><i class="fas fa-pencil-alt"></i>
+                                        Write</a>
+                                </li>
+                            </ul>
+                        <li class="nav-item active">
                             <a class="nav-link" href="#" id="signin" onclick = "javascripts:logout();">log out<span class="sr-only">(current)</span></a>
-                            </li>
+                        </li>
                         </ul>
                 {% endif %}
 
