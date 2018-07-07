@@ -29,19 +29,19 @@ DEFAULT_USER_INDEX = ''
 USER_TYPE = ''
 
 ### Production Endpoints ###
-# S3 Bucket Endpoints
-BUCKET_NAME = 'towntory'
-BUCKET_URL_PREFIX = 'https://towntory.s3.amazonaws.com/'
-# RDS Endpoints
-DB_HOST = 'towntory.ceeyveabzx1x.us-west-1.rds.amazonaws.com'
-DB_PORT = '5432'
-DB_NAME = 'towntory'
-
-### DEvelopment Endpoints ###
 # # S3 Bucket Endpoints
-# BUCKET_NAME = 'fairytaler'
-# BUCKET_URL_PREFIX = 'https://fairytaler.s3.amazonaws.com/'
+# BUCKET_NAME = 'towntory'
+# BUCKET_URL_PREFIX = 'https://towntory.s3.amazonaws.com/'
 # # RDS Endpoints
-# DB_HOST = 'towntory.cxnifljcd06r.us-west-1.rds.amazonaws.com'
+# DB_HOST = 'towntory.ceeyveabzx1x.us-west-1.rds.amazonaws.com'
 # DB_PORT = '5432'
 # DB_NAME = 'towntory'
+
+### DEvelopment Endpoints ###
+# S3 Bucket Endpoints
+BUCKET_NAME = 'fairytaler'
+BUCKET_URL_PREFIX = 'https://fairytaler.s3.amazonaws.com/'
+# RDS Endpoints
+DB_HOST = 'towntory.cxnifljcd06r.us-west-1.rds.amazonaws.com'
+DB_PORT = '5432'
+DB_NAME = 'towntory'
