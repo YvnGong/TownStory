@@ -18,5 +18,6 @@ urlpatterns = [
     path('term_of_services', views.term_of_services, name='term_of_services'),
     path('discover', views.discover, name='discover'),
     path('profile', views.profile, name='profile'),
+    path('storyLike', views.storyLike, name='storyLike'),
 ]
 

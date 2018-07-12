@@ -38,3 +38,41 @@ html {
     opacity: 0.6;
     text-align: center;
 } */
+
+#like_button_container, {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    border-radius: 4px;
+}
+
+.like{
+    text-align: justify;
+    margin-block-end: 0%;
+    vertical-align: middle;
+    color: #ea0000;
+    outline: none;
+    background: transparent;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    /* box-shadow: 0 0 22px 4px rgba(0,0,0,0.1); */
+    height: 40px;
+    width: 100px;
+    /* transition: box-shadow 0.3s;
+    box-shadow: 3px 3px 22px 4px rgba(0,0,0,0.1); */
+}
+
+.qty1, {
+    border: none;
+    width:20px;
+    background: transparent;
+}

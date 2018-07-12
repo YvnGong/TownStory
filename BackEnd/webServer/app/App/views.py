@@ -22,7 +22,7 @@ from django.http import QueryDict
 import uuid
 
 # load model
-from .models import City, Story
+from .models import City, Story, Like
 
 # time zone
 from django.utils import timezone
@@ -57,7 +57,7 @@ def landing(request):
         context = {
             'endpoints': endpoints,
             'login': request.user.is_authenticated,
-            'username': request.user.username
+            # 'username': request.user.username
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -84,7 +84,7 @@ def city(request):
             'city_name': city_name,
             'stories': stories,
             'endpoints': endpoints,
-            'username': request.user.username
+            # 'username': request.user.username
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -106,6 +106,7 @@ def story(request):
         cover_url = story.cover
         author = story.author
         city_name = story.city.city
+        like = story.number_of_like
         template = loader.get_template('story.html')
         content = dynamoAccess.get_item(DYNAMO_STORY_TABLE, 'story_id', story_id)['content']
         is_author = (request.user.username == str(author)) or request.user.is_staff
@@ -119,11 +120,20 @@ def story(request):
             'author': author,
             'is_author': is_author,
             'story_id': story_id,
-            'username': request.user.username
+            'username': request.user.username,
+            'like': like
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
 
+def like(request):
+    if request.user.is_authenticated:
+        status = sr()
+        if request.method == 'GET':
+            story_id = request.GET.get('story_id')
+            context = {
+                'endpoints': endpoints,
+            }
 """
 |_______________________________________
 |   Write Story|
@@ -222,7 +232,23 @@ def write(request):
             return HttpResponse(template.render(context, request))
     else:
         return redirect(endpoints['login_url'] + '?next=/app/write')
-
+"""
+|_______________________________________
+|   Upload Like|
+|_______________________________________
+"""
+def storyLike(request):
+    status = sr()
+    if request.method == 'POST' and request.user.is_authenticated:
+        story_id = request.POST.get('story_id')
+        user = request.user
+        story = Story.objects.get(pk=story_id)
+        story.number_of_like += 1
+        story.save()
+        # save the like
+        like = Like.objects.create(id = story_id+"-"+user.id, liked_user = user, story_id = story)
+        like.save()
+    return JsonResponse(status.data)
 """
 |_______________________________________
 |   Delete Story|

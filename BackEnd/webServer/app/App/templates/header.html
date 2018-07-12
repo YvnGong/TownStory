@@ -8,13 +8,25 @@
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
+
+<!-- <script>
+$(window).scroll(function(){
+    if ($(window).scrollTop() >= 300) {
+        $('navigation').addClass('fixed-header');
+    }
+    else {
+        $('navigation').removeClass('fixed-header');
+    }
+});
+</script> -->
+
 <!-- navigation bar whole set -->
 <div class="navigation">
     <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light py-0">
+        <nav class="navbar navbar-expand-lg navbar-light py-0">
             <a class="navbar-brand py-0" href="#" onclick="javascripts:home();">
                 {% load static %}
-                <img src="{% static 'image/globe_icon.png' %}" height='60px' alt="TownStory">
+                <img src="{% static 'image/globe_icon.png' %}" height='40px' alt="TownStory">
             </a>
             <button class="navbar-toggler py-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -58,7 +70,7 @@
                 <!-- Sign in and sign up buttom -->
                 <ul class="navbar-nav mr-2">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#" id="username" onclick="javascripts:profile();">{{username}}<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="#" id="username" onclick="javascripts:profile();">Howdy! {{user.username}}<span class="sr-only">(current)</span></a>
                         </li>
                         <ul class="navbar-nav mr-0">
                                 <li class="nav-item active">
@@ -75,3 +87,5 @@
             </nav>
         </div>
     </div>
+</div>
+

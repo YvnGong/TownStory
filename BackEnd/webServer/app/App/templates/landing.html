@@ -21,16 +21,6 @@
 	{% load static %}
 	<script src="{% static 'js/landing.js' %}"></script>
 
-	<!-- Background Img and styles -->
-	<style>
-		body{
-			background-size:cover;
-			background-color: #CDCDC0;
-			background-repeat: repeat;
-			background-position: center;
-		}
-	</style>
-
 	<title>Towntory</title>
 
 </head>
@@ -42,22 +32,9 @@
 	<style>
 		#first{
 			background-image: url("{% static 'image/typewriter.jpg' %}");
-			background-size: 100% auto;
-			background-position: top;
 		}
-
-		.parallax{
-			background-attachment: scroll;
-		}
-
 	</style>
 	
-	<!-- <script>
-	// if(isMobile){
-   		var backgrounds = document.getElementsByClassName('parallax');
-		backgrounds.style.background-attachment == 'scroll';
-	// 
-	</script> -->
 
 	<div class="parallax" id="first" style="width: 100%"></div>
 
