@@ -170,6 +170,7 @@ def uploadArticle(request):
             title = request.POST.get('title')
             summary = request.POST.get('summary')
             article = request.POST.get('article')
+            print(article)
             city = request.POST.get('city')
             # if city not exsit, create one
             try:
@@ -192,13 +193,13 @@ def uploadArticle(request):
                 if item[0] == 'image':
                     cover_img_url = item[1]
                     break
-            # save the story
-            story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, datetime = timezone.now())
             # add one story and save the update
             city.number_of_story += 1
             city.save()
             # now save the article content
             dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
+            # save the story
+            story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, datetime = timezone.now())
             status.attach_data('story_id', ID, isSuccess=True)
         status.set_errorMessage('not post')
     else:

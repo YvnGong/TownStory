@@ -16,7 +16,8 @@ function validateCity(){
         jQuery.getJSON(
                 geobyteUrl + "GetCityDetails?callback=?&fqcn=" +cityfqcn + geobyteKey,
                 function (data) {
-                    if (data.geobytescityid>0) {
+                    if (data.geobytesfqcn) {
+                        document.getElementById('city').value = data.geobytesfqcn;
                         showCity();
                     }
                     else alert('Please select city from drop down menu')
