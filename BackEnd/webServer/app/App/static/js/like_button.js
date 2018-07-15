@@ -1,7 +1,7 @@
-// import 'css/fontawesome.css'; 
 'use strict';
 
-const e = React.createElement;
+const e = React.createElement; 
+
 
 
 class LikeButton extends React.Component {
@@ -11,30 +11,53 @@ class LikeButton extends React.Component {
   }
 
   render() {
-    // const element = (<button class="btn btn-light btn-md">like me!</button>);
-    if (this.state.liked) {
-      //  return element;
-      // Submit the final information
-      var formData = new FormData();
+    var heart;
+    if (!isLogged){heart = <i className="far fa-heart fa-2x"></i>;}
+    else{
+      if (isLiked){
+        heart = <i className="fas fa-heart fa-2x"></i>;
+      } else{
+        heart = <a onClick={likeStory}><i className="far fa-heart fa-2x"></i></a>;
+      }
+    }
+    return(<div>{heart} {number_of_like}</div>);
+  }
+}
+
+function likeStory(){
+  var formData = new FormData();
       formData.append('story_id', story_id);
       var xhr = new XMLHttpRequest({mozSystem: true});
       xhr.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-              return '♥ liked';
+              isLiked = true;
+              number_of_like += 1;
+              ReactDOM.render(<LikeButton />, document.getElementById('likeButton'));
             }
           }
-      xhr.open('POST', url);
+      xhr.open('POST', likeUrl);
       xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
       xhr.send(formData);
-    }
-
-    return e(
-      'button',
-      { onClick: () => this.setState({ liked: true }) },
-      '♡ like',
-    );
-  }
 }
 
-const domContainer = document.querySelector('#like_button_container');
-ReactDOM.render(e(LikeButton), domContainer);
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+      }
+  }
+  return "";
+}
+
+
+
+// const domContainer = document.querySelector('#like_button_container');
+// ReactDOM.render(e(LikeButton), domContainer);
+ReactDOM.render(<LikeButton />, document.getElementById('likeButton'));

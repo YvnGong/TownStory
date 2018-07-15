@@ -39,7 +39,7 @@ html {
     text-align: center;
 } */
 
-#like_button_container, {
+/* #like_button_container, {
     display: inline-block;
     margin-bottom: 0;
     font-weight: normal;
@@ -65,14 +65,43 @@ html {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.1em;
     /* box-shadow: 0 0 22px 4px rgba(0,0,0,0.1); */
-    height: 40px;
-    width: 100px;
+    /* height: 40px;
+    width: 100px; */
     /* transition: box-shadow 0.3s;
     box-shadow: 3px 3px 22px 4px rgba(0,0,0,0.1); */
-}
+/* } */ 
 
-.qty1, {
-    border: none;
-    width:20px;
-    background: transparent;
+.like {
+    background: #f97779;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#f97779), to(#ce2424));
+    background: -moz-linear-gradient(#f97779, #ce2424);
+    background: linear-gradient(#f97779, #ce2424);
+    /* border: solid 1px #be2424; */
+    border-bottom: solid 3px #bd2524;
+    box-shadow: inset 0 0 0 1px #e67e7b;
+    color: #fff;
+    text-shadow: 0 1px 0 #bd2524; }
+    
+.like :hover {
+    background: #ce2424;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#ce2424), to(#f97779));
+    background: -moz-linear-gradient(#ce2424, #f97779);
+    background: linear-gradient(#ce2424, #f97779);
+    /* border: solid 1px #be2424; */
+    border-bottom: solid 3px #bd2524;
+    box-shadow: inset 0 0 0 1px #e67e7b; }
+    
+.like:active {
+    background: #ce2424;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#ce2424), to(#f97779));
+    background: -moz-linear-gradient(#ce2424, #f97779);
+    background: linear-gradient(#ce2424, #f97779);
+    /* border: solid 1px #be2424; */
+    box-shadow: inset 0 10px 15px 0 #bd2524; }
+
+.like_section{
+    color: #ce2424;
+    font-size: 100%;
+    position: relative;
+    text-align-last: right;
 }

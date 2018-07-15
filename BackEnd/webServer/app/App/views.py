@@ -107,6 +107,17 @@ def story(request):
         author = story.author
         city_name = story.city.city
         like = story.number_of_like
+        # like button
+        isLiked = 'false'
+        isLogged = 'false'
+        if request.user.is_authenticated:
+            isLogged = 'true'
+            try:
+                Like.objects.get(pk= story_id+"-"+str(request.user.id))
+                isLiked = 'true'
+            except:
+                pass
+        # end like button
         template = loader.get_template('story.html')
         content = dynamoAccess.get_item(DYNAMO_STORY_TABLE, 'story_id', story_id)['content']
         is_author = (request.user.username == str(author)) or request.user.is_staff
@@ -121,7 +132,9 @@ def story(request):
             'is_author': is_author,
             'story_id': story_id,
             'username': request.user.username,
-            'like': like
+            'like': like,
+            'isLiked': isLiked,
+            'isLogged':isLogged,
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
@@ -243,10 +256,10 @@ def storyLike(request):
         story_id = request.POST.get('story_id')
         user = request.user
         story = Story.objects.get(pk=story_id)
+        # save the like
+        like = Like.objects.create(id = story_id+"-"+str(user.id), liked_user = user, story_id = story)
         story.number_of_like += 1
         story.save()
-        # save the like
-        like = Like.objects.create(id = story_id+"-"+user.id, liked_user = user, story_id = story)
         like.save()
     return JsonResponse(status.data)
 """
