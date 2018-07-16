@@ -1,26 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script>story_id = '{{story_id}}'</script>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 	<meta charset="utf-8">
 	
 	<title>story</title>
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-	
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/story.css' %}">
-	<script src="{% static 'js/story.js' %}"></script>
-	<!-- icon font -->
-	<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
-
-
-	<!-- states -->
-	<script>
-		isLiked = {{isLiked}};
-		number_of_like = {{like}};
-		isLogged = {{isLogged}};
-	</script>
 
 	<style>
 		.content{
@@ -30,7 +17,7 @@
 			padding-right:0%;
 }
 	</style>
-  
+
 </head>
 <body>
 	<!-- Header -->
@@ -82,57 +69,6 @@
 	</div>
 	</div>
 
-	<!-- like and comment -->
-	<!-- like -->
-	<div class="container">
-		<br>
-		<br>
-		<div class="row justify-content-center">
-			<div class="col-lg-9">
-			{% if isLogged == 'false'%}
-			<div class="announcement" style="display: inline-block;">Please <a href="#" onclick = "javascripts:login();">log in</a> to vote and comment</div>
-			{% endif %}
-			<div class="like_section">
-				<div id="likeButton" style="display: inline-block;"></div>
-			</div>
-		</div>
-	</div>
-
-	<!-- comment -->
-	<div class="container">
-	<div class="row justify-content-center">
-	<div class="col-lg-9">
-	<div class="detailBox">
-		<div class="titleBox">
-		  <label>Comment</label>
-		</div>
-		<!-- <div class="commentBox">
-		</div> -->
-		<div class="actionBox">
-			<ul class="commentList">
-				<li>
-					<div class="commenterImage">
-					  <img src="http://placekitten.com/50/50" />
-					</div>
-					<div class="commentText">
-						<p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
-	
-					</div>
-				</li>
-			</ul>
-			<form class="form-inline" role="form">
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Your comments" />
-				</div>
-				<div class="form-group">
-					<button class="btn btn-default">Add</button>
-				</div>
-			</form>
-		</div>
-	</div>
-	</div>
-	</div>
-	</div>
 	<!-- delete button -->
 	{% if is_author %}
 	<script>
@@ -180,26 +116,13 @@
 	</div>
 	{% endif %}
 	<br>
-
-	
-
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
-	<!-- Load React. -->
-  	<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-  	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-  	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
-	<!-- deploying -->
-	<!-- <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-	<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
-	   -->
-	
-	<!-- Load Babel -->
-	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-	<!-- Load our React component. -->
-	<script type="text/babel" src="{% static 'js/like_button.js' %}"></script>
-
+	<!-- Footer -->
+	<br>
+	<br>
+	{% include 'footer.html' %}
 </body>
 </html>
