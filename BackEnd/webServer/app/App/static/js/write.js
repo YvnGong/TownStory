@@ -127,13 +127,11 @@ function getUploadURLs(){
     xhr.send();
 }
 
-
 function sendImage(file, uploadURL){
 
     var xhr = new XMLHttpRequest({mozSystem: true});
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            // this.article += '<img src='+accessURL+'width="400" alt=">';
             imageCount -= 1;
             if (imageCount <= 0){
                 finished();
@@ -143,33 +141,28 @@ function sendImage(file, uploadURL){
     xhr.open('PUT', uploadURL);
     var reader = new FileReader();
     reader.onload = function(evt) {
-        xhr.send(evt.target.result);
+        xhr.send(new Uint8Array(evt.target.result));
     };
     reader.readAsArrayBuffer(file);
 }
 
 function submitData(){
     var imageIndex = 0;
-    // console.log(imageFiles);
     for (i=0; i<itemCount; i++){
         type = itemType[i];
         switch (type){
             case 'header':
-                // console.log(i.toString());
                 var text = document.getElementById((i+1).toString()).value;
-                // article += '<br><h3>' + text + '</h3><br>';
-                article.push(['header', text])
+                if (text==''){text = ' '};
+                article.push(['header', text]);
                 break;
             case 'paragraph':
                 var text = document.getElementById((i+1).toString()).value;
-                // article += '<br>' + text + '<br>';
+                if (text==''){text = ' '};
                 article.push(['paragraph', text])
                 break;
             case 'image':
-                // var file = document.getElementById((i+1).toString()).files[0];
-                // console.log(imageFiles[imageIndex]);
                 sendImage(imageFiles[imageIndex], uploadURLs[imageIndex]);
-                // article += '<br><img src="' + accessURLs[imageIndex] + '" width="400" alt=""><br>';
                 article.push(['image', accessURLs[imageIndex]])
                 imageIndex += 1;
                 break;
@@ -273,9 +266,10 @@ function validateDataAndSend(){
         jQuery.getJSON(
                 geobyteUrl+"GetCityDetails?callback=?&fqcn="+cityfqcn+geobyteKey,
                 function (data) {
-                    if (data.geobytescityid>0) {
-                        latitude = data.geobyteslatitude
-                        longitude = data.geobyteslongitude
+                    if (data.geobytesfqcn) {
+                        latitude = data.geobyteslatitude;
+                        longitude = data.geobyteslongitude;
+                        document.getElementById('city').value = data.geobytesfqcn;
                         $('#submitModal').modal('show');
                         getUploadURLs();
                     }

@@ -14,8 +14,8 @@ body {
 .content{
     text-align: justify;
     margin-top: 4%;
-    padding-left:12%;
-    padding-right:12%;
+    padding-left:0%;
+    padding-right:0%;
 }
 
 /* .navigation{
