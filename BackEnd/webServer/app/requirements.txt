@@ -4,3 +4,9 @@ boto3
 pyReturn
 django-allauth
 psycopg2-binary
+
+# django user agent
+pyyaml
+ua-parser 
+user-agents
+django-user-agents
