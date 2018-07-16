@@ -5,15 +5,17 @@ body {
 }
 
 .title{
+    padding-top: 3%;
     padding-left:5%;
     padding-right:5%;
     text-align: center;
     word-wrap: break-word;
     overflow-wrap: break-word;   
 }
+
 .content{
     text-align: justify;
-    margin-top: 4%;
+    margin-top: 10%;
     padding-left:0%;
     padding-right:0%;
 }
@@ -62,15 +64,18 @@ body {
 }
 
 .detailBox {
-    text-align: justify;
     width:100%;
     border:1px solid #bbb;
-    margin:50px;
+    margin-top: 1.5%;
+    margin-bottom: 2%;
+    /* border-radius:5px; */
 }
+
 .titleBox {
     background-color:#fdfdfd;
     padding:10px;
 }
+
 .titleBox label{
   color:#444;
   margin:0;
@@ -81,6 +86,7 @@ body {
     padding:10px;
     border-top:1px dotted #bbb;
 }
+
 .commentBox .form-group:first-child, .actionBox .form-group:first-child {
     width:80%;
 }
@@ -127,4 +133,5 @@ body {
 .actionBox {
     border-top:1px dotted #bbb;
     padding:10px;
+    padding-bottom: 3%;
 }

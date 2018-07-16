@@ -25,13 +25,13 @@ except:
     SECRET_KEY = os.environ.get("DJANGO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Expire the login after browser close
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 # SSL REDIRECT
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') # because using a proxy ELB
 SECURE_REDIRECT_EXEMPT = [r'app/discover',r'app/healthcheck']
 
