@@ -12,12 +12,13 @@ class LikeButton extends React.Component {
 
   render() {
     var heart;
+    var style = {color:'#ce2424'}
     if (!isLogged){heart = <i className="far fa-heart fa-2x"></i>;}
     else{
       if (isLiked){
         heart = <i className="fas fa-heart fa-2x"></i>;
       } else{
-        heart = <a onClick={likeStory}><i className="far fa-heart fa-2x"></i></a>;
+        heart = <a href='#/' onClick={likeStory} style={style}><i className="far fa-heart fa-2x"></i></a>;
       }
     }
     return(<div>{heart} {number_of_like}</div>);

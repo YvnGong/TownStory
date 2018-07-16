@@ -4,20 +4,6 @@ body {
     background-position: center;  
 }
 
-/* body,
-html {
-    width: 100%;
-    height: 100%;
-    font-family: "Lobster";
-    color: rgb(0, 0, 0);
-} */
-
-/* h1 {
-    color: black;
-	font-weight: 700;
-	font-size: 6em;
-} */
-
 .title{
     padding-left:5%;
     padding-right:5%;
@@ -39,37 +25,6 @@ html {
     text-align: center;
 } */
 
-/* #like_button_container, {
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: normal;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    background: transparent;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.428571429;
-    border-radius: 4px;
-}
-
-.like{
-    text-align: justify;
-    margin-block-end: 0%;
-    vertical-align: middle;
-    color: #ea0000;
-    outline: none;
-    background: transparent;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.1em;
-    /* box-shadow: 0 0 22px 4px rgba(0,0,0,0.1); */
-    /* height: 40px;
-    width: 100px; */
-    /* transition: box-shadow 0.3s;
-    box-shadow: 3px 3px 22px 4px rgba(0,0,0,0.1); */
-/* } */ 
 
 .like {
     background: #f97779;
@@ -104,4 +59,72 @@ html {
     font-size: 100%;
     position: relative;
     text-align-last: right;
+}
+
+.detailBox {
+    text-align: justify;
+    width:100%;
+    border:1px solid #bbb;
+    margin:50px;
+}
+.titleBox {
+    background-color:#fdfdfd;
+    padding:10px;
+}
+.titleBox label{
+  color:#444;
+  margin:0;
+  display:inline-block;
+}
+
+.commentBox {
+    padding:10px;
+    border-top:1px dotted #bbb;
+}
+.commentBox .form-group:first-child, .actionBox .form-group:first-child {
+    width:80%;
+}
+.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+    width:18%;
+}
+.actionBox .form-group * {
+    width:100%;
+}
+.taskDescription {
+    margin-top:10px 0;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+    max-height:200px;
+    overflow:auto;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+    width:30px;
+    margin-right:5px;
+    height:100%;
+    float:left;
+}
+.commenterImage img {
+    width:100%;
+    border-radius:50%;
+}
+.commentText p {
+    margin:0;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+.actionBox {
+    border-top:1px dotted #bbb;
+    padding:10px;
 }
