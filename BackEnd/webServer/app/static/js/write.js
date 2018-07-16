@@ -127,13 +127,11 @@ function getUploadURLs(){
     xhr.send();
 }
 
-
 function sendImage(file, uploadURL){
 
     var xhr = new XMLHttpRequest({mozSystem: true});
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            // this.article += '<img src='+accessURL+'width="400" alt=">';
             imageCount -= 1;
             if (imageCount <= 0){
                 finished();
@@ -143,14 +141,13 @@ function sendImage(file, uploadURL){
     xhr.open('PUT', uploadURL);
     var reader = new FileReader();
     reader.onload = function(evt) {
-        xhr.send(evt.target.result);
+        xhr.send(new Uint8Array(evt.target.result));
     };
     reader.readAsArrayBuffer(file);
 }
 
 function submitData(){
     var imageIndex = 0;
-    // console.log(imageFiles);
     for (i=0; i<itemCount; i++){
         type = itemType[i];
         switch (type){

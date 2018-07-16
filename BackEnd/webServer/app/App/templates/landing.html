@@ -22,26 +22,59 @@
 	<script src="{% static 'js/landing.js' %}"></script>
 
 	<title>Towntory</title>
+	<style>
+		#title{
+			font-size:12vw; 
+			color: whitesmoke
+		}
+		#subtitle{
+			font-size:2.5vw; 
+			color: rgb(44, 8, 8, 0.6); 
+			background-color: rgba(255, 255, 255, 0.5);
+		}
+	</style>
+	<!-- Title Image -->
+	<style>
+		#first{
+			background-image: url("{% static 'image/book.jpg' %}");
+			background-size: 100% auto;
+		}
+	</style>
+	{% load user_agents %}
+	{% if request|is_mobile %}
+	<style>
+		#title{
+			font-size:14vw; 
+			color:black;
+		}
+		#subtitle{
+			font-size:5vw; 
+		}
+		#first{
+			background-image: url("{% static 'image/sky.jpg' %}");
+			background-size: auto 100%;
+		}
+		.parallax {
+			/* Set a specific height */
+			min-height: 500px; 
+			background-position: center;
+			background-repeat: repeat;
+			background-size: cover;  
+		}
+	</style>
+	{% endif %}
 
 </head>
 <body style="background-color: rgba(226, 222, 222, 0.2)">
 	<!-- Header -->
 	{% include 'header.html' %}
 
-	<!-- separate part -->
-	<style>
-		#first{
-			background-image: url("{% static 'image/book.jpg' %}");
-			background-size: 100% auto;
-		}
-
-	</style>
-	
+	<!-- Title image -->
 	<div class="parallax" id="first" style="width: 100%"></div>
 
-	<div class="title" style="position:center; font-size:40px; width: 100%">
-		<h1 style="font-size:12vw; color: whitesmoke">Towntory</h1>
-		<h2 style="color: rgb(44, 8, 8, 0.6); background-color: rgba(255, 255, 255, 0.5)">Tell a story in your town.</h2>
+	<div id='title_area' class="title" style="position:center; font-size:40px; width: 100%">
+		<h1 id='title'>Towntory</h1>
+		<h2 id='subtitle'>Tell a story in your town.</h2>
 		
 		<!-- city search part -->
 		<div class="container">

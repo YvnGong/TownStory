@@ -9,6 +9,15 @@
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/story.css' %}">
 
+	<style>
+		.content{
+			text-align: justify;
+			margin-top: 4%;
+			padding-left:0%;
+			padding-right:0%;
+}
+	</style>
+
 </head>
 <body>
 	<!-- Header -->
@@ -16,7 +25,7 @@
 
 	<style>
 		body{
-			background-color:rgba(168, 154, 121, 0.856);
+			background-color:rgba(255, 255, 255, 0.2);
 		}
 		</style>
 
@@ -28,7 +37,7 @@
 					<h1><b>{{title}}</b></h1>
 				<div class="d-flex justify-content-center"><p>by: {{author}}</p></div>
 				<br>
-				<div class="d-flex justify-content-center" style="color: rgba(34, 33, 30, 0.9); text-align: justify;"><h5>{{summary}}</h5></div>
+				<div class="d-flex justify-content-center" style="color: rgba(34, 33, 30, 0.9); text-align: left;"><h5>{{summary}}</h5></div>
 
 			</div>
 			<br>
@@ -43,7 +52,7 @@
 				<br>
 
 				{% elif item.0 == 'paragraph'%}
-				<div class="d-flex justify-content-start" style="font-size: 20px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+				<div class="d-flex justify-content-start" style="font-size: 18px; ">
 					<p>{{ item.1 }}</p>
 				</div>
 

@@ -42,7 +42,7 @@ class Story(models.Model):
     title = models.CharField(max_length = 50)
     summary = models.CharField(max_length = 150)
     cover = models.CharField(max_length = 100)
-    like = models.IntegerField(default=0)
+    number_of_like = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
 
 
