@@ -45,8 +45,6 @@ class Story(models.Model):
     number_of_like = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
 
-class Like(models.Model):
-    id = models.CharField(max_length = 100, primary_key = True, unique = True)
-    liked_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    story_id = models.ForeignKey(Story, on_delete=models.CASCADE)
+
+
 
