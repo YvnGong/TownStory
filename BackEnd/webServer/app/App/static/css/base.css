@@ -101,8 +101,8 @@ input[type='email']{
 }
 
 .box{
-    padding-top:10%;
-    margin-top: 10%;
+    padding-top:15%;
+    margin-top: 20%;
     border: 2px solid rgb(102, 86, 55);
     /* border-style:hidden; */
     background-color:white;

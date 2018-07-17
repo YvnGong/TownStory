@@ -23,7 +23,7 @@ except:
 
 # add edge
 def add(table_name, partitionKeyName, partitionKey, sortingKeyName = None, sortingKey = None, **kwargs): 
-    
+
     table = dynamodb.Table(table_name)
     data = {partitionKeyName: partitionKey}
     if sortingKeyName and sortingKey:
