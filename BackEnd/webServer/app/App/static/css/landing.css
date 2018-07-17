@@ -1,6 +1,6 @@
 .parallax {
     /* Set a specific height */
-    min-height: 800px; 
+    min-height: 801px; 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
@@ -9,45 +9,46 @@
     
 }
 
-.title{
+.title-part{
+    /* position:center;  */
+    font-size:40px; 
+    width: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-weight: 600;
-    font-size: 6.0em;
+    font-size: 4.0em;
     color: rgb(10, 7, 7);
     text-align: center;
 }
 
-.big{
+/* .big{
     background-repeat: no-repeat;
     background-size: cover;
     /* background-attachment: fixed; */
-    background-position: center;
-}
+    /* background-position: center;
+} */ 
 
 .about{
+    position:center;
     text-align: center;
+    width: 100%;
 }
 
-#write_section{
-    text-align: center;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-}
-
-#discovery_section{
-    text-align: center;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
 .body{
     background-color: rgb(247, 245, 242);
+}
+
+#title{
+    font-size: 60px;
+}
+
+
+.btn btn-default-outline btn-md{
+    font-weight: 500; 
+    background-color:rgba( 0, 0, 0, .2 ); 
+    border-color: aliceblue; 
+    color:white
 }
