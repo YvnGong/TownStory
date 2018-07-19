@@ -22,6 +22,7 @@
 	<script src="{% static 'js/landing.js' %}"></script>
 
 	<title>Towntory</title>
+  
 	<style>
 		#title{
 			font-size:12vw; 
@@ -36,7 +37,7 @@
 	<!-- Title Image -->
 	<style>
 		#first{
-			background-image: url("{% static 'image/book.jpg' %}");
+			background-image: url("{% static 'image/bird.jpg' %}");
 			background-size: 100% auto;
 		}
 	</style>
@@ -49,10 +50,6 @@
 		}
 		#subtitle{
 			font-size:5vw; 
-		}
-		#first{
-			background-image: url("{% static 'image/sky.jpg' %}");
-			background-size: auto 100%;
 		}
 		.parallax {
 			/* Set a specific height */
@@ -72,9 +69,9 @@
 	<!-- Title image -->
 	<div class="parallax" id="first" style="width: 100%"></div>
 
-	<div id='title_area' class="title" style="position:center; font-size:40px; width: 100%">
-		<h1 id='title'>Towntory</h1>
-		<h2 id='subtitle'>Tell a story in your town.</h2>
+	<div id='title_area' class="title-part" style="position:center; font-size:40px; width: 100%">
+		<h1 id='title' style="font-size:100px; color:rgba(70, 47, 47, 0.829);">Towntory</h1>
+		<h2 id='subtitle' style="font-size:40px">Tell a story in your town.</h2>
 		
 		<!-- city search part -->
 		<div class="container">
@@ -83,13 +80,13 @@
 					<!-- Autocomplete City -->
 					{% include 'autocomplete.html' %}
 					<!-- read story button -->
-					<button class="btn btn-light btn-md" style="font-weight: 500" onclick="javascripts:validateCity();"> <i class="fab fa-earlybirds"></i> Read Stories</button>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-lg-12 align-self-center">
-					<button class="btn btn-primary btn-md" style="font-weight: 430" onclick=javascripts:writeStory()> Write a Story </button>
+				<div class="col-lg-12 align-self-center" style="padding-top: 1%;">
+					<button class="btn btn-default-outline btn-md" style="font-weight: 500; background-color:rgba(172, 172, 172, 0.2); border-color: aliceblue; color:white" onclick="javascripts:validateCity();"> <i class="fab fa-earlybirds"></i> Read Stories</button>
+					<button class="btn btn-md btn-filled" style="font-weight: 430; background-color: rgb(99, 84, 84); color:white" onclick=javascripts:writeStory()><i class="fas fa-dove"></i> Write a Story </button>
 				</div>
 			</div>
 		</div>

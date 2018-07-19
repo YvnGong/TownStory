@@ -79,3 +79,4 @@ def create_table(table_name, partitionKeyName, sortingKeyName = None):
 
 if __name__ == '__main__':
     create_table('STORY_TABLE', 'story_id')
+    # create_table('COMMENT_TABLE', 'story_id')
