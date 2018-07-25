@@ -19,5 +19,6 @@ urlpatterns = [
     path('discover', views.discover, name='discover'),
     path('profile', views.profile, name='profile'),
     path('storyLike', views.storyLike, name='storyLike'),
+    path('comment', views.comment, name='comment'),
 ]
 

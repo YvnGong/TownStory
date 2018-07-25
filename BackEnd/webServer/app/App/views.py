@@ -32,6 +32,8 @@ from endpoints import endpoints, BUCKET_NAME
 
 # constants
 DYNAMO_STORY_TABLE = 'STORY_TABLE'
+DYNAMO_COMMENT_TABLE = 'COMMENT_TABLE'
+
 DEFAULT_COVER_IMAGE = 'https://towntory-public-host.s3.amazonaws.com/default.png'
 
 
@@ -118,6 +120,8 @@ def story(request):
         # end like button
         template = loader.get_template('story.html')
         content = dynamoAccess.get_item(DYNAMO_STORY_TABLE, 'story_id', story_id)['content']
+        # commentList = dynamoAccess.query(DYNAMO_COMMENT_TABLE, 'story_id', story_id)
+        # commentList.reverse()
         is_author = (request.user.username == str(author)) or request.user.is_staff
         context = {
             'title': title,
@@ -133,18 +137,11 @@ def story(request):
             'like': like,
             'isLiked': isLiked,
             'isLogged':isLogged,
+            # 'commentList':commentList,
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
 
-def like(request):
-    if request.user.is_authenticated:
-        status = sr()
-        if request.method == 'GET':
-            story_id = request.GET.get('story_id')
-            context = {
-                'endpoints': endpoints,
-            }
 """
 |_______________________________________
 |   Write Story|
@@ -152,7 +149,7 @@ def like(request):
 """
 def uploadImg(request):
     status = sr()
-    file = None
+    # file = None
     if request.method == 'POST':
         image = request.FILES['image']
         url = S3Access.upload_file(BUCKET_NAME, image.file)
@@ -259,6 +256,38 @@ def storyLike(request):
         story.number_of_like += 1
         story.save()
         like.save()
+    return JsonResponse(status.data)
+
+"""
+|_______________________________________
+|   Comment|
+|_______________________________________
+"""
+    
+def comment(request):
+    status = sr()
+    # post comment
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            story_id = request.POST.get('story_id')
+            comment = request.POST.get('comment')
+            user = request.user
+            print(story_id, comment, user)
+            # now save the comment content
+            time = str(timezone.now())
+            dynamoAccess.add(DYNAMO_COMMENT_TABLE, 'story_id', story_id, 'comment_time', time, user=user.username, content = comment)
+            # status.set_status(True)
+            status.attach_data('time', time, isSuccess=True)
+        else:
+            status.set_errorMessage('not logged in')
+    # get comment
+    elif request.method == 'GET':
+        story_id = request.GET.get('story_id')
+        commentList = dynamoAccess.query(DYNAMO_COMMENT_TABLE, 'story_id', story_id)
+        commentList.reverse()
+        status.attach_data('commentList', commentList, isSuccess=True)
+    else:
+        status.set_errorMessage('not valid method')
     return JsonResponse(status.data)
 """
 |_______________________________________
@@ -383,5 +412,15 @@ def profile(request):
         }
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
+
+# #Like
+# def like(request):
+#     if request.user.is_authenticated:
+#         status = sr()
+#         if request.method == 'GET':
+#             story_id = request.GET.get('story_id')
+#             context = {
+#                 'endpoints': endpoints,
+#             }
 
 
