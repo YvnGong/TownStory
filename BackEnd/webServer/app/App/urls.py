@@ -20,5 +20,6 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('storyLike', views.storyLike, name='storyLike'),
     path('comment', views.comment, name='comment'),
+    path('storyList', views.storyList, name='stroyList'),
 ]
 

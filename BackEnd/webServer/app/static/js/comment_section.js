@@ -1,8 +1,6 @@
 var runNum = 5;
 var showmore_button = <a href='#/' onClick={showMore}>show more comments</a>
 
-
-
 function formatDate(date) {
     return date.substring(0, 19);
 }
