@@ -11,9 +11,11 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/city.css' %}">
 </head>
 <body style="background-color: rgba(226, 222, 222, 0.2)">
-	<!-- Header -->
-	{% include 'header.html' %}
 
+<!-- Header -->
+{% include 'header.html' %}
+
+<!-- City name -->
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
@@ -29,6 +31,30 @@
 	</div>
 </div>
 
+<!-- Category Dropdown -->
+<script>
+	function selectCategory(cat){document.getElementById('dropdown').innerHTML=cat}
+</script>
+<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="dropdown">
+					<button id='dropdown' class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Category
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<a id='all' class="dropdown-item" href="#/" onclick="javascripts:selectCategory('all')">all</a>
+					<!-- <a id='attraction' class="dropdown-item" href="#/" onclick="javascripts:selectCategory('attraction')">attraction</a>
+					<a id='history' class="dropdown-item" href="#/" onclick="javascripts:selectCategory('history')">history</a>
+					<a id='memory' class="dropdown-item" href="#/" onclick="javascripts:selectCategory('memory')">memory</a> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+
+<!-- Stories -->
 <div class="container">
 <div class="row">
 	{% for story in stories %}
@@ -82,7 +108,7 @@
 	<br>
 	<br>
 	{% include 'footer.html' %}
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 

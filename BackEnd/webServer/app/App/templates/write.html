@@ -17,8 +17,15 @@
 
         {% load static %}
         <script src="{% static 'js/canvas-to-blob.min.js' %}"></script>
-        <script src="{% static 'js/write.js' %}"></script>
+        <!-- <script src="{% static 'js/write.js' %}"></script> -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/write.css' %}">  
+
+        <!-- React Test -->
+        <!-- Load Babel -->
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script type="text/babel" src="{% static 'js/write_react.js' %}"></script>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
         <!-- Title -->
         <title>Write Story - Towntory</title>
@@ -159,4 +166,30 @@
     <br>
     <br>
     {% include 'footer.html' %}
+
+    <!-- Signup redirect -->
+    {% if not user.is_authenticated %}
+    <!-- Signup Redirect Modal -->
+    <div id="signup_redirect" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Not Logged In</h5>
+              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span> -->
+              <!-- </button> -->
+            </div>
+            <div class="modal-body">
+              <p>Signing up allows you to manage your stories.
+                Continue to write stories as Anonymous?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="location.href='/accounts/signup?next=/app/write'">Signup</button>
+              <button type="button" class="btn btn-warning" data-dismiss="modal">Continue</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script>$('#signup_redirect').modal('show');</script>
+    {% endif %}
 </html>
