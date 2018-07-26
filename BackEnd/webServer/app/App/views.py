@@ -17,6 +17,7 @@ from django.template import loader
 
 # QueryDict
 from django.http import QueryDict
+from django.core import serializers
 
 # uuid
 import uuid
@@ -80,7 +81,7 @@ def city(request):
             # city has no story
             stories = None
         # render stories
-        template = loader.get_template('city.html')
+        template = loader.get_template('city_react.html')
         context = {
             'city_name': city_name,
             'stories': stories,
@@ -89,8 +90,20 @@ def city(request):
         return HttpResponse(template.render(context, request))
     return JsonResponse(status.data)
 
-
-
+def storyList(request):
+    status = sr()
+    if request.method == 'GET':
+        city_name = request.GET.get('city_name')
+        try:
+            # city has story
+            city = City.objects.get(pk=city_name)
+            stories = serializers.serialize('json', 
+                Story.objects.filter(city=city).order_by('-datetime'),fields=('id', 'cover', 'title', 'summary'))
+            status.attach_data('storyList', stories, isSuccess=True)
+        except:
+            # city has no story
+            status.set_errorMessage('nostory')
+    return JsonResponse(status.data)
 """
 |_______________________________________
 |   Read Story|
