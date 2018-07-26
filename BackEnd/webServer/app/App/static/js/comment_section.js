@@ -1,7 +1,5 @@
 var runNum = 5;
 
-
-
 function formatDate(date) {
     return date.substring(0, 19);
 }
