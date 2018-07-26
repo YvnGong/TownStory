@@ -90,7 +90,7 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-9">
 			{% if isLogged == 'false'%}
-			<div class="announcement" style="display: inline-block;">Please <a href="#" onclick = "javascripts:login();">log in</a> to vote and comment</div>
+			<div class="announcement" style="display: inline-block;">Please <a href="#/" onclick = "javascripts:login();">log in</a> to vote and comment</div>
 			{% endif %}
 			<div class="like_section">
 				<div id="likeButton" style="display: inline-block;"></div>
@@ -103,26 +103,27 @@
 	<div class="container">
 	<div class="row justify-content-center">
 	<div class="col-md-9">
-	<div class="detailBox">
+	<div id="comment_section"></div>
+	<!-- <div class="detailBox"> 
 		<div class="titleBox">
 		  <label>Comment</label>
-		</div>
+		</div> -->
 		<!-- <div class="commentBox">
 		</div> -->
-		<div class="actionBox">
-			<ul class="commentList">
-				{% for comment in comments %}
+		<!-- <div class="actionBox">
+			<ul class="commentList" id="commentDisplay">
+				{% for item in commentList %}
 				<li>
-					<div class="commenterImage">
-						<img src="{{commenter.img}}" />
-					</div>
+					<div class="username"><strong>{{item.user}}</strong></div>
+					<span class="date sub-text">{{item.comment_time}}</span>
 					<div class="commentText">
-						<p class="">{{commenter.comment}}</p> <span class="date sub-text">{{commenter.time}}</span>
+						<p class="">{{item.content}}</p> 
 					</div>
+					<hr>
 				</li>
-				{% endfor %}	
-					
-			{% if not comments%}
+				{% endfor %}
+
+				{% if not commentList%}
 				<li>
 					<p>Do you want to leave first comment here? </p>
 				</li>
@@ -131,17 +132,18 @@
 
 			<form class="form-inline" role="form">
 				<div class="form-group">
-					<input class="form-control" type="text" size="45" placeholder="Your comments" />
+					<span id='commentWarning' class="error text-danger" hidden>You didn't enter any content here :(</span>
+					<input class="form-control" type="text" size="45" id="comment" placeholder="Your comments" />
 				</div>
 				<div class="form-group">
-					<button class="btn btn-default">Add</button>
+					<button type="button" class="btn btn-default" onclick="javascripts:addcomment()">Add</button>
 				</div>
 			</form>
 		</div>
+	</div> -->
 	</div>
 	</div>
-	</div>
-	</div>
+	</div>	
 
 	<!-- delete button -->
 	{% if is_author %}
@@ -213,9 +215,12 @@
 	  
 	
 	<!-- Load Babel -->
-	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
 	<!-- Load our React component. -->
-	<script type="text/babel" src="{% static 'js/like_button.js' %}"></script>
+	<!-- <script type="text/babel" src="{% static 'js/like_button.js' %}"></script> -->
+	<!-- <script type="text/babel" src="{% static 'js/comment_section.js' %}"></script> -->
+	<script src="{% static 'js/like_button_test.js' %}"></script>
+	<script src="{% static 'js/comment_section_test.js' %}"></script>
 
 </body>
 </html>
