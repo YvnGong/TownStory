@@ -1,9 +1,11 @@
 {% extends "account/base.html" %}
 
+{% load socialaccount %}
+{% providers_media_js %}
+{% load account socialaccount %}
+
 {% load i18n %}
-
 {% block head_title %}{% trans "Signup" %}{% endblock %}
-
 {% block content %}
 
 <!-- Center area -->
@@ -16,6 +18,33 @@
 <h1 id="signin">{% trans "Sign Up" %}</h1>
 
 <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+<!-- Social -->
+{% get_providers as socialaccount_providers %}
+{% if socialaccount_providers %}
+
+<div class="socialaccount_ballot">
+
+  <!-- facebook login -->
+  <a class="btn btn-block btn-social btn-facebook" href="{% provider_login_url "facebook" method="js_sdk" %}">
+      <span class="fab fa-facebook"></span> Sign in with facebook
+  </a>
+  {% include "socialaccount/snippets/login_extra.html" %}
+  <div class="login-or">{% trans 'or' %}</div>
+
+  <!-- google login -->
+  <a class="btn btn-block btn-social btn-google" href="{% provider_login_url "google" method="js_sdk" %}">
+      <span class="fab fa-google"></span> Sign in with google
+  </a>
+  {% include "socialaccount/snippets/login_extra.html" %}
+  </div>
+
+  <div class="login-or">{% trans 'or' %}</div>
+  {% include "socialaccount/snippets/login_extra.html" %}
+
+{% include "socialaccount/snippets/login_extra.html" %}
+{% endif %}
+<!-- End Facebook -->
 
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
     {% csrf_token %}

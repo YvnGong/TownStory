@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- {% include "base.html" %} -->
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Towntory discover</title>
@@ -64,6 +63,7 @@
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 10,
           center: {lat: 37.7749, lng: -122.4194},
+          gestureHandling: 'greedy',
           // Google map style
           styles: 
           [
