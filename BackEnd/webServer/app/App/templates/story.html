@@ -10,7 +10,6 @@
 	
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/story.css' %}">
-	<script src="{% static 'js/story.js' %}"></script>
 	<!-- icon font -->
 	<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
 
@@ -90,7 +89,7 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-9">
 			{% if isLogged == 'false'%}
-			<div class="announcement" style="display: inline-block;">Please <a href="#/" onclick = "javascripts:login();">log in</a> to vote and comment</div>
+			<div class="announcement" style="display: inline-block;">Please <a href="#/" onclick = "javascripts:loginRedirect('/app/story?story_id='+story_id);">log in</a> to vote and comment</div>
 			{% endif %}
 			<div class="like_section">
 				<div id="likeButton" style="display: inline-block;"></div>
@@ -100,9 +99,14 @@
 	</div>
 
 	<!-- comment -->
+	
+	<br>
+	<br>
+	<br>
 	<div class="container">
 	<div class="row justify-content-center">
 	<div class="col-md-9">
+	<hr>
 	<div id="comment_section"></div>
 	<!-- <div class="detailBox"> 
 		<div class="titleBox">
@@ -217,9 +221,11 @@
 	<!-- Load Babel -->
 	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 	<!-- Load our React component. -->
-	<script type="text/babel" src="{% static 'js/like_button.js' %}"></script>
+
+	<!-- <script type="text/babel" src="{% static 'js/like_button.js' %}"></script> -->
 	<script type="text/babel" src="{% static 'js/comment_section.js' %}"></script>
-	<!-- <script src="{% static 'js/like_button_test.js' %}"></script> -->
+	<script src="{% static 'js/like_button_test.js' %}"></script>
+
 	<!-- <script src="{% static 'js/comment_section_test.js' %}"></script> -->
 
 </body>

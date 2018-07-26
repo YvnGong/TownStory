@@ -2,6 +2,10 @@ function login(){
     window.location.assign(loginUrl);
 }
 
+function loginRedirect(next){
+    window.location.assign(loginUrl+'?next='+ next);
+}
+
 function logout(){
     window.location.assign(logoutUrl);
 }

@@ -1,4 +1,5 @@
 var runNum = 5;
+var showmore_button = <a href='#/' onClick={showMore}>show more comments</a>
 
 function formatDate(date) {
     return date.substring(0, 19);
@@ -6,7 +7,10 @@ function formatDate(date) {
 
 function showMore(){
     var maxNum = commentList.length;
-    runNum += (Math.min(runNum, maxNum));
+    runNum = Math.min(runNum+6, maxNum);
+    if (runNum >= maxNum){
+        showmore_button = <a href="#/" hidden>show more</a>
+    } 
     ReactDOM.render(
         <Comment />,
         document.getElementById('comment_section')
@@ -56,8 +60,9 @@ class Comment extends React.Component {
         super(props);
     }
     render() {
-        var submit_button = <button type="button" className="btn btn-default" onClick={addcomment}>Add</button>
-        var showmore_button = <a href='#/' onClick={showMore}>show more comments</a>
+        var submit_button = <button type="button" className="btn btn-default btn-md" onClick={addcomment}>Add Comment</button>
+
+        var numberOfComments = commentList.length;
         if(commentList.length > 0){
             var comments = commentList.slice(0, runNum);
             var listItems = comments.map((comment) =>
@@ -67,30 +72,48 @@ class Comment extends React.Component {
             return(
             <div>
                 <div className="titleBox">
-                    <label>Comment</label>
-                </div>
-                <div>
+                    <label><h4>{numberOfComments} Comment</h4></label>
+                    <div>
                     <ul>
                     {listItems}
                     </ul>        
-                </div>
-                {showmore_button}
+                    </div>
+                    {showmore_button}
 
-                    <form className="form-inline" role="form">
+                    <form className="form" role="form">
 				        <div className="form-group">
-					        <span id='commentWarning' className="error text-danger" hidden>You didn't enter any content here :(</span>
+					        <span id='commentWarning' className="error text-danger" hidden>You didn't enter any content here :( </span>
+                            <span id='loginWarning' className="error text-danger" hidden>Please log in first to leave a comment :) </span>
 					        <input className="form-control" type="text" size="45" id="comment" placeholder="Your comments" />
 				        </div>
 				        <div className="form-group">
                             {submit_button}
 				        </div>
 			        </form>
+                </div>
             </div>
                 );
         }
         else{
-            return
-                <p>Do you want to leave first comment here? </p>
+            return(
+                <div>
+                <div className="titleBox">
+                    <label><h4>{numberOfComments} Comment</h4></label>
+                    <p>Do you want to leave first comment here? </p>
+                    <form className="form" role="form">
+				        <div className="form-group">
+					        <span id='commentWarning' className="error text-danger" hidden>You didn't enter any content here :(</span>
+                            <span id='loginWarning' className="error text-danger" hidden>Please log in to leave a comment :) </span>
+                            <input className="form-control" type="text" size="45" id="comment" placeholder="Your comments" />
+				        </div>
+				        <div className="form-group">
+                            {submit_button}
+				        </div>
+			        </form>
+                </div>
+                </div>
+                
+            )
         }
     }
 }
@@ -137,7 +160,11 @@ function getCookie(cname) {
 
 function addcomment(){
     var content = document.getElementById('comment');
-    if(content.value.length < 1){
+    if (!isLogged){
+        document.getElementById('loginWarning').hidden = false;  
+        return false;
+    }
+    else if(content.value.length < 1){
         document.getElementById('commentWarning').hidden = false;  
         return false;
     }
