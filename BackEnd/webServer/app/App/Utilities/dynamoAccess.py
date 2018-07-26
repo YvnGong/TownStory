@@ -40,24 +40,26 @@ def add(table_name, partitionKeyName, partitionKey, sortingKeyName = None, sorti
 
 # delete edge
 def delete(table_name, partitionKeyName, partitionKey, sortingKeyName = None, sortingKey = None):
-    
-    table = dynamodb.Table(table_name)
-    if sortingKeyName and sortingKey:
-        response = table.delete_item(
-            Key={
-                partitionKeyName: partitionKey,
-                sortingKeyName: sortingKey,
-            }
-        )
-    else:
-        response = table.delete_item(
-            Key={
-                partitionKeyName: partitionKey
-            }
-        )
-    if response['ResponseMetadata']['HTTPStatusCode'] == 200:
-        return True
-    else:
+    try:
+        table = dynamodb.Table(table_name)
+        if sortingKeyName and sortingKey:
+            response = table.delete_item(
+                Key={
+                    partitionKeyName: partitionKey,
+                    sortingKeyName: sortingKey,
+                }
+            )
+        else:
+            response = table.delete_item(
+                Key={
+                    partitionKeyName: partitionKey
+                }
+            )
+        if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+            return True
+        else:
+            return False
+    except:
         return False
 
 # query
@@ -95,3 +97,16 @@ def get_item(table_name, partitionKeyName, partitionKey, sortingKeyName = None, 
 
 if __name__ == '__main__':
     pass
+    # print(query('COMMENT_TABLE', 'story_id', '1234'))
+    add('COMMENT_TABLE', 'story_id', '1444', 'comment_time', '1500', 
+    height='1m, 5m', weight=1000, address={'street':'lequn', 'city': 'shunde'},
+    friends=['lilly','kelly','pilly','billy']
+    )
+    add('COMMENT_TABLE', 'story_id', '1444', 'comment_time', '1600', 
+    height='1m, 8m', weight=1000
+    )
+    test = query('COMMENT_TABLE', 'story_id', '1444')
+    print(test)
+    print(test[1]['comment_time'])
+    # print(delete('COMMENT_TABLE', 'story_id', '1444', 'comment_time', '1500'))
+

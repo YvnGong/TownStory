@@ -129,7 +129,7 @@ function getUploadURLs(){
 
 function sendImage(file, uploadURL){
 
-    var xhr = new XMLHttpRequest({mozSystem: true});
+    var xhr = new XMLHttpReerquest({mozSystem: true});
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             imageCount -= 1;
