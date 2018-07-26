@@ -172,77 +172,124 @@ def uploadImgURL(request):
 
 def uploadImgURLs(request):
     status = sr()
-    if request.user.is_authenticated:
-        if request.method == 'GET':
-            imageCount = request.GET.get('imageCount')
-            uploadURLs = []
-            accessURLs = []
-            for i in range(int(imageCount)):
-                uploadURL, accessURL = S3Access.generate_presigned_upload_url(BUCKET_NAME)
-                uploadURLs.append(uploadURL)
-                accessURLs.append(accessURL)
-        status.attach_data('uploadURLs', uploadURLs, True)
-        status.attach_data('accessURLs', accessURLs, True)
-    else:
-        status.set_errorMessage('not logged in')
+    # Temporary allowing anonymous user
+    # if request.user.is_authenticated:
+    if request.method == 'GET':
+        imageCount = request.GET.get('imageCount')
+        uploadURLs = []
+        accessURLs = []
+        for i in range(int(imageCount)):
+            uploadURL, accessURL = S3Access.generate_presigned_upload_url(BUCKET_NAME)
+            uploadURLs.append(uploadURL)
+            accessURLs.append(accessURL)
+    status.attach_data('uploadURLs', uploadURLs, True)
+    status.attach_data('accessURLs', accessURLs, True)
+    # else:
+    #     status.set_errorMessage('not logged in')
     return JsonResponse(status.data)
 
+# def uploadArticle(request):
+#     status = sr()
+#     if request.user.is_authenticated:
+#         if request.method == 'POST':
+#             title = request.POST.get('title')
+#             summary = request.POST.get('summary')
+#             article = request.POST.get('article')
+#             print(article)
+#             city = request.POST.get('city')
+#             # if city not exsit, create one
+#             try:
+#                 city = City.objects.get(pk=city)
+#             except:
+#                 city_name, state_name, country_name = city.split(', ')
+#                 lat = float(request.POST.get('latitude'))
+#                 lng = float(request.POST.get('longitude'))
+#                 city = City.objects.create(city=city, city_name=city_name, 
+#                     latitude=lat, longitude =lng, state_name=state_name, country_name=country_name)
+#             # get current user
+#             user = request.user
+#             # create story
+#             ID = str(uuid.uuid4())
+#             # use dynamoDB to store the contents
+#             article = json.loads(article)
+#             # check if there is any image and get the first one as cover
+#             cover_img_url = DEFAULT_COVER_IMAGE
+#             for item in article:
+#                 if item[0] == 'image':
+#                     cover_img_url = item[1]
+#                     break
+#             # add one story and save the update
+#             city.number_of_story += 1
+#             city.save()
+#             # now save the article content
+#             dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
+#             # save the story
+#             story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, datetime = timezone.now())
+#             status.attach_data('story_id', ID, isSuccess=True)
+#         status.set_errorMessage('not post')
+#     else:
+#         status.set_errorMessage('not logged in')
+#     return JsonResponse(status.data)
+
+# Temporary allowing anonymous user
+@csrf_exempt
 def uploadArticle(request):
     status = sr()
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            title = request.POST.get('title')
-            summary = request.POST.get('summary')
-            article = request.POST.get('article')
-            print(article)
-            city = request.POST.get('city')
-            # if city not exsit, create one
-            try:
-                city = City.objects.get(pk=city)
-            except:
-                city_name, state_name, country_name = city.split(', ')
-                lat = float(request.POST.get('latitude'))
-                lng = float(request.POST.get('longitude'))
-                city = City.objects.create(city=city, city_name=city_name, 
-                    latitude=lat, longitude =lng, state_name=state_name, country_name=country_name)
-            # get current user
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        summary = request.POST.get('summary')
+        article = request.POST.get('article')
+        print(article)
+        city = request.POST.get('city')
+        # if city not exsit, create one
+        try:
+            city = City.objects.get(pk=city)
+        except:
+            city_name, state_name, country_name = city.split(', ')
+            lat = float(request.POST.get('latitude'))
+            lng = float(request.POST.get('longitude'))
+            city = City.objects.create(city=city, city_name=city_name, 
+                latitude=lat, longitude =lng, state_name=state_name, country_name=country_name)
+        # get current user
+        if request.user.is_authenticated:
             user = request.user
-            # create story
-            ID = str(uuid.uuid4())
-            # use dynamoDB to store the contents
-            article = json.loads(article)
-            # check if there is any image and get the first one as cover
-            cover_img_url = DEFAULT_COVER_IMAGE
-            for item in article:
-                if item[0] == 'image':
-                    cover_img_url = item[1]
-                    break
-            # add one story and save the update
-            city.number_of_story += 1
-            city.save()
-            # now save the article content
-            dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
-            # save the story
-            story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, datetime = timezone.now())
-            status.attach_data('story_id', ID, isSuccess=True)
-        status.set_errorMessage('not post')
-    else:
-        status.set_errorMessage('not logged in')
+        else:
+            user = User.objects.get(username='anonymous')
+        # create story
+        ID = str(uuid.uuid4())
+        # use dynamoDB to store the contents
+        article = json.loads(article)
+        # check if there is any image and get the first one as cover
+        cover_img_url = DEFAULT_COVER_IMAGE
+        for item in article:
+            if item[0] == 'image':
+                cover_img_url = item[1]
+                break
+        # add one story and save the update
+        city.number_of_story += 1
+        city.save()
+        # now save the article content
+        dynamoAccess.add(DYNAMO_STORY_TABLE, 'story_id', ID, content = article)
+        # save the story
+        story = Story.objects.create(id = ID, city = city, author = user, title = title, summary = summary, cover = cover_img_url, datetime = timezone.now())
+        status.attach_data('story_id', ID, isSuccess=True)
+    status.set_errorMessage('not post')
     return JsonResponse(status.data)
 
 def write(request):
-    if request.user.is_authenticated:
-        status = sr()
-        if request.method == 'GET':
-            city_name = request.GET.get('city_name')
-            template = loader.get_template('write.html')
-            context = {
-                'endpoints': endpoints,
-                'city_name': city_name,
-            }
-            return HttpResponse(template.render(context, request))
-    else:
-        return redirect(endpoints['login_url'] + '?next=/app/write')
+    # if request.user.is_authenticated: # Temporary allowing anonymous user
+    status = sr()
+    if request.method == 'GET':
+        city_name = request.GET.get('city_name')
+        template = loader.get_template('write.html')
+        context = {
+            'endpoints': endpoints,
+            'city_name': city_name,
+        }
+        return HttpResponse(template.render(context, request))
+    # else:
+    #     return redirect(endpoints['login_url'] + '?next=/app/write')
+    
 """
 |_______________________________________
 |   Upload Like|

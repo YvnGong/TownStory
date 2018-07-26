@@ -274,7 +274,7 @@ function runResizeAndPush(e){
     canvas.height = height;
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0, width, height);
-    var dataurl = canvas.toDataURL('image/jpeg', 0.7);
+    var dataurl = canvas.toDataURL('image/jpeg', 0.8);
     var blob = window.dataURLtoBlob && window.dataURLtoBlob(dataurl);
     var newFile = new File([blob], "imageFile");
     imageFiles.push(newFile);
