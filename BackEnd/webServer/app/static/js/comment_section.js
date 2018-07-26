@@ -1,4 +1,5 @@
 var runNum = 5;
+var showmore_button = <a href='#/' onClick={showMore}>show more comments</a>
 
 
 
@@ -8,7 +9,7 @@ function formatDate(date) {
 
 function showMore(){
     var maxNum = commentList.length;
-    runNum += (Math.min(runNum, maxNum));
+    runNum = Math.min(runNum+6, maxNum);
     ReactDOM.render(
         <Comment />,
         document.getElementById('comment_section')
@@ -59,7 +60,7 @@ class Comment extends React.Component {
     }
     render() {
         var submit_button = <button type="button" className="btn btn-default" onClick={addcomment}>Add</button>
-        var showmore_button = <a href='#/' onClick={showMore}>show more comments</a>
+        // var showmore_button = <a href='#/' onClick={showMore}>show more comments</a>
         if(commentList.length > 0){
             var comments = commentList.slice(0, runNum);
             var listItems = comments.map((comment) =>

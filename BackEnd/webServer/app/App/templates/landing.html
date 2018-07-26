@@ -24,18 +24,19 @@
 	<title>Towntory</title>
   
 	<style>
-		#title{
-			font-size:12vw; 
-			color: whitesmoke
-		}
 		#subtitle{
-			font-size:2.5vw; 
 			color: rgb(44, 8, 8, 0.6); 
 			background-color: rgba(255, 255, 255, 0.5);
+			font-size:40px;
+		}
+		#title{
+			font-size:100px; 
+			color: rgba(44, 8, 8, 0.794);
 		}
 	</style>
 	<!-- Title Image -->
 	<style>
+
 		#first{
 			background-image: url("{% static 'image/bird.jpg' %}");
 			background-size: 100% auto;
@@ -44,21 +45,23 @@
 	{% load user_agents %}
 	{% if request|is_mobile %}
 	<style>
-		#title{
-			font-size:14vw; 
-			color:black;
-		}
-		#subtitle{
-			font-size:5vw; 
-		}
-		.parallax {
-			/* Set a specific height */
-			min-height: 500px; 
-			background-position: center;
-			background-repeat: repeat;
-			background-size: cover;  
-		}
-	</style>
+			#title{
+				font-size:14vw; 
+				color: rgba(44, 8, 8, 0.794);
+			}
+			#subtitle{
+				font-size:5vw; 
+				color: rgba(44, 8, 8, 0.794);
+			}
+			#first {
+				/* Set a specific height */
+				background-image: url("{% static 'image/music.jpg' %}");
+				min-height: 500px; 
+				background-position: center;
+				background-repeat: repeat;
+				background-size: cover;  
+			}
+		</style>
 	{% endif %}
 
 </head>
@@ -70,8 +73,8 @@
 	<div class="parallax" id="first" style="width: 100%"></div>
 
 	<div id='title_area' class="title-part" style="position:center; font-size:40px; width: 100%">
-		<h1 id='title' style="font-size:100px; color:rgba(70, 47, 47, 0.829);">Towntory</h1>
-		<h2 id='subtitle' style="font-size:40px">Tell a story in your town.</h2>
+		<h1 id='title'>Towntory</h1>
+		<h2 id='subtitle'>Tell a story happened in your town</h2>
 		
 		<!-- city search part -->
 		<div class="container">
@@ -85,8 +88,10 @@
 
 			<div class="row">
 				<div class="col-lg-12 align-self-center" style="padding-top: 1%;">
-					<button class="btn btn-default-outline btn-md" style="font-weight: 500; background-color:rgba(172, 172, 172, 0.2); border-color: aliceblue; color:white" onclick="javascripts:validateCity();"> <i class="fab fa-earlybirds"></i> Read Stories</button>
-					<button class="btn btn-md btn-filled" style="font-weight: 430; background-color: rgb(99, 84, 84); color:white" onclick=javascripts:writeStory()><i class="fas fa-dove"></i> Write a Story </button>
+					<button class="btn btn-default-outline btn-md" style=" font-weight: 500; background-color:rgba(172, 172, 172, 0.2); border-color: aliceblue; 
+					color:white" onclick="javascripts:validateCity();"> <i class="fab fa-earlybirds"></i> Read Stories</button>
+					<button class="btn btn-md btn-filled" style="font-weight: 430; 
+					background-color: rgb(99, 84, 84); color:white" onclick=javascripts:writeStory()><i class="fas fa-dove"></i> Write a Story </button>
 				</div>
 			</div>
 		</div>
@@ -100,12 +105,13 @@
 			<div class="col-lg-12">
 				<div class="about" style="font-size:20px">
 					<img src="{% static 'image/globe.png' %}" width="30%">
+					<br>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="about" style="font-size:20px; font-weight: 350">
+				<div class="about" style="font-family: 'Times New Roman',Times,serif; font-size:20px; font-weight: 550; color:rgba(53, 36, 36, 0.856)">
 					<p> History is made by people. </p>
 					<p> From all corners of the globe. </p>
 					<p> Everybody shares their stories in where they are. </p>

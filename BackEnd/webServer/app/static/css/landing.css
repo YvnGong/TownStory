@@ -1,6 +1,6 @@
 .parallax {
     /* Set a specific height */
-    min-height: 801px; 
+    min-height: 805px; 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
@@ -19,7 +19,7 @@
     transform: translate(-50%, -50%);
     font-weight: 600;
     font-size: 4.0em;
-    color: rgb(10, 7, 7);
+    /* color: rgb(10, 7, 7); */
     text-align: center;
 }
 
@@ -36,15 +36,9 @@
     width: 100%;
 }
 
-
 .body{
     background-color: rgb(247, 245, 242);
 }
-
-#title{
-    font-size: 60px;
-}
-
 
 .btn btn-default-outline btn-md{
     font-weight: 500; 
