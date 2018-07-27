@@ -287,6 +287,7 @@ function validateDataAndSend(){
     // Validate title
     if (document.getElementById('title').value.replace(/\s/g, "").length<5){
         document.getElementById('titleWarning').hidden = false;
+        alert('minimun length of title is 5');
         return false;
     }
 

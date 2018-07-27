@@ -43,7 +43,7 @@
               <div class="col-lg-12 col-centered">
               <div class="form-group">
                   <label for="mainTitle"><h3>Story Title</h3></label>
-                  <span id='titleWarning' class="error text-danger" hidden>Minimum title lenght is 5.</span>
+                  <span id='titleWarning' class="error text-danger" hidden>Minimum title length is 5.</span>
                   <input type="text" class="form-control" id="title" maxlength="45" style="font-weight: bold" placeholder="Enter title">
                   <small class="form-text text-muted">The title of your story.</small>
               </div>
@@ -100,8 +100,8 @@
    
     
     <!-- Image Upload Modal -->
-    <div class="modal" id="myModal">
-      <div class="modal-dialog">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document"">
         <div class="modal-content">
         
           <!-- Modal Header -->
@@ -130,8 +130,8 @@
     </div>
 
     <!-- Submit Modal -->
-    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="submitModal">
-      <div class="modal-dialog">
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         
           <!-- Modal Header -->
@@ -170,7 +170,7 @@
     <!-- Signup redirect -->
     {% if not user.is_authenticated %}
     <!-- Signup Redirect Modal -->
-    <div id="signup_redirect" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div id="signup_redirect" data-backdrop="static" data-keyboard="false" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -185,7 +185,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" onclick="location.href='/accounts/signup?next=/app/write'">Signup</button>
-              <button type="button" class="btn btn-warning" data-dismiss="modal">Continue</button>
+              <button type="button" class="btn btn-warning" data-dismiss="modal">Continue as Anonymous</button>
             </div>
           </div>
         </div>

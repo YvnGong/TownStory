@@ -64,6 +64,27 @@
 		</style>
 	{% endif %}
 
+	{% if request|is_tablet %}
+		<style>
+			#title{
+				font-size:14vw; 
+				color: rgba(44, 8, 8, 0.794);
+			}
+			#subtitle{
+				font-size:5vw; 
+				color: rgba(44, 8, 8, 0.794);
+			}
+			#first {
+				/* Set a specific height */
+				background-image: url("{% static 'image/music.jpg' %}");
+				min-height: 680px; 
+				background-position: center;
+				background-repeat: repeat;
+				background-size: cover;  
+			}
+		</style>
+	{% endif %}
+
 </head>
 <body style="background-color: rgba(226, 222, 222, 0.2)">
 	<!-- Header -->

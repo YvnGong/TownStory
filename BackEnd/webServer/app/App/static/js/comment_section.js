@@ -7,10 +7,7 @@ function formatDate(date) {
 
 function showMore(){
     var maxNum = commentList.length;
-    runNum = Math.min(runNum+6, maxNum);
-    if (runNum >= maxNum){
-        showmore_button = <a href="#/" hidden>show more</a>
-    } 
+    runNum = Math.min(runNum+6, maxNum); 
     ReactDOM.render(
         <Comment />,
         document.getElementById('comment_section')
@@ -60,8 +57,11 @@ class Comment extends React.Component {
         super(props);
     }
     render() {
+        var maxNum = commentList.length;
+        if (runNum >= maxNum){
+            showmore_button = <a href="#/" hidden>show more</a>
+        } 
         var submit_button = <button type="button" className="btn btn-default btn-md" onClick={addcomment}>Add Comment</button>
-
         var numberOfComments = commentList.length;
         if(commentList.length > 0){
             var comments = commentList.slice(0, runNum);
@@ -78,13 +78,14 @@ class Comment extends React.Component {
                     {listItems}
                     </ul>        
                     </div>
+                    <br />
                     {showmore_button}
 
                     <form className="form" role="form">
 				        <div className="form-group">
 					        <span id='commentWarning' className="error text-danger" hidden>You didn't enter any content here :( </span>
                             <span id='loginWarning' className="error text-danger" hidden>Please log in first to leave a comment :) </span>
-					        <input className="form-control" type="text" size="45" id="comment" placeholder="Your comments" />
+					        <input className="form-control" type="text" size="200" id="comment" placeholder="Your comments" />
 				        </div>
 				        <div className="form-group">
                             {submit_button}
@@ -100,6 +101,7 @@ class Comment extends React.Component {
                 <div className="titleBox">
                     <label><h4>{numberOfComments} Comment</h4></label>
                     <p>Do you want to leave first comment here? </p>
+                    <br />
                     <form className="form" role="form">
 				        <div className="form-group">
 					        <span id='commentWarning' className="error text-danger" hidden>You didn't enter any content here :(</span>
